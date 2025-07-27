@@ -1,21 +1,27 @@
+/* Modern Fintech-Inspired Watchlist Design */
 .container {
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
 }
 
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 2rem;
-  color: #6b7280;
+  gap: 16px;
+  padding: 4rem;
+  color: #64748b;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  font-weight: 500;
 }
 
 .loadingSpinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #e5e7eb;
-  border-top: 2px solid #3b82f6;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #2563eb;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -32,99 +38,163 @@
   gap: 16px;
   padding: 2rem;
   color: #dc2626;
-  background-color: #fef2f2;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
   border: 1px solid #fecaca;
-  border-radius: 8px;
+  border-radius: 16px;
+  font-weight: 500;
 }
 
 .retryButton {
-  padding: 8px 16px;
-  background-color: #dc2626;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
 }
 
 .retryButton:hover {
-  background-color: #b91c1c;
+  background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+  transform: translateY(-1px);
 }
 
 .empty {
   text-align: center;
-  padding: 3rem 2rem;
-  color: #6b7280;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  position: relative;
+  overflow: hidden;
+}
+
+.empty::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
 }
 
 .empty h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #374151;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1e293b;
+  letter-spacing: -0.025em;
 }
 
 .empty p {
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #64748b;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
 }
 
 .header h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
   margin: 0;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .refreshButton {
-  padding: 8px 16px;
-  background-color: #3b82f6;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
-  transition: background-color 0.15s ease-in-out;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
 }
 
 .refreshButton:hover:not(:disabled) {
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);
 }
 
 .refreshButton:disabled {
-  background-color: #9ca3af;
+  background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
+  color: #94a3b8;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .item {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  background-color: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.15s ease-in-out;
+  gap: 1.5rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
 }
 
 .item:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
 }
 
 .stockInfo {
@@ -134,165 +204,220 @@
 .stockHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .symbol {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #111827;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #0f172a;
   margin: 0;
+  letter-spacing: -0.025em;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
 }
 
 .name {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: 1rem;
+  color: #64748b;
   flex: 1;
+  font-weight: 500;
+  letter-spacing: 0.025em;
 }
 
 .removeButton {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f3f4f6;
-  color: #6b7280;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #64748b;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  transition: background-color 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
   margin-left: auto;
 }
 
 .removeButton:hover {
-  background-color: #fee2e2;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
   color: #dc2626;
+  transform: scale(1.1);
 }
 
 .priceInfo {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .price {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #111827;
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #0f172a;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  letter-spacing: -0.025em;
 }
 
 .change {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
 }
 
 .change.positive {
   color: #059669;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
 }
 
 .change.negative {
   color: #dc2626;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
 }
 
 .priceLoading {
-  font-size: 0.875rem;
-  color: #9ca3af;
+  font-size: 1rem;
+  color: #94a3b8;
   font-style: italic;
+  font-weight: 500;
 }
 
 .details {
   display: flex;
-  gap: 1rem;
-  font-size: 0.75rem;
-  color: #6b7280;
+  gap: 2rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
 }
 
 .sentimentContainer {
-  border-top: 1px solid #f3f4f6;
-  padding-top: 1rem;
+  border-top: 2px solid #f1f5f9;
+  padding-top: 1.5rem;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.5) 0%, rgba(241, 245, 249, 0.5) 100%);
+  margin: 0 -2.5rem -2.5rem -2.5rem;
+  padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+  border-radius: 0 0 24px 24px;
 }
 
 .sentimentLabel {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
 }
 
 .sentimentGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .sentimentItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .timeframe {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: #6b7280;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .sentimentBadge {
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 12px;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
-  min-width: 60px;
+  min-width: 70px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  transition: all 0.2s ease-in-out;
+}
+
+.sentimentBadge:hover {
+  transform: scale(1.05);
 }
 
 .sentimentBadge.bullish {
-  background-color: #dcfce7;
-  color: #166534;
-  border: 1px solid #86efac;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+  border: 2px solid #86efac;
 }
 
 .sentimentBadge.bearish {
-  background-color: #fee2e2;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
   color: #991b1b;
-  border: 1px solid #fca5a5;
+  border: 2px solid #fca5a5;
 }
 
 .sentimentBadge.neutral {
-  background-color: #f3f4f6;
-  color: #374151;
-  border: 1px solid #d1d5db;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #475569;
+  border: 2px solid #cbd5e1;
 }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
   .item {
-    padding: 1rem;
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .header {
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .header h3 {
+    font-size: 1.5rem;
   }
   
   .stockHeader {
     flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .symbol {
+    font-size: 1.5rem;
+  }
+  
+  .price {
+    font-size: 1.75rem;
   }
   
   .priceInfo {
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 8px;
   }
   
   .sentimentGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    gap: 8px;
+  }
+  
+  .sentimentContainer {
+    margin: 0 -1.5rem -1.5rem -1.5rem;
+    padding: 1.5rem;
   }
   
   .details {
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
   }
 }

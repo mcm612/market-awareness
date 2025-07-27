@@ -224,3 +224,261 @@
  GET /api/quote?symbol=AAPL 200 in 281ms
  GET /api/quote?symbol=GC%3DF 200 in 284ms
  GET /api/quote?symbol=CL%3DF 200 in 398ms
+ GET /api/quote?symbol=TSLA 200 in 221ms
+ GET /api/quote?symbol=GC%3DF 200 in 231ms
+ GET /api/quote?symbol=CL%3DF 200 in 295ms
+ GET /api/quote?symbol=AAPL 200 in 325ms
+ GET /api/quote?symbol=TSLA 200 in 318ms
+ GET /api/quote?symbol=CL%3DF 200 in 336ms
+ GET /api/quote?symbol=GC%3DF 200 in 364ms
+ GET /api/quote?symbol=AAPL 200 in 407ms
+ GET /api/quote?symbol=TSLA 200 in 486ms
+ GET /api/quote?symbol=CL%3DF 200 in 504ms
+ GET /api/quote?symbol=AAPL 200 in 504ms
+ GET /api/quote?symbol=GC%3DF 200 in 522ms
+ GET /api/quote?symbol=CL%3DF 200 in 653ms
+ GET /api/quote?symbol=GC%3DF 200 in 690ms
+ GET /api/quote?symbol=AAPL 200 in 673ms
+ GET /api/quote?symbol=TSLA 200 in 822ms
+ GET /api/quote?symbol=CL%3DF 200 in 311ms
+ GET /api/quote?symbol=AAPL 200 in 318ms
+ GET /api/quote?symbol=TSLA 200 in 339ms
+ GET /api/quote?symbol=GC%3DF 200 in 449ms
+ GET /api/quote?symbol=CL%3DF 200 in 205ms
+ GET /api/quote?symbol=TSLA 200 in 264ms
+ GET /api/quote?symbol=AAPL 200 in 328ms
+ GET /api/quote?symbol=GC%3DF 200 in 530ms
+ GET /api/quote?symbol=GC%3DF 200 in 161ms
+ GET /dashboard 200 in 674ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 342ms
+ GET /api/quote?symbol=AAPL 200 in 221ms
+ GET /api/quote?symbol=GC%3DF 200 in 225ms
+ GET /api/quote?symbol=CL%3DF 200 in 228ms
+ GET /api/quote?symbol=CL%3DF 200 in 135ms
+ GET /api/quote?symbol=TSLA 200 in 380ms
+ GET /api/quote?symbol=AAPL 200 in 159ms
+ GET /api/quote?symbol=GC%3DF 200 in 200ms
+ GET /api/quote?symbol=AAPL 200 in 95ms
+ GET /api/quote?symbol=CL%3DF 200 in 145ms
+ GET /api/quote?symbol=GC%3DF 200 in 85ms
+ GET /api/quote?symbol=TSLA 200 in 217ms
+ GET /api/quote?symbol=TSLA 200 in 58ms
+ ✓ Compiled in 97ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 115ms
+ GET /api/quote?symbol=CL%3DF 200 in 203ms
+ GET /api/quote?symbol=AAPL 200 in 241ms
+ GET /api/quote?symbol=CL%3DF 200 in 59ms
+ GET /api/quote?symbol=GC%3DF 200 in 279ms
+ GET /api/quote?symbol=TSLA 200 in 289ms
+ GET /api/quote?symbol=GC%3DF 200 in 92ms
+ GET /api/quote?symbol=AAPL 200 in 183ms
+ GET /api/quote?symbol=TSLA 200 in 203ms
+ GET /api/search?q=oil 200 in 199ms
+ GET /api/search?q=apple 200 in 212ms
+ ✓ Compiled in 82ms
+ ✓ Compiled in 81ms
+ GET /dashboard 200 in 496ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 270ms
+ GET /api/quote?symbol=TSLA 200 in 194ms
+ GET /api/quote?symbol=CL%3DF 200 in 201ms
+ GET /api/quote?symbol=TSLA 200 in 59ms
+ GET /api/quote?symbol=CL%3DF 200 in 59ms
+ GET /api/quote?symbol=GC%3DF 200 in 272ms
+ GET /api/quote?symbol=AAPL 200 in 327ms
+ GET /api/quote?symbol=TSLA 200 in 72ms
+ GET /api/quote?symbol=CL%3DF 200 in 71ms
+ GET /api/quote?symbol=GC%3DF 200 in 81ms
+ GET /api/quote?symbol=GC%3DF 200 in 51ms
+ GET /api/quote?symbol=AAPL 200 in 167ms
+ GET /api/quote?symbol=AAPL 200 in 59ms
+ GET /api/search?q=app 200 in 152ms
+ GET /api/search?q=apple 200 in 157ms
+ GET /api/quote?symbol=TSLA 200 in 246ms
+ GET /api/quote?symbol=CL%3DF 200 in 262ms
+ GET /api/quote?symbol=GC%3DF 200 in 284ms
+ GET /api/quote?symbol=AAPL 200 in 307ms
+ ✓ Compiled in 77ms
+ ✓ Compiled in 63ms
+ ✓ Compiled in 75ms
+ GET /dashboard 200 in 645ms
+ GET /dashboard 200 in 196ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 330ms
+ GET /api/quote?symbol=GC%3DF 200 in 184ms
+ GET /api/quote?symbol=TSLA 200 in 189ms
+ GET /api/quote?symbol=GC%3DF 200 in 63ms
+ GET /api/quote?symbol=CL%3DF 200 in 256ms
+ GET /api/quote?symbol=TSLA 200 in 66ms
+ GET /api/quote?symbol=AAPL 200 in 307ms
+ GET /api/quote?symbol=GC%3DF 200 in 88ms
+ GET /api/quote?symbol=TSLA 200 in 83ms
+ GET /api/quote?symbol=CL%3DF 200 in 206ms
+ GET /api/quote?symbol=CL%3DF 200 in 54ms
+ GET /api/quote?symbol=AAPL 200 in 233ms
+ GET /api/quote?symbol=AAPL 200 in 45ms
+ GET /api/search?q=apple 200 in 196ms
+ GET /dashboard 200 in 98ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 253ms
+ GET /api/quote?symbol=CL%3DF 200 in 176ms
+ GET /api/quote?symbol=GC%3DF 200 in 198ms
+ GET /api/quote?symbol=TSLA 200 in 226ms
+ GET /api/quote?symbol=AAPL 200 in 266ms
+ GET /api/quote?symbol=TSLA 200 in 60ms
+ GET /api/quote?symbol=AAPL 200 in 64ms
+ GET /api/quote?symbol=TSLA 200 in 62ms
+ GET /api/quote?symbol=CL%3DF 200 in 201ms
+ GET /api/quote?symbol=AAPL 200 in 50ms
+ GET /api/quote?symbol=CL%3DF 200 in 46ms
+ GET /api/quote?symbol=GC%3DF 200 in 284ms
+ GET /api/quote?symbol=GC%3DF 200 in 46ms
+ GET /api/search?q=pal 200 in 211ms
+ GET /api/search?q=pala 200 in 208ms
+ GET /api/quote?symbol=CL%3DF 200 in 175ms
+ GET /api/quote?symbol=GC%3DF 200 in 259ms
+ GET /api/quote?symbol=TSLA 200 in 275ms
+ GET /api/quote?symbol=AAPL 200 in 291ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 73ms
+ ✓ Compiled in 75ms
+ ✓ Compiled in 67ms
+ ✓ Compiled in 68ms
+ GET /api/search?q=pa 200 in 233ms
+ GET /api/search?q=pal 200 in 52ms
+ GET /api/search?q=pala 200 in 92ms
+ GET /api/search?q=palat 200 in 182ms
+ ✓ Compiled in 95ms
+ ✓ Compiled in 76ms
+ GET /api/search?q=pal 200 in 213ms
+ GET /api/search?q=pala 200 in 206ms
+ GET /api/search?q=palat 200 in 163ms
+ ✓ Compiled in 74ms
+ GET /api/search?q=appl 200 in 228ms
+ GET /api/search?q=apple 200 in 55ms
+ GET /api/search?q=appl 200 in 208ms
+ ✓ Compiled in 82ms
+ GET /api/search?q=apple 200 in 206ms
+ GET /api/search?q=app 200 in 206ms
+ GET /api/search?q=appl 200 in 52ms
+ GET /api/search?q=apple 200 in 78ms
+ ✓ Compiled in 94ms
+ GET /api/search?q=app 200 in 226ms
+ GET /api/search?q=appl 200 in 49ms
+ GET /api/search?q=apple 200 in 60ms
+ ✓ Compiled in 75ms
+ GET /api/search?q=cattle 200 in 208ms
+ GET /api/quote?symbol=GC%3DF 200 in 198ms
+ GET /api/quote?symbol=TSLA 200 in 267ms
+ GET /api/quote?symbol=CL%3DF 200 in 281ms
+ GET /api/quote?symbol=AAPL 200 in 302ms
+ ✓ Compiled in 79ms
+ GET /api/quote?symbol=TSLA 200 in 208ms
+ GET /api/quote?symbol=LE%3DF 200 in 250ms
+ GET /api/quote?symbol=GC%3DF 200 in 294ms
+ GET /api/quote?symbol=CL%3DF 200 in 295ms
+ GET /api/quote?symbol=AAPL 200 in 299ms
+ ✓ Compiled in 86ms
+ ✓ Compiled in 88ms
+ ✓ Compiled in 72ms
+ ✓ Compiled in 78ms
+ GET /api/search?q=gold 200 in 289ms
+ GET /api/search?q=GC%3DF 200 in 196ms
+ GET /api/quote?symbol=LE%3DF 200 in 208ms
+ GET /api/quote?symbol=GC%3DF 200 in 210ms
+ GET /api/quote?symbol=CL%3DF 200 in 213ms
+ GET /api/quote?symbol=TSLA 200 in 241ms
+ GET /api/quote?symbol=AAPL 200 in 324ms
+ GET /api/quote?symbol=LE%3DF 200 in 113ms
+ GET /api/quote?symbol=TSLA 200 in 114ms
+ GET /api/quote?symbol=GC%3DF 200 in 118ms
+ GET /api/quote?symbol=CL%3DF 200 in 184ms
+ GET /api/quote?symbol=AAPL 200 in 212ms
+ GET /api/quote?symbol=AAPL 200 in 390ms
+ GET /api/quote?symbol=GC%3DF 200 in 498ms
+ GET /api/quote?symbol=CL%3DF 200 in 519ms
+ GET /api/quote?symbol=LE%3DF 200 in 555ms
+ GET /api/quote?symbol=TSLA 200 in 553ms
+ ✓ Compiled in 76ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 97ms
+ ✓ Compiled in 80ms
+ GET /dashboard 200 in 456ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 261ms
+ GET /api/quote?symbol=LE%3DF 200 in 214ms
+ GET /api/quote?symbol=CL%3DF 200 in 254ms
+ GET /api/quote?symbol=LE%3DF 200 in 45ms
+ GET /api/quote?symbol=TSLA 200 in 284ms
+ GET /api/quote?symbol=AAPL 200 in 349ms
+ GET /api/quote?symbol=TSLA 200 in 69ms
+ GET /api/quote?symbol=CL%3DF 200 in 128ms
+ GET /api/quote?symbol=GC%3DF 200 in 392ms
+ GET /api/quote?symbol=LE%3DF 200 in 136ms
+ GET /api/quote?symbol=CL%3DF 200 in 69ms
+ GET /api/quote?symbol=GC%3DF 200 in 210ms
+ GET /api/quote?symbol=AAPL 200 in 284ms
+ GET /api/quote?symbol=TSLA 200 in 301ms
+ GET /api/quote?symbol=GC%3DF 200 in 69ms
+ GET /api/quote?symbol=AAPL 200 in 72ms
+ ✓ Compiled in 79ms
+ ✓ Compiled in 64ms
+ GET /dashboard 200 in 581ms
+ GET /dashboard 200 in 169ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 278ms
+ GET /api/quote?symbol=LE%3DF 200 in 258ms
+ GET /api/quote?symbol=GC%3DF 200 in 262ms
+ GET /api/quote?symbol=TSLA 200 in 266ms
+ GET /api/quote?symbol=CL%3DF 200 in 318ms
+ GET /api/quote?symbol=LE%3DF 200 in 135ms
+ GET /api/quote?symbol=GC%3DF 200 in 137ms
+ GET /api/quote?symbol=TSLA 200 in 142ms
+ GET /api/quote?symbol=CL%3DF 200 in 207ms
+ GET /api/quote?symbol=LE%3DF 200 in 120ms
+ GET /api/quote?symbol=GC%3DF 200 in 134ms
+ GET /api/quote?symbol=TSLA 200 in 175ms
+ GET /api/quote?symbol=CL%3DF 200 in 71ms
+ GET /api/quote?symbol=AAPL 200 in 647ms
+ GET /api/quote?symbol=AAPL 200 in 283ms
+ GET /api/quote?symbol=AAPL 200 in 65ms
+ GET /api/quote?symbol=LE%3DF 200 in 259ms
+ GET /api/quote?symbol=CL%3DF 200 in 266ms
+ GET /api/quote?symbol=GC%3DF 200 in 273ms
+ GET /api/quote?symbol=TSLA 200 in 273ms
+ GET /api/quote?symbol=AAPL 200 in 295ms
+ ✓ Compiled in 116ms
+ ✓ Compiled in 168ms
+ ✓ Compiled in 82ms
+ ✓ Compiled in 75ms
+ ✓ Compiled in 70ms
+ GET /api/quote?symbol=CL%3DF 200 in 219ms
+ GET /api/quote?symbol=TSLA 200 in 224ms
+ GET /api/quote?symbol=GC%3DF 200 in 234ms
+ GET /api/quote?symbol=AAPL 200 in 426ms
+ ✓ Compiled in 84ms
+ GET /api/quote?symbol=CL%3DF 200 in 212ms
+ GET /api/quote?symbol=TSLA 200 in 299ms
+ GET /api/quote?symbol=AAPL 200 in 314ms
+ GET /api/quote?symbol=GC%3DF 200 in 411ms
+ ✓ Compiled in 77ms
+ ✓ Compiled in 78ms
+ ✓ Compiled in 84ms
+ GET /api/quote?symbol=TSLA 200 in 244ms
+ GET /api/quote?symbol=AAPL 200 in 249ms
+ GET /api/quote?symbol=CL%3DF 200 in 277ms
+ ✓ Compiled in 77ms
+ ✓ Compiled in 90ms
+ GET /dashboard 200 in 585ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 258ms
+ GET /api/quote?symbol=CL%3DF 200 in 224ms
+ GET /api/quote?symbol=AAPL 200 in 242ms
+ GET /api/quote?symbol=CL%3DF 200 in 57ms
+ GET /api/quote?symbol=AAPL 200 in 61ms
+ GET /api/quote?symbol=TSLA 200 in 313ms
+ GET /api/quote?symbol=CL%3DF 200 in 79ms
+ GET /api/quote?symbol=AAPL 200 in 109ms
+ GET /api/quote?symbol=TSLA 200 in 226ms
+ GET /api/quote?symbol=TSLA 200 in 51ms
+ ✓ Compiled in 80ms
+ GET /api/quote?symbol=TSLA 200 in 187ms
+ GET /api/quote?symbol=CL%3DF 200 in 268ms
+ GET /api/quote?symbol=AAPL 200 in 314ms
+ ✓ Compiled in 82ms

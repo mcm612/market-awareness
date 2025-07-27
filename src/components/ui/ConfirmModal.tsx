@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import styles from './ConfirmModal.module.css'
 
 interface ConfirmModalProps {
@@ -54,7 +55,8 @@ export default function ConfirmModal({
 
   if (!isOpen) return null
 
-  return (
+
+  const modalContent = (
     <div className={styles.overlay} onClick={onCancel}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
@@ -89,4 +91,7 @@ export default function ConfirmModal({
       </div>
     </div>
   )
+
+  // Use portal to render at document body level to avoid z-index issues
+  return typeof window !== 'undefined' ? createPortal(modalContent, document.body) : null
 }

@@ -54,6 +54,8 @@ export default function StockSearch({
       try {
         const searchResults = await MarketDataService.searchSymbols(query)
         setResults(searchResults)
+        
+        
         setIsOpen(true)
         setSelectedIndex(-1)
       } catch (error) {
@@ -133,6 +135,7 @@ export default function StockSearch({
 
   const handleAddToWatchlist = (result: SearchResult) => {
     if (!user) return
+    setIsOpen(false) // Close dropdown when modal opens
     setConfirmModal({ isOpen: true, result })
   }
 

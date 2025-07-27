@@ -168,10 +168,12 @@ export class MarketDataService {
       if (!result) return this.getMockQuote(symbol)
 
       const meta = result.meta
-      const currentPrice = meta.regularMarketPrice || meta.previousClose
-      const previousClose = meta.previousClose
-      const change = currentPrice - previousClose
-      const changePercent = (change / previousClose) * 100
+      const currentPrice = meta.regularMarketPrice || meta.chartPreviousClose || 0
+      const previousClose = meta.chartPreviousClose || meta.previousClose || 0
+      
+      // Handle NaN calculations gracefully
+      const change = (currentPrice && previousClose) ? currentPrice - previousClose : 0
+      const changePercent = (change && previousClose) ? (change / previousClose) * 100 : 0
 
       return {
         symbol: meta.symbol,

@@ -43,21 +43,26 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+      <header className="bg-white/80 backdrop-blur-lg shadow-lg border-b border-slate-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">Market Awareness</h1>
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg mr-3 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">M</span>
+              </div>
+              <h1 className="text-3xl font-black bg-gradient-to-r from-slate-900 to-blue-700 bg-clip-text text-transparent">
+                Market Awareness
+              </h1>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-700">
-                Welcome, {user.email}
+            <div className="flex items-center space-x-6">
+              <span className="text-sm font-medium text-slate-600">
+                Welcome, <span className="text-slate-900 font-semibold">{user.email}</span>
               </span>
               <button
                 onClick={handleSignOut}
-                className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md text-sm font-medium text-gray-700 transition-colors"
+                className="bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 px-6 py-3 rounded-xl text-sm font-semibold text-slate-700 transition-all duration-200 shadow-md hover:shadow-lg"
               >
                 Sign Out
               </button>
@@ -66,56 +71,70 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
+      <main className="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8" style={{overflow: 'visible'}}>
+        <div className="px-4 py-6 sm:px-0 space-y-8" style={{overflow: 'visible'}}>
           {/* Stock Search Section */}
-          <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Search Stocks & Futures</h2>
-            <p className="text-gray-600 mb-6">
+          <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-slate-200/50 p-8 relative" style={{overflow: 'visible', minHeight: '400px', zIndex: 1}}>
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
+            <h2 className="text-3xl font-black text-slate-900 mb-3 tracking-tight">
+              Search Stocks & Futures
+            </h2>
+            <p className="text-slate-600 mb-8 text-lg font-medium">
               Search for stocks, futures, and other securities to add to your watchlist
             </p>
             <StockSearch onStockAdded={handleStockAdded} />
           </div>
 
           {/* Watchlist Display */}
-          <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+          <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-slate-200/50 p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
             <WatchlistDisplay ref={watchlistRef} />
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-white rounded-lg shadow-sm border p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Market Overview</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>S&P 500</span>
-                  <span className="text-green-600 font-medium">+0.5%</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-slate-200/50 p-6 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Market Overview</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-slate-700">S&P 500</span>
+                  <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 px-3 py-1 rounded-lg">
+                    <span className="text-emerald-700 font-bold">+0.5%</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>NASDAQ</span>
-                  <span className="text-red-600 font-medium">-0.2%</span>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-slate-700">NASDAQ</span>
+                  <div className="bg-gradient-to-r from-red-100 to-red-200 px-3 py-1 rounded-lg">
+                    <span className="text-red-700 font-bold">-0.2%</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>DOW</span>
-                  <span className="text-green-600 font-medium">+0.3%</span>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-slate-700">DOW</span>
+                  <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 px-3 py-1 rounded-lg">
+                    <span className="text-emerald-700 font-bold">+0.3%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm border p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Account Status</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>User:</span>
-                  <span className="font-medium">{user.email}</span>
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-slate-200/50 p-6 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Account Status</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-slate-700">User:</span>
+                  <span className="font-bold text-slate-900">{user.email}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Status:</span>
-                  <span className="text-green-600 font-medium">Active</span>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-slate-700">Status:</span>
+                  <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 px-3 py-1 rounded-lg">
+                    <span className="text-emerald-700 font-bold">Active</span>
+                  </div>
                 </div>
                 <button 
                   onClick={handleSignOut}
-                  className="w-full mt-3 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded text-sm transition-colors"
+                  className="w-full mt-4 bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-700 font-semibold px-4 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   Sign Out
                 </button>
@@ -124,13 +143,32 @@ export default function DashboardPage() {
           </div>
 
           {/* Instructions */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-blue-900 mb-2">🚀 Try the Stock Search!</h3>
-            <div className="text-blue-800 text-sm space-y-1">
-              <p>• Type any stock symbol (AAPL, TSLA, NVDA) or company name</p>
-              <p>• Use keyboard arrows to navigate results</p>
-              <p>• Click &quot;+ Add&quot; to add stocks to your watchlist</p>
-              <p>• Search includes futures and other securities</p>
+          <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-blue-200/50 rounded-2xl p-8 mt-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-900 to-indigo-900 bg-clip-text text-transparent mb-4 tracking-tight">
+              🚀 Get Started with Market Awareness
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-700">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <p className="font-medium">Type any stock symbol (AAPL, TSLA, NVDA) or company name</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                  <p className="font-medium">Use keyboard arrows to navigate results</p>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <p className="font-medium">Click &quot;+ Add&quot; to add stocks to your watchlist</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                  <p className="font-medium">Search includes futures and other securities</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
