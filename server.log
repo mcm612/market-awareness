@@ -497,3 +497,15 @@
  GET /login 200 in 72ms
  ✓ Compiled in 91ms
  ✓ Compiled in 75ms
+ GET /login 200 in 209ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 263ms
+ GET /login 200 in 115ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 270ms
+ GET /login 200 in 211ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 275ms
+ ✓ Compiled in 112ms
+ GET /dashboard 200 in 293ms
+ GET /api/quote?symbol=TSLA 200 in 278ms
+ GET /api/quote?symbol=AAPL 200 in 292ms
+ GET /api/quote?symbol=TSLA 200 in 69ms
+ GET /api/quote?symbol=AAPL 200 in 64ms
