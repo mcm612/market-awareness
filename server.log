@@ -482,3 +482,7 @@
  GET /api/quote?symbol=CL%3DF 200 in 268ms
  GET /api/quote?symbol=AAPL 200 in 314ms
  ✓ Compiled in 82ms
+ GET /api/quote?symbol=TSLA 200 in 203ms
+ GET /api/quote?symbol=AAPL 200 in 250ms
+ GET /api/quote?symbol=AAPL 200 in 228ms
+ GET /api/quote?symbol=TSLA 200 in 233ms

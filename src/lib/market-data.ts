@@ -10,19 +10,6 @@ interface YahooSearchResult {
   exchange?: string
 }
 
-interface YahooQuoteResult {
-  symbol: string
-  regularMarketPrice?: number
-  regularMarketChange?: number
-  regularMarketChangePercent?: number
-  regularMarketVolume?: number
-  regularMarketDayHigh?: number
-  regularMarketDayLow?: number
-  regularMarketOpen?: number
-  regularMarketPreviousClose?: number
-  shortName?: string
-  longName?: string
-}
 
 export interface SearchResult {
   symbol: string

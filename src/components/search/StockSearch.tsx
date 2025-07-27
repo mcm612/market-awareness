@@ -246,7 +246,7 @@ export default function StockSearch({
       {isOpen && query.length > 0 && results.length === 0 && !isLoading && (
         <div className={styles.dropdown}>
           <div className={styles.noResults}>
-            No results found for "{query}"
+            No results found for &quot;{query}&quot;
           </div>
         </div>
       )}
