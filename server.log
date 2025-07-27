@@ -486,3 +486,13 @@
  GET /api/quote?symbol=AAPL 200 in 250ms
  GET /api/quote?symbol=AAPL 200 in 228ms
  GET /api/quote?symbol=TSLA 200 in 233ms
+ GET /login 200 in 172ms
+ GET /login 200 in 110ms
+ GET /dashboard 200 in 68ms
+ GET /api/quote?symbol=TSLA 200 in 227ms
+ GET /api/quote?symbol=TSLA 200 in 52ms
+ GET /api/quote?symbol=AAPL 200 in 295ms
+ GET /api/quote?symbol=AAPL 200 in 67ms
+ GET /login 200 in 91ms
+ GET /login 200 in 72ms
+ ✓ Compiled in 91ms

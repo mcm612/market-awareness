@@ -1,5 +1,7 @@
 'use client'
 
+// Trigger redeploy after fixing Supabase environment variables
+
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
