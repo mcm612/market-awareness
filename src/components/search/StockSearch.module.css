@@ -20,10 +20,17 @@
   border-radius: 16px;
   font-size: 16px;
   font-weight: 500;
+  color: #1f2937;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   transition: all 0.2s ease-in-out;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   letter-spacing: 0.025em;
+}
+
+.searchInput::placeholder {
+  color: #6b7280;
+  opacity: 1;
+  font-weight: 400;
 }
 
 .searchInput:focus {
