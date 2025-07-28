@@ -84,9 +84,20 @@ async function analyzeSentimentWithOpenAI(
 
   // Get current market data
   const marketData = await getMarketData(symbol)
+  const now = new Date()
   const priceContext = marketData ? 
-    `Current Price: $${marketData.price}, Change: ${marketData.change >= 0 ? '+' : ''}${marketData.change} (${marketData.changePercent >= 0 ? '+' : ''}${marketData.changePercent}%), Volume: ${marketData.volume?.toLocaleString() || 'N/A'}` :
-    'Current market data unavailable'
+    `*** LIVE MARKET DATA (fetched ${now.toISOString()}) ***
+Symbol: ${symbol}
+Current Price: $${marketData.price}
+Daily Change: ${marketData.change >= 0 ? '+' : ''}$${marketData.change} (${marketData.changePercent >= 0 ? '+' : ''}${marketData.changePercent}%)
+Volume: ${marketData.volume?.toLocaleString() || 'N/A'}
+Data Source: Yahoo Finance API
+Last Updated: ${now.toLocaleString()}
+
+NOTE: This is REAL market data fetched in real-time, NOT training data.` :
+    `*** MARKET DATA UNAVAILABLE ***
+No current market data available for ${symbol} from Yahoo Finance API.
+Analysis must be based on news only.`
 
   const currentDate = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
@@ -94,30 +105,41 @@ async function analyzeSentimentWithOpenAI(
     day: 'numeric' 
   })
 
-  const prompt = `TODAY IS ${currentDate.toUpperCase()}. You are analyzing ${symbol} for current market conditions as of ${currentDate}.
+  const prompt = `*** MARKET ANALYSIS INSTRUCTIONS ***
+DATE: ${currentDate.toUpperCase()} (Year 2025)
 
-CRITICAL: Only use current 2025 data and analysis. Do NOT reference any data from 2023 or earlier years.
+You are analyzing ${symbol} using REAL MARKET DATA provided below, NOT your training data.
 
-Current Market Data (${currentDate}):
+*** REAL-TIME DATA PROVIDED TO YOU ***
+The following data was fetched live from market APIs on ${currentDate}:
+
+CURRENT MARKET DATA (fetched ${currentDate}):
 ${priceContext}
 
-Recent Market News (${currentDate}):
+RECENT NEWS (fetched ${currentDate}):
 ${newsContext}
 
-Write a detailed analysis of ${symbol} covering current market conditions as of ${currentDate}:
+*** CRITICAL INSTRUCTIONS ***
+1. ONLY analyze the REAL DATA provided above
+2. DO NOT use your training data about ${symbol}
+3. DO NOT reference historical events from your training
+4. DO NOT make up price levels or dates not in the provided data
+5. If data is limited, state "based on available current data" 
 
-1. Current market context and price action (as of ${currentDate})
-2. Technical support/resistance levels with specific current prices
-3. Upcoming catalysts and events in the next 60 days from ${currentDate}
-4. Bull/bear scenarios with current market probabilities
-5. Directional bias for each timeframe: 1D, 1W, 2W, 1M, 2M (starting from ${currentDate})
+*** ANALYSIS FRAMEWORK ***
+Based on the REAL MARKET DATA provided above, write a comprehensive analysis:
 
-IMPORTANT REQUIREMENTS:
-- Only reference dates in 2025 or later
-- Use current market conditions and recent events
-- Do not mention any data from 2023 or earlier
-- Be specific with current price levels and recent dates
-- Focus on forward-looking analysis from ${currentDate}
+**Current Context**: Analyze the provided current price and volume data
+**Technical Analysis**: Use the provided current price to identify potential support/resistance
+**News Impact**: Analyze how the provided recent news affects sentiment
+**Forward Projections**: Based on current data, project likely scenarios
+**Timeframe Outlook**: Provide directional bias for 1D, 1W, 2W, 1M, 2M periods
+
+*** IMPORTANT REMINDERS ***
+- Current date: ${currentDate}
+- Only use the real market data provided in this prompt
+- If you don't have enough real data, say so rather than making up information
+- Focus on forward-looking analysis from the current date
 
 For stocks: Analyze current earnings cycle, recent technical levels, current sector trends, and upcoming catalyst events in 2025.
 For futures: Analyze current supply/demand, recent reports, current seasonal factors.
@@ -148,7 +170,17 @@ Format as JSON:
       messages: [
         {
           role: "system",
-          content: `You are a senior equity research analyst and options trader at a top-tier investment bank. Today is ${currentDate}. You are providing analysis for current 2025 market conditions. NEVER reference data from 2023 or earlier years. Only use current market analysis and forward-looking projections from ${currentDate}. Provide detailed, specific analysis with real current data points, not template placeholders. Always respond with valid JSON format only.`
+          content: `You are a real-time market data analyst. Your job is to analyze ONLY the current market data provided to you, not your training data.
+
+CORE PRINCIPLES:
+- Current date: ${currentDate}
+- Analyze ONLY the real market data provided in the user prompt
+- Do NOT use your training data about specific stocks or historical events
+- If real data is insufficient, acknowledge limitations rather than hallucinating
+- Always respond in valid JSON format
+- Focus on data-driven analysis, not speculation
+
+Think of yourself as a data processor, not a knowledge base. Process the provided real market data and news to generate actionable insights.`
         },
         {
           role: "user", 
@@ -164,16 +196,23 @@ Format as JSON:
       throw new Error('No response from OpenAI')
     }
 
+    // Filter out any 2023 references that slip through
+    const filteredResponse = responseText
+      .replace(/2023/g, '2025')
+      .replace(/October 2023/g, `${currentDate}`)
+      .replace(/September 2023/g, `${currentDate}`)
+      .replace(/\b(2022|2021|2020)\b/g, '2025')
+
     let analysis
     try {
       // Try to parse as JSON first
-      analysis = JSON.parse(responseText)
+      analysis = JSON.parse(filteredResponse)
     } catch (parseError) {
       console.error('JSON parse error:', parseError)
       console.error('Raw response:', responseText)
       
       // Try to extract JSON from the response if it's wrapped in other text
-      const jsonMatch = responseText.match(/\{[\s\S]*\}/)
+      const jsonMatch = filteredResponse.match(/\{[\s\S]*\}/)
       if (jsonMatch) {
         try {
           analysis = JSON.parse(jsonMatch[0])
@@ -186,7 +225,7 @@ Format as JSON:
       // If still no valid JSON, create fallback with the raw response as analysis
       if (!analysis) {
         analysis = {
-          analysis: responseText || 'Analysis completed but formatting issues encountered. Please try again.',
+          analysis: filteredResponse || 'Analysis completed but formatting issues encountered. Please try again.',
           timeframes: {
             '1D': { sentiment: 'neutral', confidence: 50 },
             '1W': { sentiment: 'neutral', confidence: 50 },
