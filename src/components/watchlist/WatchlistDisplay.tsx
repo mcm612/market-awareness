@@ -323,7 +323,7 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
                 <td colSpan={8} className={styles.emptyCell}>
                   <div className={styles.emptyContent}>
                     <h4>Start Building Your Watchlist</h4>
-                    <p>Search for stocks above (try AAPL, TSLA, or NVDA) and click "Add" to see them here.</p>
+                    <p>Search for stocks above (try AAPL, TSLA, or NVDA) and click &quot;Add&quot; to see them here.</p>
                     <p className={styles.emptySubtext}>Track prices, sentiment analysis, and more in one organized table.</p>
                   </div>
                 </td>

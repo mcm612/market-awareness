@@ -135,34 +135,7 @@ export default function ComprehensiveAnalysis({
     return result
   }
 
-  const renderTimeframeSummary = () => {
-    const timeframeOrder = ['1D', '1W', '2W', '1M', '2M']
-    const labels = {
-      '1D': '1D',
-      '1W': '1W', 
-      '2W': '2W',
-      '1M': '1M',
-      '2M': '2M'
-    }
-
-    return timeframeOrder.map(tf => {
-      const data = timeframes[tf]
-      if (!data) return null
-
-      return (
-        <div key={tf} className={styles.timeframeSummary}>
-          <span className={styles.timeframeLabel}>{labels[tf as keyof typeof labels]}</span>
-          <div 
-            className={styles.sentimentIndicator}
-            style={{ color: getSentimentColor(data.sentiment) }}
-          >
-            {getSentimentIcon(data.sentiment)}
-          </div>
-          <span className={styles.confidenceText}>{data.confidence}%</span>
-        </div>
-      )
-    }).filter(Boolean)
-  }
+  // Removed unused function
 
   const modalContent = (
     <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}>
@@ -215,8 +188,6 @@ export default function ComprehensiveAnalysis({
       </div>
     </div>
   )
-
-  const overallSentiment = getOverallSentiment()
 
   return (
     <>
