@@ -12,13 +12,7 @@ interface NewsSource {
   summary?: string
 }
 
-interface SentimentData {
-  timeframe: string
-  sentiment: 'bullish' | 'bearish' | 'neutral'
-  confidence: number
-  reasoning?: string
-  news_sources?: NewsSource[]
-}
+// Removed unused interface
 
 interface SentimentReasoningProps {
   timeframe: string
@@ -211,7 +205,7 @@ export default function SentimentReasoning({
           ) : (
             <div className={styles.noReasoning}>
               <p>No detailed analysis available for this timeframe.</p>
-              <p>Click "Update AI Analysis" to generate reasoning for all timeframes.</p>
+              <p>Click &quot;Update AI Analysis&quot; to generate reasoning for all timeframes.</p>
             </div>
           )}
         </div>

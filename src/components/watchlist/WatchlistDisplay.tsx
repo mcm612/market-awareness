@@ -22,7 +22,7 @@ interface SentimentData {
   sentiment: 'bullish' | 'bearish' | 'neutral'
   confidence: number
   reasoning?: string
-  news_sources?: any[]
+  news_sources?: Record<string, unknown>[]
 }
 
 interface WatchlistItemWithData extends WatchlistItem {
@@ -63,6 +63,7 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
     if (user) {
       loadWatchlist()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   const loadWatchlist = async () => {
@@ -156,7 +157,7 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     refreshWatchlist: refreshData
-  }), [])
+  }), [refreshData])
 
   const showNotification = (message: string, type: 'success' | 'error' | 'warning' | 'info') => {
     setNotification({ message, type, isVisible: true })
@@ -264,13 +265,7 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
     }
   }
 
-  const getSentimentClass = (sentiment: string) => {
-    switch (sentiment) {
-      case 'bullish': return styles.bullish
-      case 'bearish': return styles.bearish
-      default: return styles.neutral
-    }
-  }
+  // Function removed as it's no longer used
 
   if (loading) {
     return (

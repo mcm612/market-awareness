@@ -19,12 +19,7 @@ interface NewsArticle {
   summary?: string
 }
 
-interface SentimentResult {
-  sentiment: 'bullish' | 'bearish' | 'neutral'
-  confidence: number
-  reasoning: string
-  news_sources: NewsArticle[]
-}
+// Removed unused interface
 
 async function fetchAlphaVantageNews(symbol: string): Promise<NewsArticle[]> {
   try {
@@ -43,12 +38,12 @@ async function fetchAlphaVantageNews(symbol: string): Promise<NewsArticle[]> {
     }
     
     // Transform Alpha Vantage news format to our format
-    const articles: NewsArticle[] = (data.feed || []).slice(0, 5).map((article: any) => ({
-      title: article.title,
-      url: article.url,
-      source: article.source,
-      published: article.time_published,
-      summary: article.summary
+    const articles: NewsArticle[] = (data.feed || []).slice(0, 5).map((article: Record<string, unknown>) => ({
+      title: article.title as string,
+      url: article.url as string,
+      source: article.source as string,
+      published: article.time_published as string,
+      summary: article.summary as string
     }))
     
     return articles
@@ -74,27 +69,10 @@ async function analyzeSentimentWithOpenAI(
   symbol: string, 
   timeframe: string, 
   articles: NewsArticle[]
-): Promise<any> {
-  const timeframeContext = {
-    '1D': 'intraday (0DTE/same-day expiry)',
-    '1W': 'weekly options (most liquid)',
-    '2W': 'bi-weekly (earnings/events)',
-    '1M': 'monthly options (standard cycle)',
-    '2M': '60-day (theta decay strategies)'
-  }[timeframe] || timeframe
-
+): Promise<{ analysis: string; timeframes: Record<string, { sentiment: string; confidence: number }>; news_sources: NewsArticle[] }> {
   const newsContext = articles.length > 0 
     ? articles.map(article => `- ${article.title} (${article.source}): ${article.summary || 'No summary'}`).join('\n')
     : 'No recent news articles available for analysis.'
-
-  // Options-focused catalyst analysis for directional conviction
-  const timeframeGuidance = {
-    '1D': 'Focus on TODAY\'S immediate catalysts: earnings reactions, Fed announcements, breaking news, technical breakouts, unusual options activity, and same-day events that could move the stock',
-    '1W': 'Analyze THIS WEEK\'S upcoming events: earnings releases, analyst calls, product launches, regulatory decisions, weekly options expiry positioning, and short-term momentum catalysts',
-    '2W': 'Evaluate NEXT 2 WEEKS\' scheduled events: earnings season positioning, guidance updates, conference presentations, economic data releases, and bi-weekly trading cycles',
-    '1M': 'Assess MONTHLY outlook: upcoming earnings cycle, monthly options expiry, sector rotation trends, quarterly guidance periods, and intermediate-term business developments',
-    '2M': 'Examine 60-DAY horizon: quarterly earnings approach, seasonal patterns, major product cycles, regulatory timelines, and longer-term strategic initiatives'
-  }
 
   // Get current market data
   const marketData = await getMarketData(symbol)
@@ -233,7 +211,7 @@ Format as JSON:
 
 export async function POST(request: NextRequest) {
   try {
-    const { symbol, timeframes } = await request.json()
+    const { symbol } = await request.json()
     
     if (!symbol) {
       return NextResponse.json({ error: 'Symbol is required' }, { status: 400 })

@@ -78,7 +78,7 @@ export default function ComprehensiveAnalysis({
   const formatAnalysisContent = (content: string) => {
     // Split content into lines for better processing
     const lines = content.split('\n')
-    let formattedLines: string[] = []
+    const formattedLines: string[] = []
     
     for (let i = 0; i < lines.length; i++) {
       let line = lines[i].trim()
@@ -208,7 +208,7 @@ export default function ComprehensiveAnalysis({
           ) : (
             <div className={styles.noAnalysis}>
               <p>No comprehensive analysis available.</p>
-              <p>Click "Update AI Analysis" to generate a detailed multi-timeframe report.</p>
+              <p>Click &quot;Update AI Analysis&quot; to generate a detailed multi-timeframe report.</p>
             </div>
           )}
         </div>
