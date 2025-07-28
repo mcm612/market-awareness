@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, forwardRef, useImperativeHandle, useCallback } from 'react'
+import React, { useState, useEffect, forwardRef, useImperativeHandle, useCallback } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { MarketDataService, StockQuote } from '@/lib/market-data'
@@ -58,6 +58,65 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
     item: { id: string; symbol: string } | null
   }>({ isOpen: false, item: null })
   const [sentimentLoading, setSentimentLoading] = useState<Record<string, boolean>>({})
+  const [sortConfig, setSortConfig] = useState<{
+    key: string
+    direction: 'asc' | 'desc'
+  } | null>(null)
+
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc'
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc'
+    }
+    setSortConfig({ key, direction })
+  }
+
+  const getSortableValue = (item: WatchlistItemWithData, key: string) => {
+    switch (key) {
+      case 'symbol':
+        return item.symbol
+      case 'company':
+        return item.name
+      case 'price':
+        return item.quote?.price || 0
+      case 'change':
+        return item.quote?.change || 0
+      case 'changePercent':
+        return item.quote?.changePercent || 0
+      case 'volume':
+        return item.quote?.volume || 0
+      default:
+        return ''
+    }
+  }
+
+  const sortedWatchlist = React.useMemo(() => {
+    if (!sortConfig) return watchlist
+
+    return [...watchlist].sort((a, b) => {
+      const aValue = getSortableValue(a, sortConfig.key)
+      const bValue = getSortableValue(b, sortConfig.key)
+
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        const comparison = aValue.localeCompare(bValue)
+        return sortConfig.direction === 'asc' ? comparison : -comparison
+      }
+
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        const comparison = aValue - bValue
+        return sortConfig.direction === 'asc' ? comparison : -comparison
+      }
+
+      return 0
+    })
+  }, [watchlist, sortConfig])
+
+  const getSortIcon = (columnKey: string) => {
+    if (!sortConfig || sortConfig.key !== columnKey) {
+      return '↕'
+    }
+    return sortConfig.direction === 'asc' ? '↑' : '↓'
+  }
 
   const loadWatchlist = useCallback(async () => {
     if (!user) return
@@ -362,7 +421,7 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h3>Your Watchlist ({watchlist.length} items)</h3>
+        <h3>Your Watchlist ({sortedWatchlist.length} items)</h3>
         <button 
           onClick={refreshData} 
           disabled={refreshing}
@@ -376,18 +435,43 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
         <table className={styles.watchlistTable}>
           <thead>
             <tr className={styles.tableHeader}>
-              <th className={styles.symbolHeader}>Symbol</th>
-              <th className={styles.companyHeader}>Company</th>
-              <th className={styles.priceHeader}>Price</th>
-              <th className={styles.changeHeader}>Change</th>
-              <th className={styles.volumeHeader}>Volume</th>
+              <th className={styles.symbolHeader} onClick={() => handleSort('symbol')}>
+                <div className={styles.headerContent}>
+                  <span>Symbol</span>
+                  <span className={styles.sortIcon}>{getSortIcon('symbol')}</span>
+                </div>
+              </th>
+              <th className={styles.companyHeader} onClick={() => handleSort('company')}>
+                <div className={styles.headerContent}>
+                  <span>Company</span>
+                  <span className={styles.sortIcon}>{getSortIcon('company')}</span>
+                </div>
+              </th>
+              <th className={styles.priceHeader} onClick={() => handleSort('price')}>
+                <div className={styles.headerContent}>
+                  <span>Price</span>
+                  <span className={styles.sortIcon}>{getSortIcon('price')}</span>
+                </div>
+              </th>
+              <th className={styles.changeHeader} onClick={() => handleSort('change')}>
+                <div className={styles.headerContent}>
+                  <span>Change</span>
+                  <span className={styles.sortIcon}>{getSortIcon('change')}</span>
+                </div>
+              </th>
+              <th className={styles.volumeHeader} onClick={() => handleSort('volume')}>
+                <div className={styles.headerContent}>
+                  <span>Volume</span>
+                  <span className={styles.sortIcon}>{getSortIcon('volume')}</span>
+                </div>
+              </th>
               <th className={styles.sentimentHeader}>Sentiment</th>
               <th className={styles.analysisHeader}>Analysis</th>
               <th className={styles.actionsHeader}>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {watchlist.map((item) => (
+            {sortedWatchlist.map((item) => (
               <tr key={item.id} className={styles.tableRow}>
                 <td className={styles.symbolCell}>
                   <span className={styles.symbol}>{item.symbol}</span>

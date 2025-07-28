@@ -509,3 +509,548 @@
  GET /api/quote?symbol=AAPL 200 in 292ms
  GET /api/quote?symbol=TSLA 200 in 69ms
  GET /api/quote?symbol=AAPL 200 in 64ms
+ GET /api/quote?symbol=AAPL 200 in 206ms
+ GET /api/quote?symbol=TSLA 200 in 225ms
+ GET /api/quote?symbol=TSLA 200 in 158ms
+ GET /api/quote?symbol=AAPL 200 in 197ms
+   Reload env: .env.local
+ GET /dashboard 200 in 311ms
+ GET /login 200 in 147ms
+   Reload env: .env.local
+   Reload env: .env.local
+ GET /login 200 in 1621ms
+ GET /dashboard 200 in 269ms
+ GET /api/quote?symbol=CL%3DF 200 in 296ms
+ GET /api/quote?symbol=NQ%3DF 200 in 299ms
+ GET /api/quote?symbol=CL%3DF 200 in 60ms
+ GET /api/quote?symbol=NQ%3DF 200 in 64ms
+ GET /api/quote?symbol=TSLA 200 in 365ms
+ GET /api/quote?symbol=PLTR 200 in 383ms
+ GET /api/quote?symbol=AAPL 200 in 388ms
+ GET /api/quote?symbol=PLTR 200 in 79ms
+ GET /api/quote?symbol=AAPL 200 in 174ms
+ GET /api/quote?symbol=TSLA 200 in 220ms
+ ✓ Compiled /api/sentiment-analysis in 434ms
+OpenAI analysis error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+    at APIError.generate (../src/core/error.ts:96:13)
+    at OpenAI.makeStatusError (src/client.ts:438:27)
+    at OpenAI.makeRequest (src/client.ts:661:23)
+    at async analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:96:23)
+    at async POST (src/app/api/sentiment-analysis/route.ts:158:25)
+  94 |
+  95 |   try {
+> 96 |     const completion = await openai.chat.completions.create({
+     |                       ^
+  97 |       model: "gpt-3.5-turbo",
+  98 |       messages: [
+  99 |         { {
+  status: 429,
+  headers: Headers {
+    date: 'Sun, 27 Jul 2025 18:04:52 GMT',
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': '337',
+    connection: 'keep-alive',
+    vary: 'Origin',
+    'x-request-id': '1876bd3a-4c7e-4678-b089-dcb80353903b',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=thNHecIqOcX.yBgTRvBP.9CfymQSEb4dnYPlkfMZBgg-1753639492-1.0.1.1-piDF6u6BqF2Z7foyA30eFYfx1x9QzgyNESmyeEXRNMCJzG_KDsMtE.hdFmlFkx__8mzllF99jR25LLpjQw8lRweAf80PxAkmSDE3gvJh54c; path=/; expires=Sun, 27-Jul-25 18:34:52 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=ApDNogO1Hl3_5aYau1ovbAsEUPXklQoOVysBettewNM-1753639492428-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '965e0fcb28e8dd66-MIA',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: '1876bd3a-4c7e-4678-b089-dcb80353903b',
+  error: [Object],
+  code: 'insufficient_quota',
+  param: null,
+  type: 'insufficient_quota'
+}
+OpenAI analysis error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+    at APIError.generate (../src/core/error.ts:96:13)
+    at OpenAI.makeStatusError (src/client.ts:438:27)
+    at OpenAI.makeRequest (src/client.ts:661:23)
+    at async analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:96:23)
+    at async POST (src/app/api/sentiment-analysis/route.ts:158:25)
+  94 |
+  95 |   try {
+> 96 |     const completion = await openai.chat.completions.create({
+     |                       ^
+  97 |       model: "gpt-3.5-turbo",
+  98 |       messages: [
+  99 |         { {
+  status: 429,
+  headers: Headers {
+    date: 'Sun, 27 Jul 2025 18:04:55 GMT',
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': '337',
+    connection: 'keep-alive',
+    vary: 'Origin',
+    'x-request-id': 'ee98188d-4c02-4a1c-b934-066c3b9a45be',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=enq2.4l6IrMfKYvv.56GiO4ZN_9S6UO.plPy6JDzX8Y-1753639495-1.0.1.1-cl4PttTZCM_kr.9.7t5dRN0IyU3r0nwzdBygv4C78ob5O6_jWhYufqludTALPshN7SmGnowW6CxAw10ZHHJyxgWMcvMETzzTNq3hmWfkMSM; path=/; expires=Sun, 27-Jul-25 18:34:55 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=SvvO1e.IjznSF.X5msuyvJGY63PnUb5twOiL51jsfa0-1753639495335-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '965e0fdcfad48750-MIA',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: 'ee98188d-4c02-4a1c-b934-066c3b9a45be',
+  error: [Object],
+  code: 'insufficient_quota',
+  param: null,
+  type: 'insufficient_quota'
+}
+OpenAI analysis error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+    at APIError.generate (../src/core/error.ts:96:13)
+    at OpenAI.makeStatusError (src/client.ts:438:27)
+    at OpenAI.makeRequest (src/client.ts:661:23)
+    at async analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:96:23)
+    at async POST (src/app/api/sentiment-analysis/route.ts:158:25)
+  94 |
+  95 |   try {
+> 96 |     const completion = await openai.chat.completions.create({
+     |                       ^
+  97 |       model: "gpt-3.5-turbo",
+  98 |       messages: [
+  99 |         { {
+  status: 429,
+  headers: Headers {
+    date: 'Sun, 27 Jul 2025 18:04:57 GMT',
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': '337',
+    connection: 'keep-alive',
+    vary: 'Origin',
+    'x-request-id': '362df659-8dee-49fa-b52d-f44def90b77b',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=MileC.HVZLq3PZAvlg2kHA8n5pqWFcX1tyzQTWYGsrs-1753639497-1.0.1.1-pJse1N9xgozjh6LdqgMWcGQjpeQjirQIpjBsaRfL.thGyIPpP2RxV9PCYTGaemEsWlRAFKdbBYZOI8tT6xyoXF26yq.9KN.nK3DlfdDWf3g; path=/; expires=Sun, 27-Jul-25 18:34:57 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=JBxqOtt1gBrmlZ0qx3AfuaRMGjLgORY1m2.LGG59Wz0-1753639497097-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '965e0fe86bf88750-MIA',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: '362df659-8dee-49fa-b52d-f44def90b77b',
+  error: [Object],
+  code: 'insufficient_quota',
+  param: null,
+  type: 'insufficient_quota'
+}
+OpenAI analysis error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+    at APIError.generate (../src/core/error.ts:96:13)
+    at OpenAI.makeStatusError (src/client.ts:438:27)
+    at OpenAI.makeRequest (src/client.ts:661:23)
+    at async analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:96:23)
+    at async POST (src/app/api/sentiment-analysis/route.ts:158:25)
+  94 |
+  95 |   try {
+> 96 |     const completion = await openai.chat.completions.create({
+     |                       ^
+  97 |       model: "gpt-3.5-turbo",
+  98 |       messages: [
+  99 |         { {
+  status: 429,
+  headers: Headers {
+    date: 'Sun, 27 Jul 2025 18:04:59 GMT',
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': '337',
+    connection: 'keep-alive',
+    vary: 'Origin',
+    'x-request-id': '5c6918bc-7c15-43ac-936b-15b97dafadaa',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=OJsh2hgJqy7MR4MkKCn9fTaRaO0RTyeEQYdX.U0BmVk-1753639499-1.0.1.1-uKo0qXCg8Vtpi6Ss9xbeJSKIxp0Ry58CpSNuBeDKNVKyhCKz4g8E4K916tyojknlOZVPOS_ar1srNSHQVmz1SxR.NR5GDff1gcYGAzW5GWE; path=/; expires=Sun, 27-Jul-25 18:34:59 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=vZiyq_KAcLR9vDPAflGbIUJ0AvJG3nNTfJDe4ypLPtE-1753639499689-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '965e0ff66e3f8750-MIA',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: '5c6918bc-7c15-43ac-936b-15b97dafadaa',
+  error: [Object],
+  code: 'insufficient_quota',
+  param: null,
+  type: 'insufficient_quota'
+}
+OpenAI analysis error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+    at APIError.generate (../src/core/error.ts:96:13)
+    at OpenAI.makeStatusError (src/client.ts:438:27)
+    at OpenAI.makeRequest (src/client.ts:661:23)
+    at async analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:96:23)
+    at async POST (src/app/api/sentiment-analysis/route.ts:158:25)
+  94 |
+  95 |   try {
+> 96 |     const completion = await openai.chat.completions.create({
+     |                       ^
+  97 |       model: "gpt-3.5-turbo",
+  98 |       messages: [
+  99 |         { {
+  status: 429,
+  headers: Headers {
+    date: 'Sun, 27 Jul 2025 18:05:01 GMT',
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': '337',
+    connection: 'keep-alive',
+    vary: 'Origin',
+    'x-request-id': '9482c02b-ad00-42dd-8470-d649b98dd732',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=GN4Gnp2oQPXGgHs2D.ruKlsy4Wk8OQe8D6u3JiAR4qY-1753639501-1.0.1.1-Mg4DsSSFZooMZ2oUhDD1oofVaF.3CiEE7JPEuRLP7ywcbx1RHWF5gtLnhCNODTj0AFH2oVYApOQi2MVH8NYG1KaVimS4561Pz_2MOPMJOr0; path=/; expires=Sun, 27-Jul-25 18:35:01 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=ZiZMgSvrUoXNvP4o.KVOJRWhjyriCv1hCGZos3J3A.Q-1753639501689-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '965e10030fd08750-MIA',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: '9482c02b-ad00-42dd-8470-d649b98dd732',
+  error: [Object],
+  code: 'insufficient_quota',
+  param: null,
+  type: 'insufficient_quota'
+}
+ POST /api/sentiment-analysis 200 in 13809ms
+ GET /api/quote?symbol=PLTR 200 in 214ms
+ GET /api/quote?symbol=TSLA 200 in 242ms
+ GET /api/quote?symbol=NQ%3DF 200 in 361ms
+ GET /api/quote?symbol=CL%3DF 200 in 379ms
+ GET /api/quote?symbol=AAPL 200 in 425ms
+ GET /dashboard 200 in 344ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 289ms
+ GET /api/quote?symbol=AAPL 200 in 242ms
+ GET /api/quote?symbol=PLTR 200 in 267ms
+ GET /api/quote?symbol=NQ%3DF 200 in 272ms
+ GET /api/quote?symbol=TSLA 200 in 294ms
+ GET /api/quote?symbol=NQ%3DF 200 in 163ms
+ GET /api/quote?symbol=AAPL 200 in 198ms
+ GET /api/quote?symbol=CL%3DF 200 in 463ms
+ GET /api/quote?symbol=TSLA 200 in 220ms
+ GET /api/quote?symbol=AAPL 200 in 77ms
+ GET /api/quote?symbol=NQ%3DF 200 in 131ms
+ GET /api/quote?symbol=TSLA 200 in 64ms
+ GET /api/quote?symbol=PLTR 200 in 326ms
+ GET /api/quote?symbol=PLTR 200 in 51ms
+ GET /api/quote?symbol=CL%3DF 200 in 234ms
+ GET /api/quote?symbol=CL%3DF 200 in 298ms
+ POST /api/sentiment-analysis 200 in 1005ms
+ GET /api/quote?symbol=AAPL 200 in 148ms
+ GET /api/quote?symbol=NQ%3DF 200 in 153ms
+ GET /api/quote?symbol=TSLA 200 in 154ms
+ GET /api/quote?symbol=PLTR 200 in 203ms
+ GET /api/quote?symbol=CL%3DF 200 in 262ms
+ GET /api/quote?symbol=NQ%3DF 200 in 231ms
+ GET /api/quote?symbol=CL%3DF 200 in 234ms
+ GET /api/quote?symbol=PLTR 200 in 243ms
+ GET /api/quote?symbol=AAPL 200 in 269ms
+ GET /api/quote?symbol=TSLA 200 in 291ms
+ ✓ Compiled in 71ms
+ ✓ Compiled in 82ms
+ ✓ Compiled in 75ms
+ GET /api/search?q=a 200 in 281ms
+ GET /api/search?q=app 200 in 194ms
+ ✓ Compiled in 78ms
+ ✓ Compiled in 74ms
+ ✓ Compiled in 83ms
+ ✓ Compiled in 79ms
+ ✓ Compiled /dashboard in 34ms
+ GET /dashboard 200 in 323ms
+ GET /dashboard 200 in 70ms
+ GET /dashboard 200 in 63ms
+ GET /dashboard 200 in 72ms
+ GET /dashboard 200 in 325ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 245ms
+ GET /api/quote?symbol=PLTR 200 in 230ms
+ GET /api/quote?symbol=NQ%3DF 200 in 232ms
+ GET /api/quote?symbol=CL%3DF 200 in 261ms
+ GET /api/quote?symbol=TSLA 200 in 311ms
+ GET /api/quote?symbol=PLTR 200 in 85ms
+ GET /api/quote?symbol=AAPL 200 in 340ms
+ GET /api/quote?symbol=NQ%3DF 200 in 150ms
+ GET /api/quote?symbol=PLTR 200 in 112ms
+ GET /api/quote?symbol=CL%3DF 200 in 176ms
+ GET /api/quote?symbol=TSLA 200 in 227ms
+ GET /api/quote?symbol=AAPL 200 in 228ms
+ GET /api/quote?symbol=TSLA 200 in 64ms
+ GET /api/quote?symbol=CL%3DF 200 in 178ms
+ GET /api/quote?symbol=AAPL 200 in 71ms
+ GET /api/quote?symbol=NQ%3DF 200 in 363ms
+ GET /api/quote?symbol=PLTR 200 in 225ms
+ GET /api/quote?symbol=CL%3DF 200 in 229ms
+ GET /api/quote?symbol=TSLA 200 in 313ms
+ GET /api/quote?symbol=NQ%3DF 200 in 318ms
+ GET /api/quote?symbol=AAPL 200 in 390ms
+ ✓ Compiled in 76ms
+ POST /api/sentiment-analysis 200 in 891ms
+ GET /api/quote?symbol=TSLA 200 in 232ms
+ GET /api/quote?symbol=PLTR 200 in 247ms
+ GET /api/quote?symbol=NQ%3DF 200 in 248ms
+ GET /api/quote?symbol=CL%3DF 200 in 325ms
+ GET /api/quote?symbol=AAPL 200 in 437ms
+ GET /api/quote?symbol=TSLA 200 in 244ms
+ GET /api/quote?symbol=NQ%3DF 200 in 262ms
+ GET /api/quote?symbol=CL%3DF 200 in 268ms
+ GET /api/quote?symbol=PLTR 200 in 291ms
+ GET /api/quote?symbol=AAPL 200 in 326ms
+ ✓ Compiled in 66ms
+ ✓ Compiled /dashboard in 25ms
+ GET /dashboard 200 in 287ms
+ GET /dashboard 200 in 69ms
+ GET /dashboard 200 in 65ms
+ GET /dashboard 200 in 73ms
+ GET /dashboard 200 in 355ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 244ms
+ GET /api/quote?symbol=CL%3DF 200 in 228ms
+ GET /api/quote?symbol=PLTR 200 in 282ms
+ GET /api/quote?symbol=CL%3DF 200 in 55ms
+ GET /api/quote?symbol=NQ%3DF 200 in 288ms
+ GET /api/quote?symbol=AAPL 200 in 340ms
+ GET /api/quote?symbol=TSLA 200 in 358ms
+ GET /api/quote?symbol=PLTR 200 in 112ms
+ GET /api/quote?symbol=NQ%3DF 200 in 113ms
+ GET /api/quote?symbol=CL%3DF 200 in 111ms
+ GET /api/quote?symbol=AAPL 200 in 140ms
+ GET /api/quote?symbol=TSLA 200 in 147ms
+ GET /api/quote?symbol=PLTR 200 in 126ms
+ GET /api/quote?symbol=NQ%3DF 200 in 127ms
+ GET /api/quote?symbol=AAPL 200 in 104ms
+ GET /api/quote?symbol=TSLA 200 in 88ms
+ GET /api/quote?symbol=PLTR 200 in 616ms
+ GET /api/quote?symbol=TSLA 200 in 572ms
+ GET /api/quote?symbol=NQ%3DF 200 in 611ms
+ GET /api/quote?symbol=CL%3DF 200 in 613ms
+ GET /api/quote?symbol=AAPL 200 in 709ms
+ GET /api/quote?symbol=TSLA 200 in 239ms
+ GET /api/quote?symbol=NQ%3DF 200 in 248ms
+ GET /api/quote?symbol=PLTR 200 in 255ms
+ GET /api/quote?symbol=AAPL 200 in 279ms
+ GET /api/quote?symbol=CL%3DF 200 in 282ms
+ GET /api/quote?symbol=PLTR 200 in 1524ms
+ GET /api/quote?symbol=CL%3DF 200 in 1511ms
+ GET /api/quote?symbol=NQ%3DF 200 in 1572ms
+ GET /api/quote?symbol=AAPL 200 in 1659ms
+ GET /api/quote?symbol=TSLA 200 in 1667ms
+ GET /api/quote?symbol=CL%3DF 200 in 322ms
+ GET /api/quote?symbol=AAPL 200 in 354ms
+ GET /api/quote?symbol=TSLA 200 in 371ms
+ GET /api/quote?symbol=PLTR 200 in 404ms
+ GET /api/quote?symbol=NQ%3DF 200 in 407ms
+ GET /api/quote?symbol=CL%3DF 200 in 349ms
+ GET /api/quote?symbol=PLTR 200 in 370ms
+ GET /api/quote?symbol=NQ%3DF 200 in 418ms
+ GET /api/quote?symbol=TSLA 200 in 408ms
+ GET /api/quote?symbol=AAPL 200 in 485ms
+ GET /dashboard 200 in 260ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 290ms
+ GET /api/quote?symbol=NQ%3DF 200 in 282ms
+ GET /api/quote?symbol=CL%3DF 200 in 310ms
+ GET /api/quote?symbol=TSLA 200 in 321ms
+ GET /api/quote?symbol=AAPL 200 in 327ms
+ GET /api/quote?symbol=PLTR 200 in 377ms
+ GET /api/quote?symbol=NQ%3DF 200 in 95ms
+ GET /api/quote?symbol=AAPL 200 in 133ms
+ GET /api/quote?symbol=CL%3DF 200 in 289ms
+ GET /api/quote?symbol=TSLA 200 in 293ms
+ GET /api/quote?symbol=PLTR 200 in 283ms
+ GET /api/quote?symbol=NQ%3DF 200 in 364ms
+ GET /api/quote?symbol=CL%3DF 200 in 342ms
+ GET /api/quote?symbol=TSLA 200 in 318ms
+ GET /api/quote?symbol=PLTR 200 in 306ms
+ GET /api/quote?symbol=AAPL 200 in 595ms
+ POST /api/sentiment-analysis 200 in 6528ms
+ GET /api/quote?symbol=CL%3DF 200 in 213ms
+ GET /api/quote?symbol=TSLA 200 in 214ms
+ GET /api/quote?symbol=NQ%3DF 200 in 307ms
+ GET /api/quote?symbol=AAPL 200 in 332ms
+ GET /api/quote?symbol=PLTR 200 in 340ms
+ POST /api/sentiment-analysis 200 in 8498ms
+ GET /api/quote?symbol=PLTR 200 in 270ms
+ GET /api/quote?symbol=AAPL 200 in 305ms
+ GET /api/quote?symbol=CL%3DF 200 in 321ms
+ GET /api/quote?symbol=TSLA 200 in 351ms
+ GET /api/quote?symbol=NQ%3DF 200 in 3589ms
+ GET /dashboard 200 in 205ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 267ms
+ GET /dashboard 200 in 138ms
+ GET /api/quote?symbol=PLTR 200 in 290ms
+ GET /api/quote?symbol=TSLA 200 in 293ms
+ GET /api/quote?symbol=AAPL 200 in 321ms
+ GET /api/quote?symbol=CL%3DF 200 in 339ms
+ GET /api/quote?symbol=NQ%3DF 200 in 351ms
+ GET /api/quote?symbol=PLTR 200 in 254ms
+ GET /api/quote?symbol=PLTR 200 in 68ms
+ GET /api/quote?symbol=CL%3DF 200 in 349ms
+ GET /api/quote?symbol=NQ%3DF 200 in 361ms
+ GET /api/quote?symbol=AAPL 200 in 430ms
+ GET /api/quote?symbol=TSLA 200 in 494ms
+ GET /api/quote?symbol=CL%3DF 200 in 84ms
+ GET /api/quote?symbol=TSLA 200 in 84ms
+ GET /api/quote?symbol=NQ%3DF 200 in 217ms
+ GET /api/quote?symbol=AAPL 200 in 198ms
+OpenAI analysis error: SyntaxError: Bad control character in string literal in JSON at position 482
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:159:26)
+    at async POST (src/app/api/sentiment-analysis/route.ts:200:25)
+  157 |     }
+  158 |
+> 159 |     const analysis = JSON.parse(responseText)
+      |                          ^
+  160 |     
+  161 |     return {
+  162 |       sentiment: analysis.sentiment,
+ POST /api/sentiment-analysis 200 in 11485ms
+ GET /api/quote?symbol=PLTR 200 in 215ms
+ GET /api/quote?symbol=TSLA 200 in 218ms
+ GET /api/quote?symbol=AAPL 200 in 260ms
+ GET /api/quote?symbol=CL%3DF 200 in 319ms
+ GET /api/quote?symbol=NQ%3DF 200 in 410ms
+ GET /api/quote?symbol=TSLA 200 in 253ms
+ GET /api/quote?symbol=CL%3DF 200 in 259ms
+ GET /api/quote?symbol=AAPL 200 in 313ms
+ GET /api/quote?symbol=PLTR 200 in 330ms
+ GET /api/quote?symbol=NQ%3DF 200 in 430ms
+ ✓ Compiled in 84ms
+ GET /dashboard 200 in 213ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 243ms
+ GET /api/quote?symbol=PLTR 200 in 414ms
+ GET /api/quote?symbol=AAPL 200 in 491ms
+ GET /api/quote?symbol=CL%3DF 200 in 502ms
+ GET /api/quote?symbol=NQ%3DF 200 in 509ms
+ GET /api/quote?symbol=TSLA 200 in 512ms
+ GET /api/quote?symbol=PLTR 200 in 129ms
+ GET /api/quote?symbol=CL%3DF 200 in 239ms
+ GET /api/quote?symbol=NQ%3DF 200 in 290ms
+ GET /api/quote?symbol=AAPL 200 in 298ms
+ GET /api/quote?symbol=CL%3DF 200 in 63ms
+ GET /api/quote?symbol=PLTR 200 in 279ms
+ GET /api/quote?symbol=TSLA 200 in 324ms
+ GET /api/quote?symbol=NQ%3DF 200 in 110ms
+ GET /api/quote?symbol=AAPL 200 in 112ms
+ GET /api/quote?symbol=TSLA 200 in 159ms
+OpenAI analysis error: SyntaxError: Bad control character in string literal in JSON at position 85
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:166:26)
+    at async POST (src/app/api/sentiment-analysis/route.ts:207:25)
+  164 |     }
+  165 |
+> 166 |     const analysis = JSON.parse(responseText)
+      |                          ^
+  167 |     
+  168 |     return {
+  169 |       sentiment: analysis.sentiment,
+OpenAI analysis error: SyntaxError: Bad control character in string literal in JSON at position 85
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:166:26)
+    at async POST (src/app/api/sentiment-analysis/route.ts:207:25)
+  164 |     }
+  165 |
+> 166 |     const analysis = JSON.parse(responseText)
+      |                          ^
+  167 |     
+  168 |     return {
+  169 |       sentiment: analysis.sentiment,
+OpenAI analysis error: SyntaxError: Bad control character in string literal in JSON at position 85
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:166:26)
+    at async POST (src/app/api/sentiment-analysis/route.ts:207:25)
+  164 |     }
+  165 |
+> 166 |     const analysis = JSON.parse(responseText)
+      |                          ^
+  167 |     
+  168 |     return {
+  169 |       sentiment: analysis.sentiment,
+OpenAI analysis error: SyntaxError: Bad control character in string literal in JSON at position 85
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:166:26)
+    at async POST (src/app/api/sentiment-analysis/route.ts:207:25)
+  164 |     }
+  165 |
+> 166 |     const analysis = JSON.parse(responseText)
+      |                          ^
+  167 |     
+  168 |     return {
+  169 |       sentiment: analysis.sentiment,
+OpenAI analysis error: SyntaxError: Bad control character in string literal in JSON at position 85
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:166:26)
+    at async POST (src/app/api/sentiment-analysis/route.ts:207:25)
+  164 |     }
+  165 |
+> 166 |     const analysis = JSON.parse(responseText)
+      |                          ^
+  167 |     
+  168 |     return {
+  169 |       sentiment: analysis.sentiment,
+ POST /api/sentiment-analysis 200 in 11278ms
+ GET /api/quote?symbol=CL%3DF 200 in 219ms
+ GET /api/quote?symbol=AAPL 200 in 273ms
+ GET /api/quote?symbol=PLTR 200 in 280ms
+ GET /api/quote?symbol=NQ%3DF 200 in 284ms
+ GET /api/quote?symbol=TSLA 200 in 317ms
+ GET /api/quote?symbol=NQ%3DF 200 in 361ms
+ GET /api/quote?symbol=AAPL 200 in 400ms
+ GET /api/quote?symbol=CL%3DF 200 in 534ms
+ GET /api/quote?symbol=PLTR 200 in 1202ms
+ GET /api/quote?symbol=TSLA 200 in 2015ms
+ GET /dashboard 200 in 179ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 247ms
+ GET /api/quote?symbol=PLTR 200 in 1224ms
+ GET /api/quote?symbol=PLTR 200 in 51ms
+ GET /api/quote?symbol=AAPL 200 in 1298ms
+ GET /api/quote?symbol=PLTR 200 in 62ms
+ GET /api/quote?symbol=NQ%3DF 200 in 1348ms
+ GET /api/quote?symbol=TSLA 200 in 1357ms
+ GET /api/quote?symbol=NQ%3DF 200 in 76ms
+ GET /api/quote?symbol=TSLA 200 in 70ms
+ GET /api/quote?symbol=CL%3DF 200 in 1444ms
+ GET /api/quote?symbol=AAPL 200 in 183ms
+ GET /api/quote?symbol=NQ%3DF 200 in 101ms
+ GET /api/quote?symbol=TSLA 200 in 245ms
+ GET /api/quote?symbol=AAPL 200 in 197ms
+ GET /api/quote?symbol=CL%3DF 200 in 243ms
+ GET /api/quote?symbol=CL%3DF 200 in 57ms
+JSON parse error: SyntaxError: Unexpected token '`', "```json{  "... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at analyzeSentimentWithOpenAI (src/app/api/sentiment-analysis/route.ts:177:22)
+    at async POST (src/app/api/sentiment-analysis/route.ts:238:25)
+  175 |     let analysis
+  176 |     try {
+> 177 |       analysis = JSON.parse(cleanedResponse)
+      |                      ^
+  178 |     } catch (parseError) {
+  179 |       console.error('JSON parse error:', parseError)
+  180 |       console.error('Raw response:', responseText)
+Raw response: ```json
+{
+  "sentiment": "bearish",
+  "confidence": 80,
+  "reasoning": "**EXECUTIVE SUMMARY**\nGiven the mixed sentiment from recent news articles and the uncertainty surrounding Palantir Technologies, the sentiment for PLTR stock over a medium-long-term horizon appears bearish.\n\n**FUNDAMENTAL ANALYSIS**\nThe revenue trends for Palantir Technologies have been positive, but concerns remain about the company's earnings quality and growth trajectory. Competitive positioning in the sector is strong, but uncertainties persist.\n\n**TECHNICAL & MARKET FACTORS**\nPrice momentum for PLTR stock has been volatile, with mixed volume patterns and institutional flow. Support/resistance levels are unclear, and the stock is subject to high volatility in the current market environment.\n\n**TIMEFRAME-SPECIFIC CATALYSTS**\nKey events such as earnings releases and regulatory developments could significantly impact PLTR stock over the next 3 months. Investors should closely monitor these catalysts for potential shifts in sentiment.\n\n**RISK ASSESSMENT**\nPrimary downside risks include negative earnings surprises, increased competition, and broader market volatility affecting PLTR stock. Potential upside surprises could stem from strong revenue growth, new product launches, or positive analyst sentiment."
+}
+```
+Cleaned response: ```json{  "sentiment": "bearish",  "confidence": 80,  "reasoning": "**EXECUTIVE SUMMARY**\nGiven the mixed sentiment from recent news articles and the uncertainty surrounding Palantir Technologies, the sentiment for PLTR stock over a medium-long-term horizon appears bearish.\n\n**FUNDAMENTAL ANALYSIS**\nThe revenue trends for Palantir Technologies have been positive, but concerns remain about the company's earnings quality and growth trajectory. Competitive positioning in the sector is strong, but uncertainties persist.\n\n**TECHNICAL & MARKET FACTORS**\nPrice momentum for PLTR stock has been volatile, with mixed volume patterns and institutional flow. Support/resistance levels are unclear, and the stock is subject to high volatility in the current market environment.\n\n**TIMEFRAME-SPECIFIC CATALYSTS**\nKey events such as earnings releases and regulatory developments could significantly impact PLTR stock over the next 3 months. Investors should closely monitor these catalysts for potential shifts in sentiment.\n\n**RISK ASSESSMENT**\nPrimary downside risks include negative earnings surprises, increased competition, and broader market volatility affecting PLTR stock. Potential upside surprises could stem from strong revenue growth, new product launches, or positive analyst sentiment."}```
+ POST /api/sentiment-analysis 200 in 11238ms
+ GET /api/quote?symbol=TSLA 200 in 238ms
+ GET /api/quote?symbol=NQ%3DF 200 in 269ms
+ GET /api/quote?symbol=PLTR 200 in 286ms
+ GET /api/quote?symbol=AAPL 200 in 294ms
+ GET /api/quote?symbol=CL%3DF 200 in 303ms
+ ✓ Compiled in 77ms
+ ✓ Compiled in 70ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 76ms
+ GET /dashboard 200 in 662ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 265ms
+ GET /api/quote?symbol=PLTR 200 in 233ms
+ GET /api/quote?symbol=CL%3DF 200 in 237ms
+ GET /api/quote?symbol=NQ%3DF 200 in 270ms
+ GET /api/quote?symbol=TSLA 200 in 277ms
+ GET /api/quote?symbol=AAPL 200 in 288ms
+ GET /api/quote?symbol=PLTR 200 in 116ms
+ GET /api/quote?symbol=NQ%3DF 200 in 135ms
+ GET /api/quote?symbol=CL%3DF 200 in 216ms
+ GET /api/quote?symbol=TSLA 200 in 185ms
+ GET /api/quote?symbol=NQ%3DF 200 in 96ms
+ GET /api/quote?symbol=AAPL 200 in 243ms
+ GET /api/quote?symbol=PLTR 200 in 240ms
+ GET /api/quote?symbol=CL%3DF 200 in 272ms
+ GET /api/quote?symbol=AAPL 200 in 251ms
+ GET /api/quote?symbol=TSLA 200 in 529ms
+ ✓ Compiled in 78ms
+[?25h

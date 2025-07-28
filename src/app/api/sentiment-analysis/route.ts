@@ -63,14 +63,25 @@ async function fetchAlphaVantageNews(symbol: string): Promise<NewsArticle[]> {
 
 async function getMarketData(symbol: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/quote?symbol=${encodeURIComponent(symbol)}`)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://market-awareness.vercel.app'
+    const url = `${baseUrl}/api/quote?symbol=${encodeURIComponent(symbol)}`
+    console.log(`Fetching market data from: ${url}`)
+    
+    const response = await fetch(url)
+    console.log(`Market data response status: ${response.status}`)
+    
     if (response.ok) {
-      return await response.json()
+      const data = await response.json()
+      console.log(`Market data for ${symbol}:`, data)
+      return data
+    } else {
+      console.error(`Market data API error: ${response.status} ${response.statusText}`)
+      return null
     }
   } catch (error) {
-    console.warn('Could not fetch market data:', error)
+    console.error('Could not fetch market data:', error)
+    return null
   }
-  return null
 }
 
 async function analyzeSentimentWithOpenAI(
