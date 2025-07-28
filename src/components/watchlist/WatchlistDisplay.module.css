@@ -305,20 +305,48 @@
   border-radius: 0 0 24px 24px;
 }
 
+.sentimentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
 .sentimentLabel {
   font-size: 1rem;
   font-weight: 700;
   color: #1e293b;
-  margin-bottom: 12px;
   letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
-.sentimentGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+.analyzeButton {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
+
+.analyzeButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
+}
+
+.analyzeButton:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Comprehensive analysis replaces the old sentiment grid */
 
 .sentimentItem {
   display: flex;

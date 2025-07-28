@@ -58,18 +58,50 @@
   margin-bottom: 24px;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   border-radius: 24px 24px 0 0;
+  border-top: 4px solid #e2e8f0; /* Default neutral border */
+}
+
+/* Type-specific header styling */
+.header.danger {
   border-top: 4px solid #dc2626;
+}
+
+.header.success {
+  border-top: 4px solid #059669;
+}
+
+.header.default {
+  border-top: 4px solid #3b82f6;
 }
 
 .title {
   font-size: 1.375rem;
   font-weight: 800;
+  color: #1e293b; /* Default neutral color */
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+/* Type-specific title styling */
+.title.danger {
   background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 0;
-  letter-spacing: -0.025em;
+}
+
+.title.success {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title.default {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .closeButton {

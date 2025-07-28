@@ -17,6 +17,10 @@ A comprehensive market awareness web application for retail investors featuring 
 - ✅ **Database Schema**: Complete with RLS policies and sample data
 - ✅ **Automatic Refresh**: Watchlist updates immediately when assets are added
 - ✅ **Error Handling**: Professional user feedback for all operations
+- ✅ **Fintech UI Styling**: Modern glassmorphism effects, gradients, professional design
+- ✅ **Production Deployment**: Live on Vercel at https://market-awareness.vercel.app
+- ✅ **Modal System**: Portal-based rendering with proper z-index management
+- ✅ **Cross-browser Compatibility**: Fixed placeholder text visibility issues
 
 ### Technical Architecture
 
@@ -66,18 +70,30 @@ npm run typecheck  # TypeScript checking
 
 ### Environment Variables Required
 ```
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Supabase (Required)
+NEXT_PUBLIC_SUPABASE_URL=https://bpupjzbxiwerqinlgwls.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+# Sentiment Analysis APIs (In Progress)
+ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key_here
+OPENAI_API_KEY=sk-your_openai_key_here
 ```
 
 ## Current Todo List 📋
 
+### 🔥 In Progress (Current Session)
+- ⏳ **Sentiment Reasoning System**: Adding "WHY" explanations for bullish/bearish/neutral states
+  - ✅ Database schema updated (reasoning, news_sources, last_updated columns)
+  - ⏳ Getting API keys: Alpha Vantage (free news) + OpenAI (cheap analysis)
+  - ⏳ API implementation: `/api/sentiment-analysis` endpoint
+  - ⏳ UI components: Expandable "Why?" buttons with cited news sources
+  - ⏳ Smart caching: 24hr cache to maximize free API usage (25 calls/day limit)
+
 ### High Priority
-- [ ] **Deploy to Vercel**: Get app live for real-world testing
-- [ ] **Implement Real Sentiment Analysis**: Replace mock sentiment data with actual analysis
+- ✅ **Deploy to Vercel**: Live at https://market-awareness.vercel.app
+- [ ] **Complete Sentiment Reasoning**: Finish current implementation
 
 ### Medium Priority  
-- [ ] **Complete Sentiment Analysis**: Integrate real sentiment API (Alpha Vantage, Finnhub, etc.)
 - [ ] **Add Technical Indicators**: RSI, MACD, Moving Averages, etc.
 - [ ] **Enhanced Asset Support**: ETFs, bonds, more commodity futures
 - [ ] **Price Alerts**: User-configurable notifications
@@ -166,9 +182,50 @@ src/components/
 
 ---
 
-**Last Updated**: Created during initial development session  
-**Next Session Goal**: Deploy to Vercel and implement real sentiment analysis  
+## Sentiment Reasoning Implementation Plan 🧠
+
+### Free Tier Strategy (Current)
+- **Alpha Vantage News API**: 25 calls/day free tier
+- **OpenAI GPT-3.5-turbo**: ~$0.002/1K tokens (very cheap)
+- **Smart Usage**: Update 2-3 symbols daily, 24hr caching
+- **User Control**: Manual refresh option for priority symbols
+
+### Database Schema Changes Applied
+```sql
+-- Run in Supabase SQL Editor
+ALTER TABLE sentiment_data 
+ADD COLUMN IF NOT EXISTS reasoning TEXT,
+ADD COLUMN IF NOT EXISTS news_sources JSONB,
+ADD COLUMN IF NOT EXISTS last_updated TIMESTAMP DEFAULT NOW();
+```
+
+### API Flow Design
+1. User clicks "Why?" → Check cache (24hr)
+2. If stale → Fetch news (Alpha Vantage)
+3. Analyze with OpenAI → Generate reasoning
+4. Store with citations → Display to user
+
+### UI Component Structure
+```
+Sentiment Badge: 🟢 Bullish [Why?] ← Expandable
+  ↓ Expands to show:
+📰 Reasoning: "Bullish due to..."
+📎 Sources: • "News headline" - Reuters
+```
+
+---
+
+**Last Updated**: Current session - Implementing sentiment reasoning system  
+**Next Session Goal**: Complete sentiment reasoning with API integration  
+**Current Status**: Getting API keys for Alpha Vantage + OpenAI  
 **Contact**: michael.manguart@gmail.com (GitHub: mcm612)
+
+### 🚨 Session Handoff Notes
+If this session closes before completion:
+1. **API Keys Needed**: Alpha Vantage (free) + OpenAI ($5 credit)
+2. **Database Updated**: Schema ready for reasoning storage
+3. **Files Created**: `/docs/sentiment-reasoning-schema.sql`
+4. **Next Steps**: Build `/api/sentiment-analysis` endpoint + UI components
 
 ---
 

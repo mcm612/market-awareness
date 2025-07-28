@@ -59,8 +59,8 @@ export default function ConfirmModal({
   const modalContent = (
     <div className={styles.overlay} onClick={onCancel}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <h3 className={styles.title}>{title}</h3>
+        <div className={`${styles.header} ${styles[type]}`}>
+          <h3 className={`${styles.title} ${styles[type]}`}>{title}</h3>
           <button
             onClick={onCancel}
             className={styles.closeButton}

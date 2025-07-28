@@ -17,9 +17,9 @@ export interface WatchlistItem {
   sentiment: {
     '1D': SentimentType
     '1W': SentimentType
+    '2W': SentimentType
     '1M': SentimentType
-    '3M': SentimentType
-    '6M': SentimentType
+    '2M': SentimentType
   }
 }
 

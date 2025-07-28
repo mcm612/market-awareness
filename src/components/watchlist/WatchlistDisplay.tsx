@@ -7,6 +7,7 @@ import { MarketDataService, StockQuote } from '@/lib/market-data'
 import { formatCurrency, formatPercentage } from '@/lib/utils'
 import ConfirmModal from '@/components/ui/ConfirmModal'
 import Notification from '@/components/ui/Notification'
+import ComprehensiveAnalysis from '@/components/sentiment/ComprehensiveAnalysis'
 import styles from './WatchlistDisplay.module.css'
 
 interface WatchlistItem {
@@ -16,15 +17,25 @@ interface WatchlistItem {
   added_at: string
 }
 
+interface SentimentData {
+  timeframe: string
+  sentiment: 'bullish' | 'bearish' | 'neutral'
+  confidence: number
+  reasoning?: string
+  news_sources?: any[]
+}
+
 interface WatchlistItemWithData extends WatchlistItem {
   quote?: StockQuote
   sentiment?: {
     '1D': 'bullish' | 'bearish' | 'neutral'
     '1W': 'bullish' | 'bearish' | 'neutral'
+    '2W': 'bullish' | 'bearish' | 'neutral'
     '1M': 'bullish' | 'bearish' | 'neutral'
-    '3M': 'bullish' | 'bearish' | 'neutral'
-    '6M': 'bullish' | 'bearish' | 'neutral'
+    '2M': 'bullish' | 'bearish' | 'neutral'
   }
+  sentimentData?: Record<string, SentimentData>
+  comprehensiveAnalysis?: string
 }
 
 export interface WatchlistDisplayRef {
@@ -46,6 +57,7 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
     isOpen: boolean
     item: { id: string; symbol: string } | null
   }>({ isOpen: false, item: null })
+  const [sentimentLoading, setSentimentLoading] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     if (user) {
@@ -101,15 +113,29 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
         const sentiment = {
           '1D': symbolSentiment.find(s => s.timeframe === '1D')?.sentiment || 'neutral',
           '1W': symbolSentiment.find(s => s.timeframe === '1W')?.sentiment || 'neutral',
+          '2W': symbolSentiment.find(s => s.timeframe === '2W')?.sentiment || 'neutral',
           '1M': symbolSentiment.find(s => s.timeframe === '1M')?.sentiment || 'neutral',
-          '3M': symbolSentiment.find(s => s.timeframe === '3M')?.sentiment || 'neutral',
-          '6M': symbolSentiment.find(s => s.timeframe === '6M')?.sentiment || 'neutral'
+          '2M': symbolSentiment.find(s => s.timeframe === '2M')?.sentiment || 'neutral'
         }
+
+        // Create detailed sentiment data map
+        const sentimentDataMap: Record<string, SentimentData> = {}
+        symbolSentiment.forEach(s => {
+          sentimentDataMap[s.timeframe] = {
+            timeframe: s.timeframe,
+            sentiment: s.sentiment,
+            confidence: s.confidence,
+            reasoning: s.reasoning,
+            news_sources: s.news_sources
+          }
+        })
 
         return {
           ...item,
           quote: quotes[index] || undefined,
-          sentiment
+          sentiment,
+          sentimentData: sentimentDataMap,
+          comprehensiveAnalysis: symbolSentiment.length > 0 ? symbolSentiment[0]?.reasoning : undefined
         }
       })
 
@@ -169,6 +195,73 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
 
   const cancelRemoveFromWatchlist = () => {
     setConfirmModal({ isOpen: false, item: null })
+  }
+
+  const analyzeSentiment = async (symbol: string, timeframes?: string[]): Promise<void> => {
+    try {
+      setSentimentLoading(prev => ({ ...prev, [symbol]: true }))
+      
+      const response = await fetch('/api/sentiment-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol, timeframes })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to analyze sentiment')
+      }
+
+      const result = await response.json()
+      
+      // Update only the specific item's sentiment data without full reload
+      // This prevents the modal from closing
+      const { data: sentimentData } = await supabase
+        .from('sentiment_data')
+        .select('*')
+        .eq('symbol', symbol.toUpperCase())
+        .eq('data_date', new Date().toISOString().split('T')[0])
+
+      // Update the watchlist state with new sentiment data
+      setWatchlist(prev => prev.map(item => {
+        if (item.symbol === symbol) {
+          const symbolSentiment = sentimentData || []
+          const sentiment = {
+            '1D': symbolSentiment.find(s => s.timeframe === '1D')?.sentiment || 'neutral',
+            '1W': symbolSentiment.find(s => s.timeframe === '1W')?.sentiment || 'neutral',
+            '2W': symbolSentiment.find(s => s.timeframe === '2W')?.sentiment || 'neutral',
+            '1M': symbolSentiment.find(s => s.timeframe === '1M')?.sentiment || 'neutral',
+            '2M': symbolSentiment.find(s => s.timeframe === '2M')?.sentiment || 'neutral'
+          }
+
+          const sentimentDataMap: Record<string, SentimentData> = {}
+          symbolSentiment.forEach(s => {
+            sentimentDataMap[s.timeframe] = {
+              timeframe: s.timeframe,
+              sentiment: s.sentiment,
+              confidence: s.confidence,
+              reasoning: s.reasoning,
+              news_sources: s.news_sources
+            }
+          })
+
+          return {
+            ...item,
+            sentiment,
+            sentimentData: sentimentDataMap,
+            comprehensiveAnalysis: result.analysis || symbolSentiment[0]?.reasoning
+          }
+        }
+        return item
+      }))
+      
+      showNotification(`Sentiment analysis updated for ${symbol}`, 'success')
+    } catch (error) {
+      console.error('Sentiment analysis error:', error)
+      showNotification('Failed to analyze sentiment', 'error')
+      throw error; // Re-throw so the modal can handle the error
+    } finally {
+      setSentimentLoading(prev => ({ ...prev, [symbol]: false }))
+    }
   }
 
   const getSentimentClass = (sentiment: string) => {
@@ -268,17 +361,26 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
             </div>
 
             <div className={styles.sentimentContainer}>
-              <div className={styles.sentimentLabel}>Sentiment Analysis</div>
-              <div className={styles.sentimentGrid}>
-                {Object.entries(item.sentiment || {}).map(([timeframe, sentiment]) => (
-                  <div key={timeframe} className={styles.sentimentItem}>
-                    <div className={styles.timeframe}>{timeframe}</div>
-                    <div className={`${styles.sentimentBadge} ${getSentimentClass(sentiment)}`}>
-                      {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
-                    </div>
-                  </div>
-                ))}
+              <div className={styles.sentimentHeader}>
+                <div className={styles.sentimentLabel}>Multi-Timeframe Analysis</div>
               </div>
+              <ComprehensiveAnalysis
+                symbol={item.symbol}
+                analysis={item.comprehensiveAnalysis}
+                timeframes={(() => {
+                  const timeframes: Record<string, { sentiment: 'bullish' | 'bearish' | 'neutral', confidence: number }> = {}
+                  Object.entries(item.sentiment || {}).forEach(([timeframe, sentiment]) => {
+                    const detailed = item.sentimentData?.[timeframe]
+                    timeframes[timeframe] = {
+                      sentiment,
+                      confidence: detailed?.confidence || 0
+                    }
+                  })
+                  return timeframes
+                })()}
+                isLoading={sentimentLoading[item.symbol]}
+                onAnalyze={() => analyzeSentiment(item.symbol)}
+              />
             </div>
           </div>
         ))}
