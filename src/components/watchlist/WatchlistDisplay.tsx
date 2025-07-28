@@ -293,12 +293,70 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
   if (watchlist.length === 0) {
     return (
       <div className={styles.container}>
-        <div className={styles.empty}>
-          <h3>Your watchlist is empty</h3>
-          <p>Use the search above to add stocks and futures to your watchlist!</p>
+        <div className={styles.header}>
+          <h3>Your Watchlist (0 items)</h3>
+          <button 
+            onClick={refreshData} 
+            disabled={refreshing}
+            className={styles.refreshButton}
+          >
+            {refreshing ? 'Refreshing...' : 'Refresh Prices'}
+          </button>
+        </div>
+
+        <div className={styles.tableContainer}>
+          <table className={styles.watchlistTable}>
+            <thead>
+              <tr className={styles.tableHeader}>
+                <th className={styles.symbolHeader}>Symbol</th>
+                <th className={styles.companyHeader}>Company</th>
+                <th className={styles.priceHeader}>Price</th>
+                <th className={styles.changeHeader}>Change</th>
+                <th className={styles.volumeHeader}>Volume</th>
+                <th className={styles.sentimentHeader}>Sentiment</th>
+                <th className={styles.analysisHeader}>Analysis</th>
+                <th className={styles.actionsHeader}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className={styles.emptyRow}>
+                <td colSpan={8} className={styles.emptyCell}>
+                  <div className={styles.emptyContent}>
+                    <h4>Start Building Your Watchlist</h4>
+                    <p>Search for stocks above (try AAPL, TSLA, or NVDA) and click "Add" to see them here.</p>
+                    <p className={styles.emptySubtext}>Track prices, sentiment analysis, and more in one organized table.</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     )
+  }
+
+  const getSentimentIcon = (sentiment: 'bullish' | 'bearish' | 'neutral') => {
+    switch (sentiment) {
+      case 'bullish': return '🟢'
+      case 'bearish': return '🔴'
+      case 'neutral': return '🟡'
+      default: return '⚪'
+    }
+  }
+
+  const formatVolume = (volume?: number) => {
+    if (!volume) return 'N/A'
+    if (volume >= 1000000) return `${(volume / 1000000).toFixed(1)}M`
+    if (volume >= 1000) return `${(volume / 1000).toFixed(1)}K`
+    return volume.toLocaleString()
+  }
+
+  const shortenCompanyName = (name: string) => {
+    return name
+      .replace(/\b(Inc\.|Corp\.|Corporation|Company|Ltd\.|Limited)\b/gi, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .substring(0, 25)
   }
 
   return (
@@ -314,70 +372,105 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
         </button>
       </div>
 
-      <div className={styles.list}>
-        {watchlist.map((item) => (
-          <div key={item.id} className={styles.item}>
-            <div className={styles.stockInfo}>
-              <div className={styles.stockHeader}>
-                <h4 className={styles.symbol}>{item.symbol}</h4>
-                <span className={styles.name}>{item.name}</span>
-                <button 
-                  onClick={() => handleRemoveFromWatchlist(item.id, item.symbol)}
-                  className={styles.removeButton}
-                  title="Remove from watchlist"
-                >
-                  ×
-                </button>
-              </div>
-
-              {item.quote ? (
-                <div className={styles.priceInfo}>
-                  <span className={styles.price}>
-                    {formatCurrency(item.quote.price)}
+      <div className={styles.tableContainer}>
+        <table className={styles.watchlistTable}>
+          <thead>
+            <tr className={styles.tableHeader}>
+              <th className={styles.symbolHeader}>Symbol</th>
+              <th className={styles.companyHeader}>Company</th>
+              <th className={styles.priceHeader}>Price</th>
+              <th className={styles.changeHeader}>Change</th>
+              <th className={styles.volumeHeader}>Volume</th>
+              <th className={styles.sentimentHeader}>Sentiment</th>
+              <th className={styles.analysisHeader}>Analysis</th>
+              <th className={styles.actionsHeader}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {watchlist.map((item) => (
+              <tr key={item.id} className={styles.tableRow}>
+                <td className={styles.symbolCell}>
+                  <span className={styles.symbol}>{item.symbol}</span>
+                </td>
+                <td className={styles.companyCell}>
+                  <span className={styles.companyName}>
+                    {shortenCompanyName(item.name)}
                   </span>
-                  <span className={`${styles.change} ${
-                    item.quote.change >= 0 ? styles.positive : styles.negative
-                  }`}>
-                    {item.quote.change >= 0 ? '+' : ''}{formatCurrency(item.quote.change)} 
-                    ({formatPercentage(item.quote.changePercent)})
+                </td>
+                <td className={styles.priceCell}>
+                  {item.quote ? (
+                    <span className={styles.price}>
+                      {formatCurrency(item.quote.price)}
+                    </span>
+                  ) : (
+                    <span className={styles.priceLoading}>Loading...</span>
+                  )}
+                </td>
+                <td className={styles.changeCell}>
+                  {item.quote ? (
+                    <span className={`${styles.change} ${
+                      item.quote.change >= 0 ? styles.positive : styles.negative
+                    }`}>
+                      {item.quote.change >= 0 ? '+' : ''}{formatCurrency(item.quote.change)}
+                      <br />
+                      <span className={styles.changePercent}>
+                        ({formatPercentage(item.quote.changePercent)})
+                      </span>
+                    </span>
+                  ) : (
+                    <span className={styles.changeLoading}>--</span>
+                  )}
+                </td>
+                <td className={styles.volumeCell}>
+                  <span className={styles.volume}>
+                    {formatVolume(item.quote?.volume)}
                   </span>
-                </div>
-              ) : (
-                <div className={styles.priceInfo}>
-                  <span className={styles.priceLoading}>Loading price...</span>
-                </div>
-              )}
-
-              <div className={styles.details}>
-                <span>Vol: {item.quote?.volume?.toLocaleString() || 'N/A'}</span>
-                <span>Added: {new Date(item.added_at).toLocaleDateString()}</span>
-              </div>
-            </div>
-
-            <div className={styles.sentimentContainer}>
-              <div className={styles.sentimentHeader}>
-                <div className={styles.sentimentLabel}>Multi-Timeframe Analysis</div>
-              </div>
-              <ComprehensiveAnalysis
-                symbol={item.symbol}
-                analysis={item.comprehensiveAnalysis}
-                timeframes={(() => {
-                  const timeframes: Record<string, { sentiment: 'bullish' | 'bearish' | 'neutral', confidence: number }> = {}
-                  Object.entries(item.sentiment || {}).forEach(([timeframe, sentiment]) => {
-                    const detailed = item.sentimentData?.[timeframe]
-                    timeframes[timeframe] = {
-                      sentiment,
-                      confidence: detailed?.confidence || 0
-                    }
-                  })
-                  return timeframes
-                })()}
-                isLoading={sentimentLoading[item.symbol]}
-                onAnalyze={() => analyzeSentiment(item.symbol)}
-              />
-            </div>
-          </div>
-        ))}
+                </td>
+                <td className={styles.sentimentCell}>
+                  <div className={styles.sentimentIndicators}>
+                    {['1D', '1W', '2W', '1M', '2M'].map(timeframe => (
+                      <span
+                        key={timeframe}
+                        className={styles.sentimentIcon}
+                        title={`${timeframe}: ${item.sentiment?.[timeframe as keyof typeof item.sentiment] || 'neutral'}`}
+                      >
+                        {getSentimentIcon(item.sentiment?.[timeframe as keyof typeof item.sentiment] || 'neutral')}
+                      </span>
+                    ))}
+                  </div>
+                </td>
+                <td className={styles.analysisCell}>
+                  <ComprehensiveAnalysis
+                    symbol={item.symbol}
+                    analysis={item.comprehensiveAnalysis}
+                    timeframes={(() => {
+                      const timeframes: Record<string, { sentiment: 'bullish' | 'bearish' | 'neutral', confidence: number }> = {}
+                      Object.entries(item.sentiment || {}).forEach(([timeframe, sentiment]) => {
+                        const detailed = item.sentimentData?.[timeframe]
+                        timeframes[timeframe] = {
+                          sentiment,
+                          confidence: detailed?.confidence || 0
+                        }
+                      })
+                      return timeframes
+                    })()}
+                    isLoading={sentimentLoading[item.symbol]}
+                    onAnalyze={() => analyzeSentiment(item.symbol)}
+                  />
+                </td>
+                <td className={styles.actionsCell}>
+                  <button 
+                    onClick={() => handleRemoveFromWatchlist(item.id, item.symbol)}
+                    className={styles.removeButton}
+                    title="Remove from watchlist"
+                  >
+                    ×
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <Notification

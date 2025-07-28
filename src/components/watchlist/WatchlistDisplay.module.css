@@ -1,4 +1,4 @@
-/* Modern Fintech-Inspired Watchlist Design */
+/* Professional Watchlist Table Design */
 .container {
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
@@ -45,11 +45,11 @@
 }
 
 .retryButton {
-  padding: 12px 20px;
   background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   color: white;
   border: none;
   border-radius: 12px;
+  padding: 12px 20px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -61,41 +61,7 @@
   transform: translateY(-1px);
 }
 
-.empty {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 24px;
-  border: 1px solid #e2e8f0;
-  color: #64748b;
-  position: relative;
-  overflow: hidden;
-}
-
-.empty::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
-}
-
-.empty h3 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #1e293b;
-  letter-spacing: -0.025em;
-}
-
-.empty p {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #64748b;
-}
-
+/* Header Section */
 .header {
   display: flex;
   justify-content: space-between;
@@ -161,68 +127,232 @@
   box-shadow: none;
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 2.5rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 1px solid #e2e8f0;
-  border-radius: 24px;
+/* Table Container */
+.tableContainer {
+  background: #ffffff;
+  border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-  transition: all 0.3s ease-in-out;
-  position: relative;
+  border: 1px solid #e2e8f0;
   overflow: hidden;
 }
 
-.item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
+/* Table Styles */
+.watchlistTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
 }
 
-.item:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  transform: translateY(-4px);
-  border-color: #cbd5e1;
+/* Table Header */
+.tableHeader {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 2px solid #e2e8f0;
 }
 
-.stockInfo {
-  flex: 1;
+.tableHeader th {
+  padding: 18px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-right: 1px solid #f1f5f9;
 }
 
-.stockHeader {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 12px;
+.tableHeader th:last-child {
+  border-right: none;
 }
 
-.symbol {
-  font-size: 1.75rem;
-  font-weight: 900;
-  color: #0f172a;
-  margin: 0;
-  letter-spacing: -0.025em;
+.symbolHeader {
+  width: 12%;
+  min-width: 80px;
+}
+
+.companyHeader {
+  width: 20%;
+  min-width: 120px;
+}
+
+.priceHeader {
+  width: 12%;
+  min-width: 90px;
+  text-align: right;
+}
+
+.changeHeader {
+  width: 15%;
+  min-width: 110px;
+  text-align: right;
+}
+
+.volumeHeader {
+  width: 10%;
+  min-width: 80px;
+  text-align: right;
+}
+
+.sentimentHeader {
+  width: 15%;
+  min-width: 120px;
+  text-align: center;
+}
+
+.analysisHeader {
+  width: 12%;
+  min-width: 100px;
+  text-align: center;
+}
+
+.actionsHeader {
+  width: 4%;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Table Rows */
+.tableRow {
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease-in-out;
+}
+
+.tableRow:hover {
+  background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+/* Table Cells */
+.tableRow td {
+  padding: 16px;
+  vertical-align: middle;
+  border-right: 1px solid #f9fafb;
+}
+
+.tableRow td:last-child {
+  border-right: none;
+}
+
+/* Symbol Cell */
+.symbolCell {
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
 }
 
-.name {
-  font-size: 1rem;
-  color: #64748b;
-  flex: 1;
+.symbol {
+  font-size: 16px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+}
+
+/* Company Cell */
+.companyName {
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.025em;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Price Cell */
+.priceCell {
+  text-align: right;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+}
+
+.priceLoading {
+  font-size: 14px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Change Cell */
+.changeCell {
+  text-align: right;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+.change {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+
+.change.positive {
+  color: #059669;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+
+.change.negative {
+  color: #dc2626;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+}
+
+.changePercent {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.changeLoading {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Volume Cell */
+.volumeCell {
+  text-align: right;
+}
+
+.volume {
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+/* Sentiment Cell */
+.sentimentCell {
+  text-align: center;
+}
+
+.sentimentIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  align-items: center;
+}
+
+.sentimentIcon {
+  font-size: 16px;
+  cursor: help;
+  transition: transform 0.2s ease;
+}
+
+.sentimentIcon:hover {
+  transform: scale(1.2);
+}
+
+/* Analysis Cell */
+.analysisCell {
+  text-align: center;
+}
+
+/* Actions Cell */
+.actionsCell {
+  text-align: center;
 }
 
 .removeButton {
@@ -239,7 +369,6 @@
   font-size: 18px;
   font-weight: bold;
   transition: all 0.2s ease-in-out;
-  margin-left: auto;
 }
 
 .removeButton:hover {
@@ -248,162 +377,60 @@
   transform: scale(1.1);
 }
 
-.priceInfo {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 12px;
+/* Empty State */
+.emptyRow {
+  background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
 }
 
-.price {
-  font-size: 2.25rem;
-  font-weight: 900;
-  color: #0f172a;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+.emptyCell {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: none;
+}
+
+.emptyContent {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.emptyContent h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
   letter-spacing: -0.025em;
 }
 
-.change {
-  font-size: 1.125rem;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-}
-
-.change.positive {
-  color: #059669;
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-}
-
-.change.negative {
-  color: #dc2626;
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-}
-
-.priceLoading {
+.emptyContent p {
   font-size: 1rem;
+  color: #64748b;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.6;
+}
+
+.emptySubtext {
+  font-size: 0.875rem;
   color: #94a3b8;
   font-style: italic;
-  font-weight: 500;
 }
 
-.details {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.875rem;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.sentimentContainer {
-  border-top: 2px solid #f1f5f9;
-  padding-top: 1.5rem;
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.5) 0%, rgba(241, 245, 249, 0.5) 100%);
-  margin: 0 -2.5rem -2.5rem -2.5rem;
-  padding: 1.5rem 2.5rem 2.5rem 2.5rem;
-  border-radius: 0 0 24px 24px;
-}
-
-.sentimentHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.sentimentLabel {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1e293b;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
-}
-
-.analyzeButton {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
-}
-
-.analyzeButton:hover:not(:disabled) {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
-  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
-  transform: translateY(-1px);
-}
-
-.analyzeButton:disabled {
-  background: #9ca3af;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Comprehensive analysis replaces the old sentiment grid */
-
-.sentimentItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.timeframe {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #64748b;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.sentimentBadge {
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-align: center;
-  min-width: 70px;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  transition: all 0.2s ease-in-out;
-}
-
-.sentimentBadge:hover {
-  transform: scale(1.05);
-}
-
-.sentimentBadge.bullish {
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  color: #065f46;
-  border: 2px solid #86efac;
-}
-
-.sentimentBadge.bearish {
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-  color: #991b1b;
-  border: 2px solid #fca5a5;
-}
-
-.sentimentBadge.neutral {
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  color: #475569;
-  border: 2px solid #cbd5e1;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .item {
-    padding: 1.5rem;
-    border-radius: 20px;
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .volumeHeader,
+  .volumeCell {
+    display: none;
   }
   
+  .sentimentIndicators {
+    gap: 2px;
+  }
+  
+  .sentimentIcon {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
   .header {
     padding: 1.5rem;
     flex-direction: column;
@@ -415,37 +442,58 @@
     font-size: 1.5rem;
   }
   
-  .stockHeader {
-    flex-wrap: wrap;
-    gap: 12px;
+  .tableContainer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .watchlistTable {
+    min-width: 600px;
+  }
+  
+  .tableHeader th {
+    padding: 12px 8px;
+    font-size: 11px;
+  }
+  
+  .tableRow td {
+    padding: 12px 8px;
   }
   
   .symbol {
-    font-size: 1.5rem;
+    font-size: 14px;
   }
   
   .price {
-    font-size: 1.75rem;
+    font-size: 14px;
   }
   
-  .priceInfo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  .change {
+    font-size: 12px;
+    min-width: 70px;
   }
   
-  .sentimentGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+  .emptyCell {
+    padding: 2rem 1rem;
   }
   
-  .sentimentContainer {
-    margin: 0 -1.5rem -1.5rem -1.5rem;
-    padding: 1.5rem;
+  .emptyContent h4 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .companyHeader,
+  .companyCell {
+    display: none;
   }
   
-  .details {
-    flex-direction: column;
-    gap: 8px;
+  .sentimentHeader,
+  .sentimentCell {
+    display: none;
+  }
+  
+  .watchlistTable {
+    min-width: 400px;
   }
 }

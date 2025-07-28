@@ -219,34 +219,20 @@ export default function ComprehensiveAnalysis({
   const overallSentiment = getOverallSentiment()
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.titleSection}>
-          <h4 className={styles.title}>Multi-Timeframe Analysis</h4>
-          <div 
-            className={styles.overallSentiment}
-            style={{ color: getSentimentColor(overallSentiment) }}
-          >
-            {getSentimentIcon(overallSentiment)} {overallSentiment.toUpperCase()}
-          </div>
-        </div>
-        <button
-          className={styles.viewButton}
-          onClick={handleViewFullAnalysis}
-          disabled={isLoading}
-        >
-          {isLoading ? 'Analyzing...' : 'View Full Analysis'}
-        </button>
-      </div>
-
-      <div className={styles.timeframeGrid}>
-        {renderTimeframeSummary()}
-      </div>
+    <>
+      <button
+        className={styles.viewButton}
+        onClick={handleViewFullAnalysis}
+        disabled={isLoading}
+        title={`View comprehensive analysis for ${symbol}`}
+      >
+        {isLoading ? 'Analyzing...' : 'View Analysis'}
+      </button>
 
       {isModalOpen && typeof window !== 'undefined' && createPortal(
         modalContent,
         document.body
       )}
-    </div>
+    </>
   )
 }
