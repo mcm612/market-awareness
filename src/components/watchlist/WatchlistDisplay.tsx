@@ -59,12 +59,6 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
   }>({ isOpen: false, item: null })
   const [sentimentLoading, setSentimentLoading] = useState<Record<string, boolean>>({})
 
-  useEffect(() => {
-    if (user) {
-      loadWatchlist()
-    }
-  }, [user, loadWatchlist])
-
   const loadWatchlist = useCallback(async () => {
     if (!user) return
 
@@ -147,6 +141,12 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
       setLoading(false)
     }
   }, [user])
+
+  useEffect(() => {
+    if (user) {
+      loadWatchlist()
+    }
+  }, [user, loadWatchlist])
 
   const refreshData = useCallback(async () => {
     setRefreshing(true)
