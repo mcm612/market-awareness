@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
+import { useState, useEffect, forwardRef, useImperativeHandle, useCallback } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { MarketDataService, StockQuote } from '@/lib/market-data'
@@ -63,10 +63,9 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
     if (user) {
       loadWatchlist()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
+  }, [user, loadWatchlist])
 
-  const loadWatchlist = async () => {
+  const loadWatchlist = useCallback(async () => {
     if (!user) return
 
     try {
@@ -147,13 +146,13 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [user])
 
-  const refreshData = async () => {
+  const refreshData = useCallback(async () => {
     setRefreshing(true)
     await loadWatchlist()
     setRefreshing(false)
-  }
+  }, [loadWatchlist])
 
   useImperativeHandle(ref, () => ({
     refreshWatchlist: refreshData

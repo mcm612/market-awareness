@@ -7,9 +7,17 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-})
+// Initialize OpenAI client only when needed to avoid build-time errors
+let openai: OpenAI | null = null
+
+function getOpenAIClient() {
+  if (!openai && process.env.OPENAI_API_KEY) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
+  }
+  return openai
+}
 
 interface NewsArticle {
   title: string
@@ -130,7 +138,12 @@ Format as JSON:
 }`
 
   try {
-    const completion = await openai.chat.completions.create({
+    const openaiClient = getOpenAIClient()
+    if (!openaiClient) {
+      throw new Error('OpenAI API key not configured')
+    }
+
+    const completion = await openaiClient.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
