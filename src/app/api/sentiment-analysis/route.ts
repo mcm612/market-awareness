@@ -263,11 +263,52 @@ Think of yourself as a data processor, not a knowledge base. Process the provide
 
 export async function POST(request: NextRequest) {
   try {
-    const { symbol } = await request.json()
+    const { symbol, force_refresh = false } = await request.json()
     
     if (!symbol) {
       return NextResponse.json({ error: 'Symbol is required' }, { status: 400 })
     }
+
+    // Check if we have fresh analysis (less than 24 hours old) - skip if force refresh requested
+    const { data: existingData } = await supabase
+      .from('sentiment_data')
+      .select('*')
+      .eq('symbol', symbol.toUpperCase())
+      .eq('data_date', new Date().toISOString().split('T')[0])
+      .gte('last_updated', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()) // 24 hours ago
+      .limit(1)
+
+    // If we have fresh data and not forcing refresh, return cached data
+    if (!force_refresh && existingData && existingData.length > 0) {
+      console.log(`Using cached analysis for ${symbol} (last updated: ${existingData[0].last_updated})`)
+      
+      // Transform existing data to match expected format
+      const timeframes: Record<string, { sentiment: string; confidence: number }> = {}
+      const { data: allTimeframeData } = await supabase
+        .from('sentiment_data')
+        .select('*')
+        .eq('symbol', symbol.toUpperCase())
+        .eq('data_date', new Date().toISOString().split('T')[0])
+        .gte('last_updated', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+
+      allTimeframeData?.forEach(item => {
+        timeframes[item.timeframe] = {
+          sentiment: item.sentiment,
+          confidence: item.confidence
+        }
+      })
+
+      return NextResponse.json({
+        symbol: symbol.toUpperCase(),
+        analysis: existingData[0].reasoning || 'Cached analysis available',
+        timeframes,
+        cached: true,
+        last_updated: existingData[0].last_updated,
+        timestamp: new Date().toISOString()
+      })
+    }
+
+    console.log(`Generating fresh analysis for ${symbol} (no cache or stale data)`)
 
     // Fetch news for comprehensive analysis
     const articles = await fetchAlphaVantageNews(symbol)
