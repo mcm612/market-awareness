@@ -21,12 +21,14 @@ A comprehensive market awareness web application for retail investors featuring 
 - ✅ **Production Deployment**: Live on Vercel at https://market-awareness.vercel.app
 - ✅ **Modal System**: Portal-based rendering with proper z-index management
 - ✅ **Cross-browser Compatibility**: Fixed placeholder text visibility issues
+- ✅ **Sortable Watchlist Table**: Professional table with clean, minimal sort indicators
+- ✅ **Unified Container Design**: Seamless header-table integration with optimal visual balance
 
 ### Technical Architecture
 
 #### Core Components
 - `StockSearch`: Debounced search with keyboard navigation and futures support
-- `WatchlistDisplay`: Live price updates with sentiment analysis display
+- `WatchlistDisplay`: Professional sortable table with live price updates and sentiment analysis
 - `Notification`: Toast-style notifications (success/error/warning/info)
 - `ConfirmModal`: Professional confirmation dialogs
 - `AuthContext`: Centralized authentication state management
@@ -94,6 +96,7 @@ OPENAI_API_KEY=sk-your_openai_key_here
 ### High Priority
 - ✅ **Deploy to Vercel**: Live at https://market-awareness.vercel.app
 - ✅ **Complete Sentiment Analysis**: Full implementation deployed
+- ✅ **Professional Table Design**: Sortable watchlist with unified container layout
 - [ ] **Market Data Debugging**: Investigate API data availability for all symbols
 
 ### Medium Priority  
@@ -117,6 +120,8 @@ OPENAI_API_KEY=sk-your_openai_key_here
 4. **Database Constraints**: Fixed asset_type mapping (was using 'other', now uses valid values)
 5. **Watchlist Auto-refresh**: Implemented callback system between components
 6. **UI/UX**: Replaced browser alerts with professional modal components
+7. **Table Design**: Implemented sortable functionality with clean, minimal design
+8. **Container Layout**: Unified header-table design for better visual hierarchy
 
 ## Deployment Notes
 
@@ -242,9 +247,16 @@ Sentiment Badge: 🟢 Bullish [Why?] ← Expandable
 - Added explicit data source attribution and timestamps
 - System now admits data limitations rather than generating fake information
 
-**Last Updated**: July 28, 2025 - Sentiment analysis system fully implemented and deployed  
+### ✅ **Professional Table Design** 
+- **Sortable functionality**: Click headers to sort by Symbol, Company, Price, Change, Volume
+- **Clean visual design**: Minimal text-based sort indicators (↕, ↑, ↓) replace emoji arrows
+- **Unified container**: Header and table seamlessly connected as one component
+- **Optimal spacing**: Reduced padding and margins for better visual balance
+- **Professional styling**: Consistent with fintech design standards
+
+**Last Updated**: July 28, 2025 - Professional table design with sortable functionality complete  
 **Next Session Goal**: Debug market data API coverage and optimize data sources  
-**Current Status**: Core features complete, investigating API data availability edge cases  
+**Current Status**: Core features complete with professional UI, investigating API data availability edge cases  
 **Contact**: michael.manguart@gmail.com (GitHub: mcm612)
 
 ### 🚨 Session Handoff Notes

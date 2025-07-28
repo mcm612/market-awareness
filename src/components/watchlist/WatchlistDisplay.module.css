@@ -66,29 +66,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: 20px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  border-radius: 16px 16px 0 0;
+  margin-bottom: 0;
+  box-shadow: none;
   border: 1px solid #e2e8f0;
+  border-bottom: none;
   position: relative;
   overflow: hidden;
 }
 
-.header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
-}
 
 .header h3 {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.025em;
@@ -99,16 +91,16 @@
 }
 
 .refreshButton {
-  padding: 14px 28px;
+  padding: 12px 24px;
   background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
   color: white;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.15);
   letter-spacing: 0.025em;
   text-transform: uppercase;
 }
@@ -130,9 +122,10 @@
 /* Table Container */
 .tableContainer {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 0 0 16px 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
   border: 1px solid #e2e8f0;
+  border-top: none;
   overflow: hidden;
 }
 
