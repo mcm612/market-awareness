@@ -24111,3 +24111,114 @@ Valid contracts: 14/14
   syscall: 'open',
   path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/favicon.ico/[__metadata_id__]/route/app-paths-manifest.json'
 }
+ GET / 200 in 463ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 312ms
+ GET /login 200 in 70ms
+ GET /login 200 in 67ms
+ GET /login 200 in 67ms
+ ⚠ Fast Refresh had to perform a full reload when ./src/app/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 74ms
+ GET /login 200 in 189ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 269ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/favicon.ico/[__metadata_id__]/route/app-paths-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/favicon.ico/[__metadata_id__]/route/app-paths-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/pages/_app/build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/favicon.ico/[__metadata_id__]/route/app-paths-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/michaelmanguart/Documents/Projects/market-awareness/.next/server/app/favicon.ico/[__metadata_id__]/route/app-paths-manifest.json'
+}
