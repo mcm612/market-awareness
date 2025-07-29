@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import CorrelationHeatmap from '@/components/CorrelationHeatmap'
+import AssetFlowDiagram from '@/components/AssetFlowDiagram'
 import styles from './dashboard.module.css'
 
 interface ContractData {
@@ -314,6 +315,18 @@ export default function DashboardPage() {
             </p>
           </div>
           <CorrelationHeatmap />
+        </section>
+
+        {/* Cross-Asset Flow Section */}
+        <section className={styles.flowSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Where Money is Flowing Right Now</h2>
+            <p className={styles.sectionSubtitle}>
+              Watch capital rotate between asset classes in real-time. This shows you WHY correlations exist - 
+              money flows from underperforming assets to outperforming ones, creating the market dynamics you see.
+            </p>
+          </div>
+          <AssetFlowDiagram />
         </section>
 
         {/* Today's Learning Section */}
