@@ -48,22 +48,27 @@ function calculateCorrelation(series1: number[], series2: number[]): number {
 async function fetchHistoricalData(symbol: string): Promise<PriceData[]> {
   try {
     const encodedSymbol = encodeURIComponent(symbol)
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : `http://localhost:3000`
+    
+    // Use absolute URL for production deployment
+    const baseUrl = 'https://market-awareness.vercel.app'
+    
+    console.log(`Fetching data for ${symbol} from ${baseUrl}`)
     
     const response = await fetch(
       `${baseUrl}/api/historical-data?symbol=${encodedSymbol}&period=3mo&interval=1d`,
       { 
         method: 'GET',
         headers: {
-          'Cache-Control': 'no-cache'
+          'Cache-Control': 'no-cache',
+          'User-Agent': 'market-awareness-internal'
         }
       }
     )
 
     if (!response.ok) {
-      console.error(`Failed to fetch data for ${symbol}: ${response.status}`)
+      console.error(`Failed to fetch data for ${symbol}: ${response.status} ${response.statusText}`)
+      const errorText = await response.text()
+      console.error(`Error response: ${errorText}`)
       return []
     }
 
@@ -74,6 +79,8 @@ async function fetchHistoricalData(symbol: string): Promise<PriceData[]> {
       return []
     }
 
+    console.log(`Successfully fetched ${data.data.length} data points for ${symbol}`)
+    
     return data.data.map((price: { date: string; close: number }) => ({
       date: price.date,
       close: price.close
@@ -101,24 +108,34 @@ function calculateReturns(prices: PriceData[]): number[] {
 
 export async function GET() {
   try {
-    console.log('Fetching correlation data for all contracts...')
+    console.log('Starting correlation data fetch for all contracts...')
+    console.log('Contracts to fetch:', FUTURES_CONTRACTS)
     
     // Fetch historical data for all contracts in parallel
     const dataPromises = FUTURES_CONTRACTS.map(symbol => 
       fetchHistoricalData(symbol).then(data => ({ symbol, data }))
     )
     
+    console.log('Waiting for all data fetches to complete...')
     const allData = await Promise.all(dataPromises)
+    
+    // Log data counts for each contract
+    allData.forEach(({ symbol, data }) => {
+      console.log(`${symbol}: ${data.length} data points`)
+    })
     
     // Filter out contracts with insufficient data
     const validContracts = allData.filter(({ data }) => data.length >= 30) // Need at least 30 days
     
     console.log(`Valid contracts: ${validContracts.length}/${FUTURES_CONTRACTS.length}`)
+    console.log('Valid contracts:', validContracts.map(c => c.symbol))
     
     if (validContracts.length < 2) {
+      console.error('Insufficient valid contracts for correlation calculation')
       return NextResponse.json({
         error: 'Insufficient data to calculate correlations',
-        validContracts: validContracts.length
+        validContracts: validContracts.length,
+        contractDetails: allData.map(({ symbol, data }) => ({ symbol, dataPoints: data.length }))
       }, { status: 500 })
     }
 
@@ -169,9 +186,11 @@ export async function GET() {
 
   } catch (error) {
     console.error('Correlation calculation error:', error)
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace')
     return NextResponse.json({
       error: 'Failed to calculate correlations',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
     }, { status: 500 })
   }
 }
