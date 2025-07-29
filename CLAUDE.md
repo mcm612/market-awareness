@@ -134,16 +134,20 @@ OPENAI_API_KEY=sk-your_openai_key_here
 ## Current Todo List 📋
 
 ### 🔥 Recently Completed (Current Session)
-- ✅ **Interactive Correlation Heatmap**: Real-time futures contract relationship visualization
-  - ✅ Correlation API: `/api/correlations` calculates 3-month statistical correlations for all 13 contracts
-  - ✅ Heatmap component: `CorrelationHeatmap.tsx` with color-coded visualization and interactive tooltips
-  - ✅ Smart caching: 1-hour cache reduces API calls and improves performance
-  - ✅ Educational tooltips: Hover interactions showing relationship strength and personality names
-  - ✅ Dashboard integration: Moved from landing page to dashboard for better user flow
-  - ✅ UX optimization: Now appears after personality cards where it makes logical sense
-- ✅ **Authentication Pages Redesign**: Updated login/signup to match futures education theme
-  - ✅ Rebranding: Changed from "Stock Sentiment Analysis" to "Futures Education" messaging
-  - ✅ WSB personality preview: Mini-cards showcasing Paper-Handed Boomer, YOLO Ape, Prepper King
+- ✅ **Cross-Asset Flow Diagram**: Revolutionary capital flow visualization system
+  - ✅ Flow API: `/api/asset-flows` calculates real-time relative strength across 4 asset classes
+  - ✅ Interactive visualization: Sankey-style diagram showing money movement between stocks/bonds/commodities/currencies
+  - ✅ Market regime detection: Auto-detects risk-on/risk-off/inflation-hedge environments
+  - ✅ Animated flows: SVG animations showing capital rotation with clickable flow details
+  - ✅ Performance breakdown: 1D/1W/1M metrics for each asset class with trend indicators
+  - ✅ Educational context: Explains WHY correlations exist through capital flows
+- ✅ **Landing Page Optimization**: Streamlined user experience
+  - ✅ Removed marketing content: Eliminated lengthy promotional sections from root page
+  - ✅ Direct authentication flow: Root URL now redirects to login (new landing page)
+  - ✅ Clean user journey: / → /login → /dashboard for better conversion
+- ✅ **Interactive Correlation Heatmap**: Mature relationship visualization (previous session)  
+  - ✅ 13-contract correlation matrix with Yahoo Finance integration
+  - ✅ Educational tooltips and professional glassmorphism design
   - ✅ Themed features: Highlights correlation analysis, personality-driven learning, live market data
   - ✅ Enhanced UI: Animated rocket logo, glassmorphism cards, proper app identity
 - ✅ **Professional Charting System**: Complete implementation with Yahoo Finance integration
@@ -318,30 +322,31 @@ Sentiment Badge: 🟢 Bullish [Why?] ← Expandable
 - **Optimal spacing**: Reduced padding and margins for better visual balance
 - **Professional styling**: Consistent with fintech design standards
 
-**Last Updated**: July 29, 2025 - Interactive correlation heatmap system implemented and integrated  
-**Next Session Goal**: Consider technical indicators, enhanced portfolio tracking, or mobile app optimizations
-**Current Status**: Core educational features complete with correlation analysis, ready for user testing  
+**Last Updated**: July 29, 2025 - Cross-asset flow diagram system complete with landing page optimization  
+**Next Session Goal**: Implement additional visualizations from ideas document or mobile app features
+**Current Status**: Revolutionary dual-visualization system (correlation + flow) with streamlined UX, production-ready  
 **Contact**: michael.manguart@gmail.com (GitHub: mcm612)
 
 ### 🚨 Session Handoff Notes
 Current state for next session:
-1. **Major Achievement**: Complete correlation heatmap system + authentication redesign
-2. **User Experience**: Cohesive futures education branding from login through dashboard
-3. **Technical Infrastructure**: Real-time correlation calculations with proper app identity
-4. **Educational Flow**: Login preview → Dashboard personalities → Correlation analysis → Contract details
-5. **Ready for Production**: Full user journey optimized with consistent WSB-style personality theme
-6. **Next Priority**: Consider technical indicators, portfolio tracking, or mobile optimizations
+1. **Major Achievement**: Cross-asset flow diagram - first-of-its-kind visualization showing real-time capital flows
+2. **Dual Visualization Power**: Correlation heatmap (relationships) + Flow diagram (capital movement) = complete market picture
+3. **Technical Infrastructure**: 2 new APIs with statistical calculations, market regime detection, Yahoo Finance integration
+4. **User Experience**: Streamlined flow (/ → /login → /dashboard) with powerful educational visualizations
+5. **Ready for Scaling**: Solid foundation for additional visualization ideas (see VISUALIZATION_IDEAS.md)
+6. **Next Priority**: Implement volatility landscape, contract network graph, or mobile optimizations
 
 **Files Added This Session:**
-- `/src/app/api/correlations/route.ts` - Statistical correlation calculation API
-- `/src/components/CorrelationHeatmap.tsx` - Interactive heatmap component  
-- `/src/components/CorrelationHeatmap.module.css` - Professional heatmap styling
+- `/src/app/api/asset-flows/route.ts` - Real-time asset class performance and flow calculations
+- `/src/components/AssetFlowDiagram.tsx` - Interactive Sankey-style flow visualization
+- `/src/components/AssetFlowDiagram.module.css` - Professional flow diagram styling
+- `/docs/VISUALIZATION_IDEAS.md` - Comprehensive visualization roadmap for future development
 
 **Files Updated This Session:**
-- `/src/app/login/page.tsx` - Futures education theme with personality previews
-- `/src/app/login/login.module.css` - WSB-style branding with animated elements
+- `/src/app/page.tsx` - Simplified to direct authentication redirect
+- `/src/app/dashboard/page.tsx` - Integrated flow diagram after correlation heatmap
 
-**Complete User Flow**: Authentication now properly introduces the futures education concept
+**Revolutionary Feature**: Cross-asset flow diagram shows WHY correlations exist through real-time capital movement
 
 ---
 
