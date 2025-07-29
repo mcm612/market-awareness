@@ -5,20 +5,16 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function HomePage() {
-  const { user, loading } = useAuth()
+  const { loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
     if (!loading) {
-      if (user) {
-        // If user is logged in, redirect to dashboard
-        router.push('/dashboard')
-      } else {
-        // If user is not logged in, redirect to login
-        router.push('/login')
-      }
+      // Always redirect to login page first
+      // Login page will handle redirecting to dashboard if user is already authenticated
+      router.push('/login')
     }
-  }, [user, loading, router])
+  }, [loading, router])
 
   // Show loading while determining where to redirect
   if (loading) {
