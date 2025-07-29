@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
+import FuturesChart from '@/components/charts/FuturesChart'
 import styles from './contract.module.css'
 
 interface ContractPersonality {
@@ -305,6 +306,494 @@ const contractData: Record<string, ContractPersonality> = {
       inflation: 'Biggest enemy - inflation erodes bond values and drives rates higher',
       recession: 'Best performer - rate cut expectations drive prices higher'
     }
+  },
+  // Commodity Futures - The Chaos Squad
+  SI: {
+    symbol: '/SI',
+    name: 'Silver Futures',
+    personality: 'The Poor Man&apos;s Gold Pleb',
+    personalityIcon: '🥈',
+    description: 'The scrappy underdog who follows gold around like a loyal puppy but occasionally goes absolutely feral and 10x in a month. Industrial demand meets precious metal FOMO.',
+    temperament: 'Volatile copycat with explosive potential',
+    violentDirection: 'Both directions - can move 5-15% in single sessions during squeeze events',
+    keyTriggers: ['Gold price movements', 'Industrial demand (solar, electronics)', 'Dollar strength', 'Investment demand', 'Supply disruptions'],
+    tradingHours: '8:25 AM - 1:25 PM ET (most active), nearly 24-hour trading',
+    beginnerTips: [
+      'Silver-to-gold ratio is key - when it&apos;s high (80+), silver often outperforms',
+      'More volatile than gold due to smaller market size',
+      'Industrial demand makes it different from pure precious metals',
+      'Reddit apes love silver squeezes - watch for coordinated buying'
+    ],
+    currentMood: 'Restless',
+    moodIcon: '😤',
+    directionalBias: 'bullish',
+    biasStrength: 'moderate',
+    biasReasoning: 'Industrial demand for green energy and electronics, plus precious metal safe haven bid during uncertainty',
+    keyRelationships: [
+      {
+        contract: '/GC',
+        relationship: 'Little Brother Complex',
+        currentCorrelation: 0.80,
+        explanation: 'Follows gold but with 2-3x the volatility. When gold moves, silver amplifies the move.'
+      },
+      {
+        contract: '/ES',
+        relationship: 'Risk Asset Hybrid',
+        currentCorrelation: 0.10,
+        explanation: 'Industrial demand creates positive correlation during growth, precious metal nature creates negative during stress.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Commodity Complex Partner',
+        currentCorrelation: 0.35,
+        explanation: 'Both rise with inflation expectations and commodity supercycles.'
+      },
+      {
+        contract: '/ZB',
+        relationship: 'Real Rates Enemy',
+        currentCorrelation: -0.50,
+        explanation: 'Rising real rates hurt silver as it pays no yield and costs storage.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Mixed - industrial demand helps, but precious metal premium fades',
+      riskOff: 'Explosive upside - flight to precious metals with leverage',
+      inflation: 'Rocket fuel - both industrial input costs and monetary debasement',
+      recession: 'Conflicted - safe haven bid vs industrial demand destruction'
+    }
+  },
+  HG: {
+    symbol: '/HG',
+    name: 'Copper Futures',
+    personality: 'The Economic PhD Chad',
+    personalityIcon: '🔧',
+    description: 'The smartest guy in the room who has a PhD in economics and won&apos;t let you forget it. If copper is moving, it&apos;s because Dr. Copper knows something about the global economy.',
+    temperament: 'Analytical and forward-looking, reacts to economic data',
+    violentDirection: 'Both directions based on economic sentiment shifts',
+    keyTriggers: ['China economic data', 'Infrastructure spending', 'Housing construction', 'Manufacturing PMI', 'Dollar strength'],
+    tradingHours: '8:10 AM - 1:00 PM ET (most active), nearly 24-hour trading',
+    beginnerTips: [
+      'Called "Dr. Copper" because it predicts economic turns',
+      'China demand drives 50% of global copper consumption',
+      'Housing and infrastructure = copper demand',
+      'Watch Chilean mine strikes and supply disruptions'
+    ],
+    currentMood: 'Analytical',
+    moodIcon: '🤓',
+    directionalBias: 'neutral',
+    biasStrength: 'moderate',
+    biasReasoning: 'Chinese economic uncertainty balances against US infrastructure spending and green energy transition needs',
+    keyRelationships: [
+      {
+        contract: '/ES',
+        relationship: 'Economic Leading Indicator',
+        currentCorrelation: 0.70,
+        explanation: 'Copper often leads stock markets by 3-6 months due to its economic sensitivity.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Growth Commodity Brother',
+        currentCorrelation: 0.60,
+        explanation: 'Both rise with economic growth expectations and industrial demand.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'Growth vs Fear Trade',
+        currentCorrelation: -0.30,
+        explanation: 'Copper rises with growth optimism, gold with fear - often inverse relationship.'
+      },
+      {
+        contract: '/ZB',
+        relationship: 'Growth Expectations Mirror',
+        currentCorrelation: -0.55,
+        explanation: 'Rising copper signals growth and inflation, pressuring bonds lower.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Thrives - economic growth drives infrastructure and manufacturing demand',
+      riskOff: 'Gets crushed - first commodity sold when growth fears emerge',
+      inflation: 'Benefits - industrial input costs rise, but can signal demand destruction at extremes',
+      recession: 'Deep decline - industrial demand evaporates, inventory builds'
+    }
+  },
+  ZC: {
+    symbol: '/ZC',
+    name: 'Corn Futures',
+    personality: 'The Midwest Karen',
+    personalityIcon: '🌽',
+    description: 'The passive-aggressive soccer mom who complains about everything - weather, ethanol mandates, Chinese trade deals. But when she&apos;s angry about crop conditions, the whole food chain feels it.',
+    temperament: 'Weather-obsessed and seasonally moody',
+    violentDirection: 'Upside during weather scares - drought can cause 50%+ rallies',
+    keyTriggers: ['Weather conditions', 'USDA crop reports', 'Ethanol demand', 'Chinese imports', 'Planting/harvest seasons'],
+    tradingHours: '9:30 AM - 2:20 PM ET (most active), limited overnight',
+    beginnerTips: [
+      'Weather is everything - watch Corn Belt conditions religiously',
+      'USDA reports on 11th each month move markets violently',
+      'Ethanol mandates create price floor through energy demand',
+      'Seasonally weak during harvest (Sept-Nov), strong during growing season'
+    ],
+    currentMood: 'Worried',
+    moodIcon: '😰',
+    directionalBias: 'bullish',
+    biasStrength: 'moderate',
+    biasReasoning: 'La Nina weather patterns threaten South American crops while US acres may decline due to input costs',
+    keyRelationships: [
+      {
+        contract: '/ZS',
+        relationship: 'Sibling Rivalry',
+        currentCorrelation: 0.75,
+        explanation: 'Farmers choose between corn and soybeans - when one rallies, the other often follows.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Ethanol Energy Connection',
+        currentCorrelation: 0.45,
+        explanation: 'Higher oil prices make ethanol more attractive, increasing corn demand.'
+      },
+      {
+        contract: '/ES',
+        relationship: 'Food Inflation Concern',
+        currentCorrelation: -0.20,
+        explanation: 'Rising food prices create inflation concerns, pressuring stocks through consumer spending.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'Inflation Hedge Cousin',
+        currentCorrelation: 0.30,
+        explanation: 'Both benefit from currency debasement and inflation fears.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Moderate gains - biofuel demand and economic growth support prices',
+      riskOff: 'Mixed - food security bid vs demand destruction concerns',
+      inflation: 'Major contributor - food prices directly impact CPI calculations',
+      recession: 'Resilient - food demand is inelastic, weather still matters most'
+    }
+  },
+  ZS: {
+    symbol: '/ZS',
+    name: 'Soybean Futures',
+    personality: 'The Vegan Influencer',
+    personalityIcon: '🫘',
+    description: 'The trendy health influencer who&apos;s constantly talking about plant-based diets and sustainability. China can&apos;t get enough of her protein, and she knows it.',
+    temperament: 'Health-conscious but trade-war sensitive',
+    violentDirection: 'Both directions - China trade news can move 5-10% instantly',
+    keyTriggers: ['China trade relations', 'South American weather', 'Crushing margins', 'Meal and oil demand', 'Dollar strength'],
+    tradingHours: '9:30 AM - 2:20 PM ET (most active), limited overnight',
+    beginnerTips: [
+      'China buys 60% of global soybean exports - watch trade relations',
+      'Split into meal (animal feed) and oil (food/biodiesel) products',
+      'South American harvest (Feb-May) competes with US crop',
+      'Crushing spread (beans vs meal/oil) shows processing demand'
+    ],
+    currentMood: 'Optimistic',
+    moodIcon: '😊',
+    directionalBias: 'bullish',
+    biasStrength: 'strong',
+    biasReasoning: 'Tight global stocks, strong Chinese demand recovery, and South American weather concerns support prices',
+    keyRelationships: [
+      {
+        contract: '/ZC',
+        relationship: 'Planting Competition',
+        currentCorrelation: 0.75,
+        explanation: 'Farmers allocate acres between corn and soybeans based on relative prices.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Biodiesel Energy Link',
+        currentCorrelation: 0.40,
+        explanation: 'Soybean oil competes with petroleum for biodiesel production.'
+      },
+      {
+        contract: '/ES',
+        relationship: 'Trade War Barometer',
+        currentCorrelation: 0.25,
+        explanation: 'US-China trade relations affect both soybeans and broader market sentiment.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'Dollar Sensitivity Twin',
+        currentCorrelation: 0.20,
+        explanation: 'Both hurt by strong dollar as commodities priced in USD become expensive for foreign buyers.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Benefits - stronger global growth increases protein consumption',
+      riskOff: 'Vulnerable - China reduces imports, demand destruction fears',
+      inflation: 'Contributing factor - protein costs feed through to food inflation',
+      recession: 'Moderate decline - animal feed demand relatively stable'
+    }
+  },
+  ZW: {
+    symbol: '/ZW',
+    name: 'Wheat Futures',
+    personality: 'The Geopolitical Drama Queen',
+    personalityIcon: '🌾',
+    description: 'The dramatic friend who turns every minor event into a global crisis. Ukraine conflict? "OMG FOOD SECURITY!" Bad weather in Kansas? "FAMINE INCOMING!" She\'s exhausting but occasionally right.',
+    temperament: 'Dramatic and crisis-prone, geopolitically sensitive',
+    violentDirection: 'Explosive upside during geopolitical crises - can double in weeks',
+    keyTriggers: ['Geopolitical tensions (Russia/Ukraine)', 'Weather in major regions', 'Export restrictions', 'Food security concerns', 'Competing crops'],
+    tradingHours: '9:30 AM - 2:20 PM ET (most active), limited overnight',
+    beginnerTips: [
+      'Most politically sensitive grain - wars and export bans cause spikes',
+      'Russia and Ukraine = 30% of global wheat exports',
+      'Different classes (hard red winter, spring, etc.) trade separately',
+      'Food security premium during geopolitical tensions'
+    ],
+    currentMood: 'Anxious',
+    moodIcon: '😨',
+    directionalBias: 'bullish',
+    biasStrength: 'strong',
+    biasReasoning: 'Ongoing geopolitical tensions affecting Black Sea exports, drought concerns in key growing regions',
+    keyRelationships: [
+      {
+        contract: '/ZC',
+        relationship: 'Grain Complex Cousin',
+        currentCorrelation: 0.65,
+        explanation: 'Both grains but wheat more sensitive to geopolitical events and food security.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Geopolitical Twins',
+        currentCorrelation: 0.50,
+        explanation: 'Both spike during Middle East/Eastern Europe conflicts affecting supply.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'Crisis Hedge Partners',
+        currentCorrelation: 0.35,
+        explanation: 'Both benefit from geopolitical uncertainty and currency debasement.'
+      },
+      {
+        contract: '/ES',
+        relationship: 'Food Inflation Threat',
+        currentCorrelation: -0.25,
+        explanation: 'Rising wheat prices increase food inflation, hurting consumer spending and stocks.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Moderate - steady demand but less crisis premium',
+      riskOff: 'Rockets higher - food security becomes national priority',
+      inflation: 'Primary driver - bread prices directly impact consumer budgets',
+      recession: 'Defensive - food demand inelastic, government support likely'
+    }
+  },
+  // Currency Futures - The International Drama Club
+  '6E': {
+    symbol: '/6E',
+    name: 'Euro Currency Futures',
+    personality: 'The Sophisticated European Mess',
+    personalityIcon: '🇪🇺',
+    description: 'The sophisticated European who speaks 5 languages but can\'t figure out if they want fiscal union or sovereignty. Elegant on the surface, complete chaos underneath.',
+    temperament: 'Cultured but internally conflicted',
+    violentDirection: 'Both ways during EU crises - can swing 5%+ on political events',
+    keyTriggers: ['ECB policy decisions', 'EU political unity', 'German economic data', 'Peripheral bond spreads', 'US-EU yield differentials'],
+    tradingHours: '6:00 PM - 5:00 PM ET next day (24-hour), most active during EU/US overlap',
+    beginnerTips: [
+      'Watch German 10-year vs US 10-year yield spread - drives EUR/USD',
+      'ECB more dovish than Fed historically - rate differentials matter',
+      'Political unity crises (Brexit, Italy, etc.) create volatility',
+      'Energy dependence on Russia creates geopolitical sensitivity'
+    ],
+    currentMood: 'Uncertain',
+    moodIcon: '😕',
+    directionalBias: 'bearish',
+    biasStrength: 'moderate',
+    biasReasoning: 'ECB dovishness vs Fed hawkishness widens yield differentials, energy crisis weighs on EU growth',
+    keyRelationships: [
+      {
+        contract: '/ES',
+        relationship: 'Risk Sentiment Mirror',
+        currentCorrelation: 0.60,
+        explanation: 'Risk-on benefits both EUR and US stocks, risk-off hurts both vs USD and bonds.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'USD Alternative',
+        currentCorrelation: 0.40,
+        explanation: 'When USD weakens, both EUR and gold often strengthen as alternatives.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Energy Import Burden',
+        currentCorrelation: -0.30,
+        explanation: 'Higher oil prices hurt EU more due to energy dependence, weakening EUR.'
+      },
+      {
+        contract: '/ZB',
+        relationship: 'Yield Differential Play',
+        currentCorrelation: -0.45,
+        explanation: 'Rising US yields (falling bonds) attract capital from EUR to USD.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Moderate strength - capital flows to higher-yielding USD limit gains',
+      riskOff: 'Weakness - safe haven flows go to USD and CHF, not EUR',
+      inflation: 'Mixed - ECB behind Fed on tightening, energy inflation hurts',
+      recession: 'Vulnerable - EU more sensitive to global slowdown than US'
+    }
+  },
+  '6J': {
+    symbol: '/6J',
+    name: 'Japanese Yen Futures',
+    personality: 'The Polite Kamikaze Pilot',
+    personalityIcon: '🇯🇵',
+    description: 'The ultra-polite warrior who bows respectfully before absolutely destroying carry trades and risk assets. Stays calm for years, then kamikaze dives through your stop losses.',
+    temperament: 'Extremely polite until violently defensive',
+    violentDirection: 'Explosive upside during risk-off events - can rally 10%+ in days',
+    keyTriggers: ['BoJ intervention levels', 'Risk-off events', 'Carry trade unwinding', 'US-Japan yield spreads', 'Global market volatility'],
+    tradingHours: '6:00 PM - 5:00 PM ET next day (24-hour), most active during Asian/US overlap',
+    beginnerTips: [
+      'Ultimate safe haven currency - strengthens when markets crash',
+      'BoJ intervenes when USD/JPY gets too high (historically 145-150)',
+      'Carry trade funding currency - borrowed to buy higher-yielding assets',
+      'Inverse correlation with risk assets and volatility'
+    ],
+    currentMood: 'Vigilant',
+    moodIcon: '👁️',
+    directionalBias: 'bullish',
+    biasStrength: 'moderate',
+    biasReasoning: 'Market volatility and geopolitical tensions support safe haven demand, but BoJ intervention risk caps gains',
+    keyRelationships: [
+      {
+        contract: '/ES',
+        relationship: 'Risk-Off Nemesis',
+        currentCorrelation: -0.70,
+        explanation: 'Strong inverse relationship - when stocks fall, capital flees to yen safety.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'Safe Haven Competition',
+        currentCorrelation: 0.50,
+        explanation: 'Both strengthen during crisis, but yen more liquid and widely held.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Energy Import Vulnerability',
+        currentCorrelation: -0.25,
+        explanation: 'Japan imports all oil - higher prices worsen trade balance and weaken yen.'
+      },
+      {
+        contract: '/ZB',
+        relationship: 'Safe Haven Partner',
+        currentCorrelation: 0.35,
+        explanation: 'Both benefit from flight to quality, but yield differentials matter for relative performance.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Weakens - carry trades resume, capital flows to higher yields',
+      riskOff: 'Explodes higher - ultimate safe haven repatriation trade',
+      inflation: 'Conflicted - BoJ wants inflation but markets fear intervention',
+      recession: 'Strongest performer - deflationary mindset and safe haven flows'
+    }
+  },
+  '6B': {
+    symbol: '/6B',
+    name: 'British Pound Futures',
+    personality: 'The Brexit Disaster',
+    personalityIcon: '🇬🇧',
+    description: 'The posh aristocrat who shot themselves in the foot with Brexit and now wanders around muttering about "sovereignty" while their empire crumbles. Occasionally rallies on nostalgia.',
+    temperament: 'Formerly dignified, now erratic and crisis-prone',
+    violentDirection: 'Both ways on political drama - Brexit/PM changes cause 5%+ swings',
+    keyTriggers: ['BoE policy decisions', 'UK political stability', 'Brexit developments', 'Inflation data', 'US-UK yield spreads'],
+    tradingHours: '6:00 PM - 5:00 PM ET next day (24-hour), most active during London/US overlap',
+    beginnerTips: [
+      'Most politically sensitive major currency - PM changes move markets',
+      'BoE often more aggressive on rates than expected - inflation concerns',
+      'Brexit aftermath still creates trade/investment uncertainty',
+      'Energy crisis hits UK hard due to limited domestic production'
+    ],
+    currentMood: 'Struggling',
+    moodIcon: '😵‍💫',
+    directionalBias: 'neutral',
+    biasStrength: 'weak',
+    biasReasoning: 'BoE hawkishness vs political instability and economic challenges create mixed signals',
+    keyRelationships: [
+      {
+        contract: '/6E',
+        relationship: 'European Divorce Drama',
+        currentCorrelation: 0.70,
+        explanation: 'Still move together despite Brexit - both European currencies affected by similar factors.'
+      },
+      {
+        contract: '/ES',
+        relationship: 'Risk Sentiment Follower',
+        currentCorrelation: 0.55,
+        explanation: 'GBP benefits from risk-on but underperforms due to structural issues.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Energy Import Stress',
+        currentCorrelation: -0.35,
+        explanation: 'UK energy dependence makes higher oil prices particularly damaging to GBP.'
+      },
+      {
+        contract: '/ZB',
+        relationship: 'Yield Differential Competitor',
+        currentCorrelation: -0.40,
+        explanation: 'Rising US yields attract capital from UK gilts and GBP to USD.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Moderate gains - but lags other currencies due to structural issues',
+      riskOff: 'Disproportionate weakness - political risk premium remains high',
+      inflation: 'Volatile - BoE hawkishness vs economic weakness creates uncertainty',
+      recession: 'Vulnerable - Brexit impact amplifies global slowdown effects'
+    }
+  },
+  '6A': {
+    symbol: '/6A',
+    name: 'Australian Dollar Futures',
+    personality: 'The Commodity Bro Surfer',
+    personalityIcon: '🇦🇺',
+    description: 'The laid-back surfer dude who\'s actually a commodities genius. Rides the China wave like a pro and knows exactly when iron ore and gold are about to moon. "No worries mate, just following the metals."',
+    temperament: 'Chill but commodity-obsessed',
+    violentDirection: 'Both ways on China/commodity news - can move 3-5% on key data',
+    keyTriggers: ['China economic data', 'Commodity prices (iron ore, gold)', 'RBA policy decisions', 'US-Australia yield spreads', 'Risk appetite'],
+    tradingHours: '6:00 PM - 5:00 PM ET next day (24-hour), most active during Asian/US overlap',
+    beginnerTips: [
+      'Ultimate China proxy - 40% of Australian exports go to China',
+      'Iron ore and coal prices drive AUD more than any economic data',
+      'High-yielding currency - benefits from carry trades during risk-on',
+      'RBA often follows Fed but with commodity considerations'
+    ],
+    currentMood: 'Optimistic',
+    moodIcon: '😎',
+    directionalBias: 'bullish',
+    biasStrength: 'moderate',
+    biasReasoning: 'China reopening benefits commodity demand, high yields attractive in risk-on environment',
+    keyRelationships: [
+      {
+        contract: '/ES',
+        relationship: 'Risk-On Best Friend',
+        currentCorrelation: 0.75,
+        explanation: 'High-beta currency that amplifies risk sentiment - up more in bull markets, down more in bear markets.'
+      },
+      {
+        contract: '/GC',
+        relationship: 'Commodity Complex Brother',
+        currentCorrelation: 0.60,
+        explanation: 'Australia is major gold producer - AUD and gold often move together on commodity themes.'
+      },
+      {
+        contract: '/CL',
+        relationship: 'Commodity Cycle Partner',
+        currentCorrelation: 0.55,
+        explanation: 'Both benefit from commodity supercycles and global growth expectations.'
+      },
+      {
+        contract: '/6J',
+        relationship: 'Risk-On vs Risk-Off',
+        currentCorrelation: -0.65,
+        explanation: 'Perfect opposites - AUD thrives in risk-on when JPY weakens, vice versa in risk-off.'
+      }
+    ],
+    marketRegimeImpact: {
+      riskOn: 'Outperforms - commodity currency with high yields, benefits from carry trades',
+      riskOff: 'Gets smashed - high-beta currency, China concerns amplify selling',
+      inflation: 'Benefits - commodity exporter gains from higher commodity prices',
+      recession: 'Deep decline - China demand destruction fears hit commodity currencies hardest'
+    }
   }
 }
 
@@ -455,6 +944,12 @@ export default function ContractPersonalityPage() {
               <p className={styles.profileValue}>{contract.tradingHours}</p>
             </div>
           </div>
+        </section>
+
+        {/* Price Chart */}
+        <section className={styles.priceChart}>
+          <h3 className={styles.sectionTitle}>📈 Price Chart & Technical Analysis</h3>
+          <FuturesChart symbol={contract.symbol} height={400} />
         </section>
 
         {/* Current Market Analysis */}

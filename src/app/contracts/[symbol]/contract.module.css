@@ -217,6 +217,16 @@
   margin: 0;
 }
 
+/* Price Chart */
+.priceChart {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  margin-bottom: 2rem;
+}
+
 /* Market Analysis */
 .marketAnalysis {
   background: white;

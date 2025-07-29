@@ -74,7 +74,7 @@ async function fetchHistoricalData(symbol: string): Promise<PriceData[]> {
       return []
     }
 
-    return data.data.map((price: any) => ({
+    return data.data.map((price: { date: string; close: number }) => ({
       date: price.date,
       close: price.close
     }))
@@ -99,7 +99,7 @@ function calculateReturns(prices: PriceData[]): number[] {
   return returns
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log('Fetching correlation data for all contracts...')
     

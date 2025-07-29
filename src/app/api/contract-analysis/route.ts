@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import OpenAI from 'openai'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// const supabase = createClient(
+//   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+//   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+// )
 
 // Initialize OpenAI client only when needed to avoid build-time errors
 let openai: OpenAI | null = null
@@ -57,7 +57,7 @@ async function getMarketData(symbols: string[]) {
     })
     
     const results = await Promise.all(promises)
-    const marketData: Record<string, any> = {}
+    const marketData: Record<string, unknown> = {}
     results.forEach(({ symbol, data }) => {
       marketData[symbol] = data
     })
@@ -71,7 +71,7 @@ async function getMarketData(symbols: string[]) {
 
 async function analyzeContractWithOpenAI(
   symbol: string,
-  marketData: Record<string, any>
+  marketData: Record<string, unknown>
 ): Promise<ContractAnalysis> {
   const currentDate = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
@@ -219,7 +219,7 @@ Current date: ${currentDate}`
       if (jsonMatch) {
         try {
           analysis = JSON.parse(jsonMatch[0])
-        } catch (innerParseError) {
+        } catch {
           throw new Error('Failed to parse OpenAI response as JSON')
         }
       } else {

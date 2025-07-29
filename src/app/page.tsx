@@ -115,7 +115,7 @@ export default function LandingPage() {
       {/* Featured Section */}
       <section id="contracts" className={styles.featured}>
         <div className={styles.featuredContainer}>
-          <h2 className={styles.sectionTitle}>Today's Market Lesson</h2>
+          <h2 className={styles.sectionTitle}>Today&apos;s Market Lesson</h2>
           <div className={styles.marketLesson}>
             <div className={styles.lessonContent}>
               <h3 className={styles.lessonTitle}>Cross-Market Personality Drama in Action</h3>
@@ -125,7 +125,7 @@ export default function LandingPage() {
                 is riding the China wave. This is why understanding ALL personalities = true market awareness.
               </p>
               <div className={styles.lessonInsight}>
-                <strong>💡 Learning Insight:</strong> Real market awareness isn't just stocks - it's understanding how 
+                <strong>💡 Learning Insight:</strong> Real market awareness isn&apos;t just stocks - it&apos;s understanding how 
                 equities, bonds, commodities, and currencies all relate to each other through their unique personalities.
               </div>
             </div>

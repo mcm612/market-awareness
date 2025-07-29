@@ -182,7 +182,7 @@ const contractsData: ContractData[] = [
 export default function DashboardPage() {
   const { user, loading, signOut } = useAuth()
   const router = useRouter()
-  const [contracts, setContracts] = useState<ContractData[]>(contractsData)
+  const [contracts] = useState<ContractData[]>(contractsData)
 
   useEffect(() => {
     if (!loading && !user) {
@@ -324,14 +324,14 @@ export default function DashboardPage() {
               <div className={styles.marketEvent}>
                 <h3 className={styles.eventTitle}>🌍 Global Market Relationships in Action</h3>
                 <p className={styles.eventDescription}>
-                  Today's market shows the full ecosystem in action: /ZW (Geopolitical Drama Queen) is freaking out about grain exports, 
+                  Today&apos;s market shows the full ecosystem in action: /ZW (Geopolitical Drama Queen) is freaking out about grain exports, 
                   /6J (Polite Kamikaze Pilot) is strengthening on safe haven flows, while /6A (Commodity Bro Surfer) rides the China optimism wave. 
                   This is why understanding ALL the personalities = true market awareness.
                 </p>
                 <div className={styles.whyMatters}>
                   <h4 className={styles.whyTitle}>💡 Why This Matters for Learning</h4>
                   <p className={styles.whyDescription}>
-                    Real market awareness isn't just about stocks - it's understanding how equities, bonds, commodities, and currencies 
+                    Real market awareness isn&apos;t just about stocks - it&apos;s understanding how equities, bonds, commodities, and currencies 
                     all relate to each other. Each personality reacts differently to the same global events, creating opportunities.
                   </p>
                 </div>

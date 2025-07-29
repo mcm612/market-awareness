@@ -39,7 +39,6 @@ const CONTRACT_PERSONALITIES: { [key: string]: { name: string; emoji: string } }
 
 // Get color for correlation value
 function getCorrelationColor(correlation: number): string {
-  const abs = Math.abs(correlation)
   
   if (correlation > 0.7) return '#10b981' // Strong positive - green
   if (correlation > 0.3) return '#34d399' // Medium positive - light green  
