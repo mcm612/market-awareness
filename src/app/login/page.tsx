@@ -35,38 +35,58 @@ export default function LoginPage() {
       <div className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.logo}>
-            <h1>Market Awareness</h1>
+            <span className={styles.logoIcon}>🚀</span>
+            <h1>Futures Education</h1>
           </div>
           
           <div className={styles.tagline}>
-            <h2>Intelligent Stock Sentiment Analysis</h2>
-            <p>Track your investments with multi-timeframe sentiment insights</p>
+            <h2>Learn Futures Through Personality-Driven Education</h2>
+            <p>Meet 13 futures personalities with serious attitude problems and learn how they really behave</p>
+          </div>
+
+          <div className={styles.personalityPreview}>
+            <h3>Meet Some of Our Problem Children</h3>
+            <div className={styles.personalityCards}>
+              <div className={styles.miniCard}>
+                <span className={styles.cardIcon}>📰</span>
+                <span className={styles.cardName}>Paper-Handed Boomer</span>
+                <span className={styles.cardSymbol}>/ES</span>
+              </div>
+              <div className={styles.miniCard}>
+                <span className={styles.cardIcon}>🦍</span>
+                <span className={styles.cardName}>YOLO Diamond Hands Ape</span>
+                <span className={styles.cardSymbol}>/NQ</span>
+              </div>
+              <div className={styles.miniCard}>
+                <span className={styles.cardIcon}>👑</span>
+                <span className={styles.cardName}>Paranoid Prepper King</span>
+                <span className={styles.cardSymbol}>/GC</span>
+              </div>
+            </div>
           </div>
 
           <div className={styles.features}>
-            <h3>Key Features</h3>
+            <h3>Why This Actually Works</h3>
             <ul>
-              <li>Real-time stock & futures search</li>
-              <li>Multi-timeframe sentiment analysis (1D - 6M)</li>
-              <li>Personal watchlists with alerts</li>
-              <li>Technical indicators & market data</li>
-              <li>News sentiment tracking</li>
-              <li>Analyst price targets</li>
+              <li>🎭 13 futures contracts with WSB-style personalities</li>
+              <li>📊 Live correlation analysis shows how they relate</li>
+              <li>🧠 Real market psychology made understandable</li>
+              <li>📈 Interactive charts with actual market data</li>
             </ul>
           </div>
 
           <div className={styles.marketStats}>
             <div className={styles.stat}>
-              <div className={styles.statValue}>$2.7T</div>
-              <div className={styles.statLabel}>AAPL Market Cap</div>
+              <div className={styles.statValue}>13</div>
+              <div className={styles.statLabel}>Contract Personalities</div>
             </div>
             <div className={styles.stat}>
-              <div className={styles.statValue}>+1.2%</div>
-              <div className={styles.statLabel}>S&P 500 Today</div>
+              <div className={styles.statValue}>4</div>
+              <div className={styles.statLabel}>Asset Classes</div>
             </div>
             <div className={styles.stat}>
               <div className={styles.statValue}>Live</div>
-              <div className={styles.statLabel}>Market Data</div>
+              <div className={styles.statLabel}>Market Drama</div>
             </div>
           </div>
         </div>

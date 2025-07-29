@@ -18,10 +18,27 @@
   text-align: left;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.logoIcon {
+  font-size: 3rem;
+  animation: rocket 2s ease-in-out infinite;
+}
+
+@keyframes rocket {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 .logo h1 {
   font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin: 0;
   background: linear-gradient(45deg, #ffffff, #e0e7ff);
   background-clip: text;
   -webkit-background-clip: text;
@@ -43,6 +60,58 @@
   font-size: 1.125rem;
   opacity: 0.9;
   line-height: 1.5;
+}
+
+.personalityPreview {
+  margin-bottom: 2rem;
+}
+
+.personalityPreview h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.personalityCards {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.miniCard {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 120px;
+  transition: transform 0.2s ease;
+}
+
+.miniCard:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cardIcon {
+  font-size: 1.5rem;
+}
+
+.cardName {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.cardSymbol {
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+  opacity: 0.8;
+  font-weight: 700;
 }
 
 .features {
