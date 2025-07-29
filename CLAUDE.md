@@ -1,7 +1,7 @@
-# Market Awareness - Claude Development Notes
+# Futures Education App - Claude Development Notes
 
 ## Project Overview
-A comprehensive market awareness web application for retail investors featuring real-time stock/futures search, personal watchlists, and multi-timeframe sentiment analysis.
+An educational web application that transforms complex futures trading into an approachable learning experience through "contract personalities" and live market context. Target audience: stock traders and newcomers wanting to learn futures trading without intimidation.
 
 **Repository**: https://github.com/mcm612/market-awareness  
 **Technology Stack**: Next.js 14, TypeScript, Supabase, CSS Modules, Yahoo Finance API

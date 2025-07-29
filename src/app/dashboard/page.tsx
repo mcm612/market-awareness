@@ -1,17 +1,85 @@
 'use client'
 
-// Trigger redeploy after fixing Supabase environment variables
-
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import StockSearch from '@/components/search/StockSearch'
-import WatchlistDisplay, { WatchlistDisplayRef } from '@/components/watchlist/WatchlistDisplay'
+import styles from './dashboard.module.css'
+
+interface ContractData {
+  symbol: string
+  name: string
+  personality: string
+  currentPrice: number
+  change: number
+  changePercent: number
+  mood: string
+  moodIcon: string
+  personalityIcon: string
+}
+
+// Mock data for the 5 main futures contracts
+const contractsData: ContractData[] = [
+  {
+    symbol: '/ES',
+    name: 'E-mini S&P 500',
+    personality: 'The Steady Giant',
+    currentPrice: 4850.50,
+    change: -12.25,
+    changePercent: -0.25,
+    mood: 'Cautious',
+    moodIcon: '😐',
+    personalityIcon: '🏛️'
+  },
+  {
+    symbol: '/NQ',
+    name: 'E-mini NASDAQ',
+    personality: 'The Tech Optimist',
+    currentPrice: 16234.25,
+    change: 45.75,
+    changePercent: 0.28,
+    mood: 'Bullish',
+    moodIcon: '😊',
+    personalityIcon: '🚀'
+  },
+  {
+    symbol: '/GC',
+    name: 'Gold Futures',
+    personality: 'The Safe Haven',
+    currentPrice: 2045.80,
+    change: 8.30,
+    changePercent: 0.41,
+    mood: 'Steady',
+    moodIcon: '😌',
+    personalityIcon: '🥇'
+  },
+  {
+    symbol: '/CL',
+    name: 'Crude Oil',
+    personality: 'The Volatile Wild Card',
+    currentPrice: 78.95,
+    change: -2.15,
+    changePercent: -2.65,
+    mood: 'Agitated',
+    moodIcon: '😤',
+    personalityIcon: '⚡'
+  },
+  {
+    symbol: '/ZB',
+    name: '30-Year Treasury Bond',
+    personality: 'The Wise Elder',
+    currentPrice: 123.84,
+    change: 0.25,
+    changePercent: 0.20,
+    mood: 'Thoughtful',
+    moodIcon: '🤔',
+    personalityIcon: '📊'
+  }
+]
 
 export default function DashboardPage() {
   const { user, loading, signOut } = useAuth()
   const router = useRouter()
-  const watchlistRef = useRef<WatchlistDisplayRef>(null)
+  const [contracts, setContracts] = useState<ContractData[]>(contractsData)
 
   useEffect(() => {
     if (!loading && !user) {
@@ -40,140 +108,206 @@ export default function DashboardPage() {
     }
   }
 
-  const handleStockAdded = () => {
-    watchlistRef.current?.refreshWatchlist()
+  const handleContractClick = (symbol: string) => {
+    // Navigate to contract personality page
+    router.push(`/contracts/${symbol.replace('/', '')}`)
+  }
+
+  const formatCurrency = (value: number, symbol: string) => {
+    if (symbol === '/GC') return `$${value.toFixed(2)}`
+    if (symbol === '/CL') return `$${value.toFixed(2)}`
+    if (symbol === '/ZB') return value.toFixed(2)
+    return value.toLocaleString()
+  }
+
+  const getChangeColor = (change: number) => {
+    if (change > 0) return styles.positive
+    if (change < 0) return styles.negative
+    return styles.neutral
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
-      <header className="bg-white/80 backdrop-blur-lg shadow-lg border-b border-slate-200/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg mr-3 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">M</span>
-              </div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-slate-900 to-blue-700 bg-clip-text text-transparent">
-                Market Awareness
-              </h1>
+    <div className={styles.container}>
+      {/* Header */}
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={styles.logoSection}>
+            <div className={styles.logo}>
+              <span className={styles.logoIcon}>📈</span>
+              <h1 className={styles.logoText}>Futures Education</h1>
             </div>
-            
-            <div className="flex items-center space-x-6">
-              <span className="text-sm font-medium text-slate-600">
-                Welcome, <span className="text-slate-900 font-semibold">{user.email}</span>
-              </span>
-              <button
-                onClick={handleSignOut}
-                className="bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 px-6 py-3 rounded-xl text-sm font-semibold text-slate-700 transition-all duration-200 shadow-md hover:shadow-lg"
-              >
-                Sign Out
-              </button>
-            </div>
+            <p className={styles.tagline}>Learn futures through personality-driven education</p>
+          </div>
+          
+          <div className={styles.userSection}>
+            <span className={styles.welcome}>
+              Welcome, <strong>{user.email?.split('@')[0]}</strong>
+            </span>
+            <button onClick={handleSignOut} className={styles.signOutButton}>
+              Sign Out
+            </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8" style={{overflow: 'visible'}}>
-        <div className="px-4 py-6 sm:px-0 space-y-8" style={{overflow: 'visible'}}>
-          {/* Stock Search Section */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-slate-200/50 p-8 relative" style={{overflow: 'visible', minHeight: '400px', zIndex: 1}}>
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
-            <h2 className="text-3xl font-black text-slate-900 mb-3 tracking-tight">
-              Search Stocks & Futures
-            </h2>
-            <p className="text-slate-600 mb-8 text-lg font-medium">
-              Search for stocks, futures, and other securities to add to your watchlist
+      <main className={styles.main}>
+        {/* Market Overview Section */}
+        <section className={styles.marketOverview}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Meet Your Futures Personalities</h2>
+            <p className={styles.sectionSubtitle}>
+              Each contract has its own personality, triggers, and behaviors. Click to learn more about each one.
             </p>
-            <StockSearch onStockAdded={handleStockAdded} />
           </div>
 
-          {/* Watchlist Display */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-slate-200/50 p-8 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
-            <WatchlistDisplay ref={watchlistRef} />
-          </div>
+          <div className={styles.contractGrid}>
+            {contracts.map((contract) => (
+              <div 
+                key={contract.symbol}
+                className={styles.contractCard}
+                onClick={() => handleContractClick(contract.symbol)}
+              >
+                <div className={styles.contractHeader}>
+                  <div className={styles.contractSymbol}>
+                    <span className={styles.personalityIcon}>{contract.personalityIcon}</span>
+                    <span className={styles.symbol}>{contract.symbol}</span>
+                  </div>
+                  <div className={styles.contractMood}>
+                    <span className={styles.moodIcon}>{contract.moodIcon}</span>
+                    <span className={styles.mood}>{contract.mood}</span>
+                  </div>
+                </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-slate-200/50 p-6 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Market Overview</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-slate-700">S&P 500</span>
-                  <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 px-3 py-1 rounded-lg">
-                    <span className="text-emerald-700 font-bold">+0.5%</span>
+                <div className={styles.contractInfo}>
+                  <h3 className={styles.contractPersonality}>{contract.personality}</h3>
+                  <p className={styles.contractName}>{contract.name}</p>
+                </div>
+
+                <div className={styles.contractStats}>
+                  <div className={styles.price}>
+                    {formatCurrency(contract.currentPrice, contract.symbol)}
+                  </div>
+                  <div className={`${styles.change} ${getChangeColor(contract.change)}`}>
+                    {contract.change >= 0 ? '+' : ''}{contract.change.toFixed(2)} 
+                    ({contract.changePercent >= 0 ? '+' : ''}{contract.changePercent.toFixed(2)}%)
                   </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-slate-700">NASDAQ</span>
-                  <div className="bg-gradient-to-r from-red-100 to-red-200 px-3 py-1 rounded-lg">
-                    <span className="text-red-700 font-bold">-0.2%</span>
-                  </div>
+
+                <div className={styles.learnMore}>
+                  <span>Learn about {contract.personality} →</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-slate-700">DOW</span>
-                  <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 px-3 py-1 rounded-lg">
-                    <span className="text-emerald-700 font-bold">+0.3%</span>
-                  </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Today's Learning Section */}
+        <section className={styles.todaysLearning}>
+          <div className={styles.learningContent}>
+            <div className={styles.learningMain}>
+              <h2 className={styles.learningTitle}>What's Moving Markets Today</h2>
+              <div className={styles.marketEvent}>
+                <h3 className={styles.eventTitle}>📊 Fed Policy Uncertainty Creates Mixed Signals</h3>
+                <p className={styles.eventDescription}>
+                  Today's market action perfectly demonstrates how different futures personalities react to the same news. 
+                  While /ES (The Steady Giant) shows its typical cautious behavior with a slight decline, /NQ (The Tech Optimist) 
+                  remains bullish on tech innovation. Meanwhile, /GC (The Safe Haven) is attracting safety-seekers.
+                </p>
+                <div className={styles.whyMatters}>
+                  <h4 className={styles.whyTitle}>💡 Why This Matters for Learning</h4>
+                  <p className={styles.whyDescription}>
+                    Understanding how each contract's "personality" responds to macro events is the key to futures success. 
+                    This isn't just about numbers - it's about market psychology and character traits that remain consistent over time.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-slate-200/50 p-6 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Account Status</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-slate-700">User:</span>
-                  <span className="font-bold text-slate-900">{user.email}</span>
+            <div className={styles.learningOpportunity}>
+              <h3 className={styles.opportunityTitle}>Today's Learning Opportunity</h3>
+              <div className={styles.opportunityCard}>
+                <div className={styles.opportunityHeader}>
+                  <span className={styles.opportunityIcon}>🎯</span>
+                  <span className={styles.opportunityLabel}>Observation Exercise</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-slate-700">Status:</span>
-                  <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 px-3 py-1 rounded-lg">
-                    <span className="text-emerald-700 font-bold">Active</span>
-                  </div>
+                <p className={styles.opportunityText}>
+                  Watch how /ES and /NQ react differently to the same Fed news throughout the day. 
+                  Notice /ES's steady, cautious moves vs /NQ's more dramatic swings.
+                </p>
+                <div className={styles.opportunityAction}>
+                  <strong>Your Task:</strong> Click on both contracts to learn about their personalities, 
+                  then observe their price action patterns.
                 </div>
-                <button 
-                  onClick={handleSignOut}
-                  className="w-full mt-4 bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-700 font-semibold px-4 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
-                >
-                  Sign Out
-                </button>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Instructions */}
-          <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-blue-200/50 rounded-2xl p-8 mt-8 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-900 to-indigo-900 bg-clip-text text-transparent mb-4 tracking-tight">
-              🚀 Get Started with Market Awareness
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-700">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <p className="font-medium">Type any stock symbol (AAPL, TSLA, NVDA) or company name</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-                  <p className="font-medium">Use keyboard arrows to navigate results</p>
-                </div>
+        {/* Quick Actions Section */}
+        <section className={styles.quickActions}>
+          <h2 className={styles.actionsTitle}>Continue Your Learning Journey</h2>
+          <div className={styles.actionGrid}>
+            <button 
+              className={styles.actionButton}
+              onClick={() => router.push('/learn')}
+            >
+              <span className={styles.actionIcon}>📚</span>
+              <span className={styles.actionText}>Learning Center</span>
+              <span className={styles.actionDescription}>Structured lessons and modules</span>
+            </button>
+
+            <button 
+              className={styles.actionButton}
+              onClick={() => router.push('/daily')}
+            >
+              <span className={styles.actionIcon}>📅</span>
+              <span className={styles.actionText}>Daily Lessons</span>
+              <span className={styles.actionDescription}>Market-driven education</span>
+            </button>
+
+            <button 
+              className={styles.actionButton}
+              onClick={() => router.push('/simulator')}
+            >
+              <span className={styles.actionIcon}>🎮</span>
+              <span className={styles.actionText}>Practice Trading</span>
+              <span className={styles.actionDescription}>Paper trading simulator</span>
+            </button>
+
+            <button 
+              className={styles.actionButton}
+              onClick={() => router.push('/macro')}
+            >
+              <span className={styles.actionIcon}>🌍</span>
+              <span className={styles.actionText}>Macro Context</span>
+              <span className={styles.actionDescription}>Current market environment</span>
+            </button>
+          </div>
+        </section>
+
+        {/* Progress Section */}
+        <section className={styles.progress}>
+          <div className={styles.progressContent}>
+            <h2 className={styles.progressTitle}>Your Learning Progress</h2>
+            <div className={styles.progressStats}>
+              <div className={styles.progressStat}>
+                <div className={styles.statNumber}>3</div>
+                <div className={styles.statLabel}>Contracts Learned</div>
               </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <p className="font-medium">Click &quot;+ Add&quot; to add stocks to your watchlist</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
-                  <p className="font-medium">Search includes futures and other securities</p>
-                </div>
+              <div className={styles.progressStat}>
+                <div className={styles.statNumber}>7</div>
+                <div className={styles.statLabel}>Lessons Completed</div>
+              </div>
+              <div className={styles.progressStat}>
+                <div className={styles.statNumber}>12</div>
+                <div className={styles.statLabel}>Days Learning</div>
               </div>
             </div>
+            <div className={styles.nextLesson}>
+              <strong>Next Recommended:</strong> Learn about margin and risk management in futures trading
+            </div>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   )
