@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
 import OpenAI from 'openai'
 
 // const supabase = createClient(
@@ -82,7 +81,7 @@ async function analyzeContractWithOpenAI(
   // Prepare market context
   const allContracts = ['/ES', '/NQ', '/GC', '/CL', '/ZB', '/SI', '/HG', '/ZC', '/ZS', '/ZW', '/6E', '/6J', '/6B', '/6A']
   const marketContext = allContracts.map(contract => {
-    const data = marketData[contract]
+    const data = marketData[contract] as { price: number; change: number; changePercent: number } | null
     if (data) {
       return `${contract}: $${data.price} (${data.change >= 0 ? '+' : ''}${data.change} / ${data.changePercent >= 0 ? '+' : ''}${data.changePercent}%)`
     }

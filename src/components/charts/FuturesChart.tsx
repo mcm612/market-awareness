@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { 
   ComposedChart, 
   AreaChart,
@@ -33,14 +33,18 @@ type ChartType = 'candlestick' | 'line' | 'area'
 type TimePeriod = '1d' | '5d' | '1mo' | '3mo' | '6mo' | '1y'
 
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface TooltipPayload {
+  payload: HistoricalDataPoint;
+}
+
+const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: TooltipPayload[]; label?: string }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload
     const isUp = data.close > data.open
     
     return (
       <div className={styles.tooltip}>
-        <p className={styles.tooltipDate}>{new Date(label).toLocaleDateString()}</p>
+        <p className={styles.tooltipDate}>{label ? new Date(label).toLocaleDateString() : 'No date'}</p>
         <div className={styles.tooltipData}>
           <div className={styles.tooltipRow}>
             <span>Open:</span>
@@ -78,11 +82,7 @@ export default function FuturesChart({ symbol, height = 400 }: FuturesChartProps
   const [chartType, setChartType] = useState<ChartType>('candlestick')
   const [timePeriod, setTimePeriod] = useState<TimePeriod>('1mo')
 
-  useEffect(() => {
-    fetchHistoricalData()
-  }, [symbol, timePeriod])
-
-  const fetchHistoricalData = async () => {
+  const fetchHistoricalData = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -101,7 +101,11 @@ export default function FuturesChart({ symbol, height = 400 }: FuturesChartProps
     } finally {
       setLoading(false)
     }
-  }
+  }, [symbol, timePeriod])
+
+  useEffect(() => {
+    fetchHistoricalData()
+  }, [fetchHistoricalData])
 
   const formatXAxisTick = (tickItem: string) => {
     const date = new Date(tickItem)

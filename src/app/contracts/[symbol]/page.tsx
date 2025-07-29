@@ -6,6 +6,26 @@ import { useAuth } from '@/contexts/AuthContext'
 import FuturesChart from '@/components/charts/FuturesChart'
 import styles from './contract.module.css'
 
+interface ContractAnalysis {
+  symbol: string
+  directionalBias: 'bullish' | 'bearish' | 'neutral'
+  biasStrength: 'strong' | 'moderate' | 'weak'
+  biasReasoning: string
+  keyRelationships: {
+    [contract: string]: {
+      correlation: number
+      relationshipType: string
+      currentDynamic: string
+    }
+  }
+  marketRegimeAnalysis: {
+    currentRegime: 'risk_on' | 'risk_off' | 'transitional'
+    regimeConfidence: number
+    impactOnContract: string
+  }
+  timestamp: string
+}
+
 interface ContractPersonality {
   symbol: string
   name: string
@@ -802,7 +822,7 @@ export default function ContractPersonalityPage() {
   const router = useRouter()
   const { user, loading } = useAuth()
   const [contract, setContract] = useState<ContractPersonality | null>(null)
-  const [liveAnalysis, setLiveAnalysis] = useState<any>(null)
+  const [liveAnalysis, setLiveAnalysis] = useState<ContractAnalysis | null>(null)
   const [analysisLoading, setAnalysisLoading] = useState(false)
 
   useEffect(() => {
@@ -1017,8 +1037,8 @@ export default function ContractPersonalityPage() {
         <section className={styles.relationships}>
           <h3 className={styles.sectionTitle}>🔗 How {contract.symbol} Relates to Other Markets</h3>
           <p className={styles.relationshipsIntro}>
-            Understanding these relationships is the key to market awareness. Each contract doesn't trade in isolation - 
-            they're all connected in a complex web of economic relationships.
+            Understanding these relationships is the key to market awareness. Each contract doesn&apos;t trade in isolation - 
+            they&apos;re all connected in a complex web of economic relationships.
           </p>
           
           <div className={styles.relationshipGrid}>

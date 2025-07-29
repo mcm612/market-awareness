@@ -320,7 +320,7 @@ export default function DashboardPage() {
         <section className={styles.todaysLearning}>
           <div className={styles.learningContent}>
             <div className={styles.learningMain}>
-              <h2 className={styles.learningTitle}>What's Moving Markets Today</h2>
+              <h2 className={styles.learningTitle}>What&apos;s Moving Markets Today</h2>
               <div className={styles.marketEvent}>
                 <h3 className={styles.eventTitle}>🌍 Global Market Relationships in Action</h3>
                 <p className={styles.eventDescription}>
@@ -339,7 +339,7 @@ export default function DashboardPage() {
             </div>
 
             <div className={styles.learningOpportunity}>
-              <h3 className={styles.opportunityTitle}>Today's Learning Opportunity</h3>
+              <h3 className={styles.opportunityTitle}>Today&apos;s Learning Opportunity</h3>
               <div className={styles.opportunityCard}>
                 <div className={styles.opportunityHeader}>
                   <span className={styles.opportunityIcon}>🎯</span>

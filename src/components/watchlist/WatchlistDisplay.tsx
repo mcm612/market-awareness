@@ -527,17 +527,6 @@ const WatchlistDisplay = forwardRef<WatchlistDisplayRef>((props, ref) => {
                   <ComprehensiveAnalysis
                     symbol={item.symbol}
                     analysis={item.comprehensiveAnalysis}
-                    timeframes={(() => {
-                      const timeframes: Record<string, { sentiment: 'bullish' | 'bearish' | 'neutral', confidence: number }> = {}
-                      Object.entries(item.sentiment || {}).forEach(([timeframe, sentiment]) => {
-                        const detailed = item.sentimentData?.[timeframe]
-                        timeframes[timeframe] = {
-                          sentiment,
-                          confidence: detailed?.confidence || 0
-                        }
-                      })
-                      return timeframes
-                    })()}
                     isLoading={sentimentLoading[item.symbol]}
                     onAnalyze={() => analyzeSentiment(item.symbol)}
                   />

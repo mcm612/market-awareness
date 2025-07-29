@@ -4,15 +4,10 @@ import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './ComprehensiveAnalysis.module.css'
 
-interface TimeframeData {
-  sentiment: 'bullish' | 'bearish' | 'neutral'
-  confidence: number
-}
 
 interface ComprehensiveAnalysisProps {
   symbol: string
   analysis?: string
-  timeframes?: Record<string, TimeframeData>
   isLoading?: boolean
   onAnalyze?: () => Promise<void>
 }
@@ -20,7 +15,6 @@ interface ComprehensiveAnalysisProps {
 export default function ComprehensiveAnalysis({
   symbol,
   analysis,
-  timeframes = {},
   isLoading = false,
   onAnalyze
 }: ComprehensiveAnalysisProps) {
@@ -28,23 +22,6 @@ export default function ComprehensiveAnalysis({
   const [modalLoading, setModalLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const getSentimentIcon = (sentiment: string) => {
-    switch (sentiment) {
-      case 'bullish': return '🟢'
-      case 'bearish': return '🔴'
-      case 'neutral': return '🟡'
-      default: return '⚪'
-    }
-  }
-
-  const getSentimentColor = (sentiment: string) => {
-    switch (sentiment) {
-      case 'bullish': return '#10b981'
-      case 'bearish': return '#ef4444'
-      case 'neutral': return '#f59e0b'
-      default: return '#6b7280'
-    }
-  }
 
   const handleViewFullAnalysis = async () => {
     setIsModalOpen(true)
@@ -65,15 +42,6 @@ export default function ComprehensiveAnalysis({
     }
   }
 
-  const getOverallSentiment = () => {
-    const sentiments = Object.values(timeframes).map(tf => tf.sentiment)
-    const bullishCount = sentiments.filter(s => s === 'bullish').length
-    const bearishCount = sentiments.filter(s => s === 'bearish').length
-    
-    if (bullishCount > bearishCount) return 'bullish'
-    if (bearishCount > bullishCount) return 'bearish'
-    return 'neutral'
-  }
 
   const formatAnalysisContent = (content: string) => {
     // Split content into lines for better processing
