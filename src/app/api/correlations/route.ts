@@ -7,6 +7,46 @@ const FUTURES_CONTRACTS = [
   '/6E', '/6J', '/6B', '/6A'
 ]
 
+// Map our symbols to Yahoo Finance symbols
+const SYMBOL_MAPPING: Record<string, string> = {
+  '/ES': 'ES=F',
+  '/NQ': 'NQ=F', 
+  '/GC': 'GC=F',
+  '/CL': 'CL=F',
+  '/ZB': 'ZB=F',
+  '/SI': 'SI=F',
+  '/HG': 'HG=F',
+  '/ZC': 'ZC=F',
+  '/ZS': 'ZS=F',
+  '/ZW': 'ZW=F',
+  '/6E': 'EURUSD=X',
+  '/6J': 'USDJPY=X',
+  '/6B': 'GBPUSD=X',
+  '/6A': 'AUDUSD=X'
+}
+
+interface YahooHistoricalResponse {
+  chart: {
+    result: [{
+      meta: {
+        symbol: string
+        exchangeTimezoneName: string
+        regularMarketPrice: number
+      }
+      timestamp: number[]
+      indicators: {
+        quote: [{
+          open: number[]
+          high: number[]
+          low: number[]
+          close: number[]
+          volume: number[]
+        }]
+      }
+    }]
+  }
+}
+
 interface PriceData {
   date: string
   close: number
@@ -44,47 +84,63 @@ function calculateCorrelation(series1: number[], series2: number[]): number {
   return denominator === 0 ? 0 : numerator / denominator
 }
 
-// Fetch historical data for a symbol
+// Fetch historical data directly from Yahoo Finance
 async function fetchHistoricalData(symbol: string): Promise<PriceData[]> {
   try {
-    const encodedSymbol = encodeURIComponent(symbol)
+    const yahooSymbol = SYMBOL_MAPPING[symbol]
+    if (!yahooSymbol) {
+      console.error(`No Yahoo symbol mapping found for ${symbol}`)
+      return []
+    }
+
+    console.log(`Fetching data for ${symbol} (Yahoo: ${yahooSymbol}) directly from Yahoo Finance`)
     
-    // Use absolute URL for production deployment
-    const baseUrl = 'https://market-awareness.vercel.app'
+    // Calculate timestamps for 3 months ago and now
+    const endTime = Math.floor(Date.now() / 1000)
+    const startTime = endTime - (90 * 24 * 60 * 60) // 90 days ago
     
-    console.log(`Fetching data for ${symbol} from ${baseUrl}`)
+    const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?period1=${startTime}&period2=${endTime}&interval=1d&includePrePost=true&events=div%2Csplit`
     
-    const response = await fetch(
-      `${baseUrl}/api/historical-data?symbol=${encodedSymbol}&period=3mo&interval=1d`,
-      { 
-        method: 'GET',
-        headers: {
-          'Cache-Control': 'no-cache',
-          'User-Agent': 'market-awareness-internal'
-        }
+    const response = await fetch(yahooUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       }
-    )
+    })
 
     if (!response.ok) {
-      console.error(`Failed to fetch data for ${symbol}: ${response.status} ${response.statusText}`)
-      const errorText = await response.text()
-      console.error(`Error response: ${errorText}`)
+      console.error(`Yahoo Finance API error for ${symbol}: ${response.status} ${response.statusText}`)
       return []
     }
 
-    const data = await response.json()
+    const data: YahooHistoricalResponse = await response.json()
     
-    if (data.error || !data.data || !Array.isArray(data.data)) {
-      console.error(`Invalid data structure for ${symbol}:`, data.error || 'No data array found')
+    if (!data.chart?.result?.[0]) {
+      console.error(`No chart data returned for ${symbol}`)
       return []
     }
 
-    console.log(`Successfully fetched ${data.data.length} data points for ${symbol}`)
+    const result = data.chart.result[0]
+    const timestamps = result.timestamp
+    const closes = result.indicators.quote[0].close
+
+    if (!timestamps || !closes || timestamps.length !== closes.length) {
+      console.error(`Invalid data structure for ${symbol}`)
+      return []
+    }
+
+    const priceData: PriceData[] = []
+    for (let i = 0; i < timestamps.length; i++) {
+      if (closes[i] !== null && closes[i] !== undefined) {
+        priceData.push({
+          date: new Date(timestamps[i] * 1000).toISOString().split('T')[0],
+          close: closes[i]
+        })
+      }
+    }
+
+    console.log(`Successfully fetched ${priceData.length} data points for ${symbol}`)
+    return priceData
     
-    return data.data.map((price: { date: string; close: number }) => ({
-      date: price.date,
-      close: price.close
-    }))
   } catch (error) {
     console.error(`Error fetching data for ${symbol}:`, error)
     return []
