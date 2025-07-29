@@ -17,62 +17,62 @@ interface ContractData {
   personalityIcon: string
 }
 
-// Mock data for the 5 main futures contracts
+// Mock data for the 5 main futures contracts - WSB Style!
 const contractsData: ContractData[] = [
   {
     symbol: '/ES',
     name: 'E-mini S&P 500',
-    personality: 'The Steady Giant',
+    personality: 'The Paper-Handed Boomer',
     currentPrice: 4850.50,
     change: -12.25,
     changePercent: -0.25,
-    mood: 'Cautious',
-    moodIcon: '😐',
-    personalityIcon: '🏛️'
+    mood: 'Paper Handing',
+    moodIcon: '📰',
+    personalityIcon: '📰'
   },
   {
     symbol: '/NQ',
     name: 'E-mini NASDAQ',
-    personality: 'The Tech Optimist',
+    personality: 'The YOLO Diamond Hands Ape',
     currentPrice: 16234.25,
     change: 45.75,
     changePercent: 0.28,
-    mood: 'Bullish',
-    moodIcon: '😊',
-    personalityIcon: '🚀'
+    mood: 'MOONING',
+    moodIcon: '🚀',
+    personalityIcon: '🦍'
   },
   {
     symbol: '/GC',
     name: 'Gold Futures',
-    personality: 'The Safe Haven',
+    personality: 'The Paranoid Prepper King',
     currentPrice: 2045.80,
     change: 8.30,
     changePercent: 0.41,
-    mood: 'Steady',
-    moodIcon: '😌',
-    personalityIcon: '🥇'
+    mood: 'Hoarding',
+    moodIcon: '😤',
+    personalityIcon: '👑'
   },
   {
     symbol: '/CL',
     name: 'Crude Oil',
-    personality: 'The Volatile Wild Card',
+    personality: 'The Bipolar Energy Chad',
     currentPrice: 78.95,
     change: -2.15,
     changePercent: -2.65,
-    mood: 'Agitated',
-    moodIcon: '😤',
-    personalityIcon: '⚡'
+    mood: 'Going Psycho',
+    moodIcon: '😡',
+    personalityIcon: '💥'
   },
   {
     symbol: '/ZB',
     name: '30-Year Treasury Bond',
-    personality: 'The Wise Elder',
+    personality: 'The Theta Gang Boomer',
     currentPrice: 123.84,
     change: 0.25,
     changePercent: 0.20,
-    mood: 'Thoughtful',
-    moodIcon: '🤔',
-    personalityIcon: '📊'
+    mood: 'Collecting Coupons',
+    moodIcon: '💰',
+    personalityIcon: '🏦'
   }
 ]
 

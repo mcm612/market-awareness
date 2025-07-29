@@ -42,18 +42,18 @@ export default function LandingPage() {
           <div className={styles.contractPreview}>
             <div className={styles.contractCard}>
               <span className={styles.contractSymbol}>/ES</span>
-              <span className={styles.contractName}>The Steady Giant</span>
-              <div className={styles.contractMood}>😐 Cautious</div>
+              <span className={styles.contractName}>The Paper-Handed Boomer</span>
+              <div className={styles.contractMood}>📰 Paper Handing</div>
             </div>
             <div className={styles.contractCard}>
               <span className={styles.contractSymbol}>/NQ</span>
-              <span className={styles.contractName}>The Tech Optimist</span>
-              <div className={styles.contractMood}>😊 Bullish</div>
+              <span className={styles.contractName}>The YOLO Diamond Hands Ape</span>
+              <div className={styles.contractMood}>🚀 MOONING</div>
             </div>
             <div className={styles.contractCard}>
               <span className={styles.contractSymbol}>/GC</span>
-              <span className={styles.contractName}>The Safe Haven</span>
-              <div className={styles.contractMood}>😌 Steady</div>
+              <span className={styles.contractName}>The Paranoid Prepper King</span>
+              <div className={styles.contractMood}>😤 Hoarding</div>
             </div>
           </div>
         </div>
@@ -68,8 +68,8 @@ export default function LandingPage() {
               <div className={styles.featureIcon}>🎭</div>
               <h3 className={styles.featureTitle}>Contract Personalities</h3>
               <p className={styles.featureDescription}>
-                Meet /ES, /NQ, /GC, /CL, and /ZB as unique market characters with their own traits, 
-                triggers, and behaviors. Make abstract markets feel personal and memorable.
+                Meet the Paper-Handed Boomer (/ES), YOLO Diamond Hands Ape (/NQ), Paranoid Prepper King (/GC), 
+                Bipolar Energy Chad (/CL), and Theta Gang Boomer (/ZB). Each one's got serious personality issues.
               </p>
               <button 
                 className={styles.featureButton}
@@ -120,9 +120,9 @@ export default function LandingPage() {
             <div className={styles.lessonContent}>
               <h3 className={styles.lessonTitle}>Understanding Market Personalities in Action</h3>
               <p className={styles.lessonDescription}>
-                Right now, /ES (The Steady Giant) is showing its typical cautious behavior during 
-                uncertain times, while /NQ (The Tech Optimist) remains more volatile. This is exactly 
-                the kind of personality difference that makes futures trading both fascinating and profitable.
+                Right now, /ES (The Paper-Handed Boomer) is panic selling like it's 2008 again, 
+                while /NQ (The YOLO Diamond Hands Ape) is still screaming "BUY THE DIP!" 💎🙌 
+                This is exactly why understanding their personalities = tendies.
               </p>
               <div className={styles.lessonInsight}>
                 <strong>💡 Learning Insight:</strong> Each contract reacts differently to the same news. 
@@ -134,14 +134,14 @@ export default function LandingPage() {
               <div className={styles.spotlightCard}>
                 <div className={styles.spotlightHeader}>
                   <span className={styles.spotlightSymbol}>/ES</span>
-                  <span className={styles.spotlightName}>The Steady Giant</span>
+                  <span className={styles.spotlightName}>The Paper-Handed Boomer</span>
                 </div>
                 <div className={styles.spotlightStats}>
-                  <div className={styles.spotlightMood}>Current Mood: 😐 Cautious</div>
-                  <div className={styles.spotlightTrigger}>Key Trigger: Fed Policy Updates</div>
+                  <div className={styles.spotlightMood}>Current Mood: 📰 Paper Handing</div>
+                  <div className={styles.spotlightTrigger}>Key Trigger: CNBC FUD Reports</div>
                   <div className={styles.spotlightTip}>
-                    <strong>Beginner Tip:</strong> /ES moves steadily but can panic quickly during uncertainty. 
-                    Perfect for learning risk management.
+                    <strong>Ape Tip:</strong> /ES paper hands at the first sign of trouble but steady gains when confident. 
+                    Perfect for learning when boomers panic sell.
                   </div>
                 </div>
               </div>
