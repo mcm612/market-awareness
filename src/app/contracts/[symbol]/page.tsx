@@ -313,6 +313,8 @@ export default function ContractPersonalityPage() {
   const router = useRouter()
   const { user, loading } = useAuth()
   const [contract, setContract] = useState<ContractPersonality | null>(null)
+  const [liveAnalysis, setLiveAnalysis] = useState<any>(null)
+  const [analysisLoading, setAnalysisLoading] = useState(false)
 
   useEffect(() => {
     if (!loading && !user) {
@@ -325,11 +327,33 @@ export default function ContractPersonalityPage() {
     
     if (contractInfo) {
       setContract(contractInfo)
+      // Fetch live analysis
+      fetchLiveAnalysis(symbol.toUpperCase())
     } else {
       // Redirect to dashboard if invalid contract
       router.push('/dashboard')
     }
   }, [params.symbol, user, loading, router])
+
+  const fetchLiveAnalysis = async (symbol: string) => {
+    try {
+      setAnalysisLoading(true)
+      const response = await fetch('/api/contract-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol: `/${symbol}` })
+      })
+
+      if (response.ok) {
+        const analysis = await response.json()
+        setLiveAnalysis(analysis)
+      }
+    } catch (error) {
+      console.error('Failed to fetch live analysis:', error)
+    } finally {
+      setAnalysisLoading(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -436,10 +460,52 @@ export default function ContractPersonalityPage() {
         {/* Current Market Analysis */}
         <section className={styles.marketAnalysis}>
           <h3 className={styles.sectionTitle}>Current Market Analysis</h3>
+          
+          {/* Live AI Analysis */}
+          {liveAnalysis && (
+            <div className={styles.liveAnalysisCard}>
+              <div className={styles.liveHeader}>
+                <h4 className={styles.liveTitle}>🤖 Live AI Analysis</h4>
+                <span className={styles.liveTimestamp}>
+                  Updated: {new Date(liveAnalysis.timestamp).toLocaleTimeString()}
+                </span>
+              </div>
+              <div className={styles.biasSection}>
+                <h4 className={styles.biasTitle}>
+                  AI Directional Bias: 
+                  <span 
+                    className={styles.biasValue}
+                    style={{ color: getBiasColor(liveAnalysis.directionalBias, liveAnalysis.biasStrength) }}
+                  >
+                    {liveAnalysis.biasStrength} {liveAnalysis.directionalBias}
+                  </span>
+                </h4>
+                <p className={styles.biasReasoning}>{liveAnalysis.biasReasoning}</p>
+                
+                <div className={styles.marketRegime}>
+                  <strong>Market Regime:</strong> {liveAnalysis.marketRegimeAnalysis?.currentRegime.replace('_', ' ').toUpperCase()} 
+                  ({liveAnalysis.marketRegimeAnalysis?.regimeConfidence}% confidence)
+                </div>
+                <p className={styles.regimeImpact}>{liveAnalysis.marketRegimeAnalysis?.impactOnContract}</p>
+              </div>
+            </div>
+          )}
+          
+          {analysisLoading && (
+            <div className={styles.analysisLoading}>
+              <div className={styles.spinner}></div>
+              <span>Generating live market analysis...</span>
+            </div>
+          )}
+          
+          {/* Static Analysis for Comparison */}
           <div className={styles.analysisCard}>
+            <div className={styles.staticHeader}>
+              <h4 className={styles.staticTitle}>📚 Educational Baseline</h4>
+            </div>
             <div className={styles.biasSection}>
               <h4 className={styles.biasTitle}>
-                Directional Bias: 
+                Baseline Bias: 
                 <span 
                   className={styles.biasValue}
                   style={{ color: getBiasColor(contract.directionalBias, contract.biasStrength) }}
