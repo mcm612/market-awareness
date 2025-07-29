@@ -80,7 +80,7 @@ async function analyzeContractWithOpenAI(
   })
 
   // Prepare market context
-  const allContracts = ['/ES', '/NQ', '/GC', '/CL', '/ZB']
+  const allContracts = ['/ES', '/NQ', '/GC', '/CL', '/ZB', '/SI', '/HG', '/ZC', '/ZS', '/ZW', '/6E', '/6J', '/6B', '/6A']
   const marketContext = allContracts.map(contract => {
     const data = marketData[contract]
     if (data) {
@@ -198,10 +198,18 @@ Current date: ${currentDate}`
       throw new Error('No response from OpenAI')
     }
 
-    // Parse JSON response
+    // Parse JSON response - handle markdown code blocks
     let analysis: ContractAnalysis
     try {
-      analysis = JSON.parse(responseText)
+      // Remove markdown code blocks if present
+      let cleanedResponse = responseText.trim()
+      if (cleanedResponse.startsWith('```json')) {
+        cleanedResponse = cleanedResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '')
+      } else if (cleanedResponse.startsWith('```')) {
+        cleanedResponse = cleanedResponse.replace(/^```\s*/, '').replace(/\s*```$/, '')
+      }
+      
+      analysis = JSON.parse(cleanedResponse)
     } catch (parseError) {
       console.error('JSON parse error:', parseError)
       console.error('Raw response:', responseText)
@@ -258,7 +266,7 @@ export async function POST(request: NextRequest) {
     const normalizedSymbol = symbol.startsWith('/') ? symbol : `/${symbol}`
 
     // Get market data for all major contracts
-    const allContracts = ['/ES', '/NQ', '/GC', '/CL', '/ZB']
+    const allContracts = ['/ES', '/NQ', '/GC', '/CL', '/ZB', '/SI', '/HG', '/ZC', '/ZS', '/ZW', '/6E', '/6J', '/6B', '/6A']
     const marketData = await getMarketData(allContracts)
     
     // Generate analysis

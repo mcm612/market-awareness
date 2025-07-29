@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
+import CorrelationHeatmap from '@/components/CorrelationHeatmap'
 import styles from './dashboard.module.css'
 
 interface ContractData {
@@ -17,8 +18,9 @@ interface ContractData {
   personalityIcon: string
 }
 
-// Mock data for the 5 main futures contracts - WSB Style!
+// Mock data for all futures contracts - WSB Style!
 const contractsData: ContractData[] = [
+  // Core 5 Contracts
   {
     symbol: '/ES',
     name: 'E-mini S&P 500',
@@ -73,6 +75,107 @@ const contractsData: ContractData[] = [
     mood: 'Collecting Coupons',
     moodIcon: '💰',
     personalityIcon: '🏦'
+  },
+  // Commodity Futures
+  {
+    symbol: '/SI',
+    name: 'Silver Futures',
+    personality: 'The Poor Man\'s Gold Pleb',
+    currentPrice: 24.85,
+    change: 0.45,
+    changePercent: 1.84,
+    mood: 'Following Gold',
+    moodIcon: '🤤',
+    personalityIcon: '🥈'
+  },
+  {
+    symbol: '/HG',
+    name: 'Copper Futures',
+    personality: 'The Economic PhD Chad',
+    currentPrice: 3.92,
+    change: -0.08,
+    changePercent: -2.0,
+    mood: 'Analyzing Data',
+    moodIcon: '🤓',
+    personalityIcon: '🔧'
+  },
+  {
+    symbol: '/ZC',
+    name: 'Corn Futures',
+    personality: 'The Midwest Karen',
+    currentPrice: 675.25,
+    change: 12.50,
+    changePercent: 1.89,
+    mood: 'Weather Worried',
+    moodIcon: '😰',
+    personalityIcon: '🌽'
+  },
+  {
+    symbol: '/ZS',
+    name: 'Soybean Futures',
+    personality: 'The Vegan Influencer',
+    currentPrice: 1534.75,
+    change: 18.25,
+    changePercent: 1.20,
+    mood: 'Plant Based Gains',
+    moodIcon: '🌱',
+    personalityIcon: '🫘'
+  },
+  {
+    symbol: '/ZW',
+    name: 'Wheat Futures',
+    personality: 'The Geopolitical Drama Queen',
+    currentPrice: 745.50,
+    change: 25.75,
+    changePercent: 3.58,
+    mood: 'Crisis Mode',
+    moodIcon: '😱',
+    personalityIcon: '🌾'
+  },
+  // Currency Futures
+  {
+    symbol: '/6E',
+    name: 'Euro Futures',
+    personality: 'The Sophisticated European Mess',
+    currentPrice: 1.0875,
+    change: -0.0025,
+    changePercent: -0.23,
+    mood: 'Existential Crisis',
+    moodIcon: '😕',
+    personalityIcon: '🇪🇺'
+  },
+  {
+    symbol: '/6J',
+    name: 'Japanese Yen Futures',
+    personality: 'The Polite Kamikaze Pilot',
+    currentPrice: 0.00685,
+    change: 0.00015,
+    changePercent: 2.24,
+    mood: 'Safe Haven Mode',
+    moodIcon: '🛡️',
+    personalityIcon: '🇯🇵'
+  },
+  {
+    symbol: '/6B',
+    name: 'British Pound Futures',
+    personality: 'The Brexit Disaster',
+    currentPrice: 1.2450,
+    change: -0.0075,
+    changePercent: -0.60,
+    mood: 'Brexit Regret',
+    moodIcon: '😵‍💫',
+    personalityIcon: '🇬🇧'
+  },
+  {
+    symbol: '/6A',
+    name: 'Australian Dollar Futures',
+    personality: 'The Commodity Bro Surfer',
+    currentPrice: 0.6725,
+    change: 0.0035,
+    changePercent: 0.52,
+    mood: 'Riding the Wave',
+    moodIcon: '🏄‍♂️',
+    personalityIcon: '🇦🇺'
   }
 ]
 
@@ -156,7 +259,7 @@ export default function DashboardPage() {
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Meet Your Futures Personalities</h2>
             <p className={styles.sectionSubtitle}>
-              Each contract has its own personality, triggers, and behaviors. Click to learn more about each one.
+              From stocks to commodities to currencies - each contract has its own WSB-style personality, triggers, and behaviors. Click to learn more about each one.
             </p>
           </div>
 
@@ -201,23 +304,35 @@ export default function DashboardPage() {
           </div>
         </section>
 
+        {/* Correlation Analysis Section */}
+        <section className={styles.correlationSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>How the Personalities Relate</h2>
+            <p className={styles.sectionSubtitle}>
+              Understanding correlations helps you see which contracts move together, move opposite, or act independently. 
+              This is key to understanding market dynamics and risk management.
+            </p>
+          </div>
+          <CorrelationHeatmap />
+        </section>
+
         {/* Today's Learning Section */}
         <section className={styles.todaysLearning}>
           <div className={styles.learningContent}>
             <div className={styles.learningMain}>
               <h2 className={styles.learningTitle}>What's Moving Markets Today</h2>
               <div className={styles.marketEvent}>
-                <h3 className={styles.eventTitle}>📊 Fed Policy Uncertainty Creates Mixed Signals</h3>
+                <h3 className={styles.eventTitle}>🌍 Global Market Relationships in Action</h3>
                 <p className={styles.eventDescription}>
-                  Today's market action perfectly demonstrates how different futures personalities react to the same news. 
-                  While /ES (The Steady Giant) shows its typical cautious behavior with a slight decline, /NQ (The Tech Optimist) 
-                  remains bullish on tech innovation. Meanwhile, /GC (The Safe Haven) is attracting safety-seekers.
+                  Today's market shows the full ecosystem in action: /ZW (Geopolitical Drama Queen) is freaking out about grain exports, 
+                  /6J (Polite Kamikaze Pilot) is strengthening on safe haven flows, while /6A (Commodity Bro Surfer) rides the China optimism wave. 
+                  This is why understanding ALL the personalities = true market awareness.
                 </p>
                 <div className={styles.whyMatters}>
                   <h4 className={styles.whyTitle}>💡 Why This Matters for Learning</h4>
                   <p className={styles.whyDescription}>
-                    Understanding how each contract's "personality" responds to macro events is the key to futures success. 
-                    This isn't just about numbers - it's about market psychology and character traits that remain consistent over time.
+                    Real market awareness isn't just about stocks - it's understanding how equities, bonds, commodities, and currencies 
+                    all relate to each other. Each personality reacts differently to the same global events, creating opportunities.
                   </p>
                 </div>
               </div>
@@ -228,15 +343,15 @@ export default function DashboardPage() {
               <div className={styles.opportunityCard}>
                 <div className={styles.opportunityHeader}>
                   <span className={styles.opportunityIcon}>🎯</span>
-                  <span className={styles.opportunityLabel}>Observation Exercise</span>
+                  <span className={styles.opportunityLabel}>Cross-Market Exercise</span>
                 </div>
                 <p className={styles.opportunityText}>
-                  Watch how /ES and /NQ react differently to the same Fed news throughout the day. 
-                  Notice /ES's steady, cautious moves vs /NQ's more dramatic swings.
+                  Compare how /GC (Paranoid Prepper King) and /6J (Polite Kamikaze Pilot) both benefit from risk-off flows, 
+                  while /6A (Commodity Bro Surfer) moves opposite due to its risk-on nature.
                 </p>
                 <div className={styles.opportunityAction}>
-                  <strong>Your Task:</strong> Click on both contracts to learn about their personalities, 
-                  then observe their price action patterns.
+                  <strong>Your Task:</strong> Click on different asset classes (stocks, bonds, commodities, currencies) 
+                  to see how they relate to each other.
                 </div>
               </div>
             </div>
@@ -291,16 +406,16 @@ export default function DashboardPage() {
             <h2 className={styles.progressTitle}>Your Learning Progress</h2>
             <div className={styles.progressStats}>
               <div className={styles.progressStat}>
-                <div className={styles.statNumber}>3</div>
-                <div className={styles.statLabel}>Contracts Learned</div>
+                <div className={styles.statNumber}>13</div>
+                <div className={styles.statLabel}>Contracts Available</div>
               </div>
               <div className={styles.progressStat}>
-                <div className={styles.statNumber}>7</div>
-                <div className={styles.statLabel}>Lessons Completed</div>
+                <div className={styles.statNumber}>4</div>
+                <div className={styles.statLabel}>Asset Classes</div>
               </div>
               <div className={styles.progressStat}>
-                <div className={styles.statNumber}>12</div>
-                <div className={styles.statLabel}>Days Learning</div>
+                <div className={styles.statNumber}>∞</div>
+                <div className={styles.statLabel}>Market Relationships</div>
               </div>
             </div>
             <div className={styles.nextLesson}>

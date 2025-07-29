@@ -21,6 +21,8 @@ An educational web application that transforms complex futures trading into an a
 - ✅ **Production Deployment**: Live on Vercel at https://market-awareness.vercel.app
 - ✅ **Modal System**: Portal-based rendering with proper z-index management
 - ✅ **Cross-browser Compatibility**: Fixed placeholder text visibility issues
+- ✅ **Expanded Contract Universe**: 13 contracts across 4 asset classes with WSB personalities
+- ✅ **Professional Charting System**: Interactive charts with Yahoo Finance integration
 - ✅ **Sortable Watchlist Table**: Professional table with clean, minimal sort indicators
 - ✅ **Unified Container Design**: Seamless header-table integration with optimal visual balance
 
@@ -29,6 +31,7 @@ An educational web application that transforms complex futures trading into an a
 #### Core Components
 - `StockSearch`: Debounced search with keyboard navigation and futures support
 - `WatchlistDisplay`: Professional sortable table with live price updates and sentiment analysis
+- `FuturesChart`: Professional charting component with 3 chart types and 6 timeframes
 - `Notification`: Toast-style notifications (success/error/warning/info)
 - `ConfirmModal`: Professional confirmation dialogs
 - `AuthContext`: Centralized authentication state management
@@ -36,6 +39,9 @@ An educational web application that transforms complex futures trading into an a
 #### API Integration
 - `/api/search`: Server-side proxy for Yahoo Finance search (CORS bypass)
 - `/api/quote`: Server-side proxy for real-time price data
+- `/api/historical-data`: Yahoo Finance integration for chart data with OHLC + volume
+- `/api/correlations`: Statistical correlation calculations using 3-month price data for all 13 contracts
+- `/api/contract-analysis`: OpenAI-powered real-time market analysis for all 13 contracts
 - Market data service with futures, crypto, and options support
 - Automatic fallback to mock data on API failures
 
@@ -48,12 +54,56 @@ An educational web application that transforms complex futures trading into an a
 - user_preferences: User settings and notifications
 ```
 
+#### Expanded Contract Universe (13 Total)
+
+**Equity Indices (2):**
+- `/ES` - The Paper-Handed Boomer 📰
+- `/NQ` - The YOLO Diamond Hands Ape 🦍
+
+**Bonds (1):**
+- `/ZB` - The Theta Gang Boomer 🏦
+
+**Precious Metals (2):**
+- `/GC` - The Paranoid Prepper King 👑
+- `/SI` - The Poor Man's Gold Pleb 🥈
+
+**Energy & Industrial (2):**
+- `/CL` - The Bipolar Energy Chad 💥
+- `/HG` - The Economic PhD Chad 🔧
+
+**Agricultural (3):**
+- `/ZC` - The Midwest Karen 🌽
+- `/ZS` - The Vegan Influencer 🫘
+- `/ZW` - The Geopolitical Drama Queen 🌾
+
+**Currencies (3):**
+- `/6E` - The Sophisticated European Mess 🇪🇺
+- `/6J` - The Polite Kamikaze Pilot 🇯🇵
+- `/6B` - The Brexit Disaster 🇬🇧
+- `/6A` - The Commodity Bro Surfer 🇦🇺
+
+#### Professional Charting System
+
+**Chart Types:**
+- **Line Charts**: Clean price movement tracking
+- **Area Charts**: Gradient-filled trend visualization
+- **Enhanced Candlestick**: High/low indicators with close price overlay
+
+**Features:**
+- **6 Timeframes**: 1D, 5D, 1M, 3M, 6M, 1Y with smart date formatting
+- **Interactive Controls**: Easy switching between chart types and periods
+- **Professional Tooltips**: OHLC data with volume information
+- **Real-time Updates**: Yahoo Finance API integration for all contracts
+- **Mobile Responsive**: Optimized for all screen sizes
+- **Price Context**: Current price with period % change indicators
+
 #### Key Technical Decisions
 - **CSS Modules** preferred over inline Tailwind for better maintainability
 - **Server-side API routes** to handle CORS restrictions
 - **Proper asset type mapping**: equity→stock, future→future, cryptocurrency→crypto
 - **Professional UI patterns** replacing basic browser alerts
 - **Real-time data** preferred over mock data where possible
+- **Recharts integration** for professional financial charting with existing dependencies
 
 ## Development Environment Setup
 
@@ -84,20 +134,29 @@ OPENAI_API_KEY=sk-your_openai_key_here
 ## Current Todo List 📋
 
 ### 🔥 Recently Completed (Current Session)
-- ✅ **Sentiment Analysis System**: Complete implementation with OpenAI integration
-  - ✅ Database schema updated (reasoning, news_sources, last_updated columns)
-  - ✅ API keys configured: OpenAI + Alpha Vantage APIs in Vercel environment
-  - ✅ API implementation: `/api/sentiment-analysis` endpoint with comprehensive analysis
-  - ✅ UI components: Professional modal with auto-fetch behavior
-  - ✅ Smart caching: 24hr cache system to maximize free API usage
-  - ✅ Real data focus: Enhanced prompts to prevent AI hallucination of 2023 data
-  - ✅ Deployment fixes: ESLint errors, build-time API initialization issues
+- ✅ **Interactive Correlation Heatmap**: Real-time futures contract relationship visualization
+  - ✅ Correlation API: `/api/correlations` calculates 3-month statistical correlations for all 13 contracts
+  - ✅ Heatmap component: `CorrelationHeatmap.tsx` with color-coded visualization and interactive tooltips
+  - ✅ Smart caching: 1-hour cache reduces API calls and improves performance
+  - ✅ Educational tooltips: Hover interactions showing relationship strength and personality names
+  - ✅ Dashboard integration: Moved from landing page to dashboard for better user flow
+  - ✅ UX optimization: Now appears after personality cards where it makes logical sense
+- ✅ **Professional Charting System**: Complete implementation with Yahoo Finance integration
+  - ✅ Expanded contract universe: 13 contracts across 4 asset classes with WSB personalities
+  - ✅ Historical data API: `/api/historical-data` with OHLC + volume data
+  - ✅ Chart component: `FuturesChart.tsx` with 3 chart types and 6 timeframes
+  - ✅ Interactive controls: Easy switching between Line, Area, and Candlestick views
+  - ✅ Professional tooltips: Real-time OHLC data with volume information
+  - ✅ Mobile responsive: Optimized charts for all screen sizes
+  - ✅ Integration: Charts added to all contract personality pages
+  - ✅ Build fixes: Resolved parsing errors and import issues
 
 ### High Priority
 - ✅ **Deploy to Vercel**: Live at https://market-awareness.vercel.app
 - ✅ **Complete Sentiment Analysis**: Full implementation deployed
 - ✅ **Professional Table Design**: Sortable watchlist with unified container layout
-- [ ] **Market Data Debugging**: Investigate API data availability for all symbols
+- ✅ **Professional Charting**: Interactive charts for all 13 futures contracts
+- [ ] **Node.js Upgrade**: Need Node 20+ for proper server startup
 
 ### Medium Priority  
 - [ ] **Add Technical Indicators**: RSI, MACD, Moving Averages, etc.
@@ -254,17 +313,26 @@ Sentiment Badge: 🟢 Bullish [Why?] ← Expandable
 - **Optimal spacing**: Reduced padding and margins for better visual balance
 - **Professional styling**: Consistent with fintech design standards
 
-**Last Updated**: July 28, 2025 - Professional table design with sortable functionality complete  
-**Next Session Goal**: Debug market data API coverage and optimize data sources  
-**Current Status**: Core features complete with professional UI, investigating API data availability edge cases  
+**Last Updated**: July 29, 2025 - Interactive correlation heatmap system implemented and integrated  
+**Next Session Goal**: Consider technical indicators, enhanced portfolio tracking, or mobile app optimizations
+**Current Status**: Core educational features complete with correlation analysis, ready for user testing  
 **Contact**: michael.manguart@gmail.com (GitHub: mcm612)
 
 ### 🚨 Session Handoff Notes
 Current state for next session:
-1. **Core System**: Fully deployed and functional sentiment analysis
-2. **Known Issue**: Some symbols (e.g. AVGO) may have limited market data availability
-3. **Environment**: All API keys configured in Vercel production environment
-4. **Next Priority**: Improve market data coverage and add fallback data sources
+1. **Major Achievement**: Interactive correlation heatmap system implemented and integrated
+2. **Dashboard Flow**: Improved UX with correlation visualization placed logically after personality cards
+3. **Technical Infrastructure**: Real-time correlation calculations, smart caching, responsive design
+4. **API Coverage**: All 13 contracts with statistical correlation analysis using 3-month price data
+5. **Ready for Production**: Correlation heatmap fully functional and integrated into main user flow
+6. **Next Priority**: Consider adding technical indicators or enhanced portfolio tracking features
+
+**Files Added This Session:**
+- `/src/app/api/correlations/route.ts` - Statistical correlation calculation API
+- `/src/components/CorrelationHeatmap.tsx` - Interactive heatmap component  
+- `/src/components/CorrelationHeatmap.module.css` - Professional heatmap styling
+
+**Dashboard Integration**: Correlation heatmap now appears in optimal location within user workflow
 
 ---
 

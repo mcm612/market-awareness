@@ -68,8 +68,8 @@ export default function LandingPage() {
               <div className={styles.featureIcon}>🎭</div>
               <h3 className={styles.featureTitle}>Contract Personalities</h3>
               <p className={styles.featureDescription}>
-                Meet the Paper-Handed Boomer (/ES), YOLO Diamond Hands Ape (/NQ), Paranoid Prepper King (/GC), 
-                Bipolar Energy Chad (/CL), and Theta Gang Boomer (/ZB). Each one's got serious personality issues.
+                Meet 13 unique personalities across 4 asset classes: from the Paper-Handed Boomer (/ES) to the 
+                Commodity Bro Surfer (/6A). Stocks, bonds, commodities, and currencies - each with serious personality issues.
               </p>
               <button 
                 className={styles.featureButton}
@@ -118,15 +118,15 @@ export default function LandingPage() {
           <h2 className={styles.sectionTitle}>Today's Market Lesson</h2>
           <div className={styles.marketLesson}>
             <div className={styles.lessonContent}>
-              <h3 className={styles.lessonTitle}>Understanding Market Personalities in Action</h3>
+              <h3 className={styles.lessonTitle}>Cross-Market Personality Drama in Action</h3>
               <p className={styles.lessonDescription}>
-                Right now, /ES (The Paper-Handed Boomer) is panic selling like it's 2008 again, 
-                while /NQ (The YOLO Diamond Hands Ape) is still screaming "BUY THE DIP!" 💎🙌 
-                This is exactly why understanding their personalities = tendies.
+                Right now, /ZW (Geopolitical Drama Queen) is having a meltdown about grain exports, 
+                /6J (Polite Kamikaze Pilot) is quietly destroying carry trades, while /6A (Commodity Bro Surfer) 
+                is riding the China wave. This is why understanding ALL personalities = true market awareness.
               </p>
               <div className={styles.lessonInsight}>
-                <strong>💡 Learning Insight:</strong> Each contract reacts differently to the same news. 
-                Understanding these personalities helps you choose the right market for your trading style.
+                <strong>💡 Learning Insight:</strong> Real market awareness isn't just stocks - it's understanding how 
+                equities, bonds, commodities, and currencies all relate to each other through their unique personalities.
               </div>
             </div>
             <div className={styles.contractSpotlight}>
@@ -158,7 +158,7 @@ export default function LandingPage() {
             <div className={styles.pathStep}>
               <div className={styles.stepNumber}>1</div>
               <h3 className={styles.stepTitle}>Meet the Contracts</h3>
-              <p className={styles.stepDescription}>Get introduced to the 5 major futures personalities</p>
+              <p className={styles.stepDescription}>Get introduced to 13 futures personalities across 4 asset classes</p>
             </div>
             <div className={styles.pathStep}>
               <div className={styles.stepNumber}>2</div>
